@@ -12,14 +12,14 @@
 </p>
 
 ## Description
-This addon adds Lock command on every door.
-- Left-click to lock toggle.
-- Right click for more options
-
-Note: Door lock must be flicked by colonist.
+This addon adds new locking doors system.
+- Doors can be unlocked to allow enemies and prisoners to pass by (only races that have inteligence "humanlike" or above).
+- Doors can now exclude vistiors. (Wanna lock some traders?).
+- Doors can now be assigned to colonists (You can now simply restrict area to specific colonists without allowed area manager).
+- New Flicking job: Locking/unlocking doors, it has higher priority than normal flicking job. ( "Flicking" doors is only needed when unlocking/locking. It is not required for changing rules for door).
 
 ## How to use
-todo
+Select door and left click "Lock" command if you want to unlock/lock door. Right click for more options.
 
 ## New mod
 This is new mod. You can experience some bugs and errors.
@@ -27,4 +27,4 @@ This is new mod. You can experience some bugs and errors.
 ## Compatibility
 * There can be compatibility issues with mods that add custom doors with custom security mechanics.
 
-## [Credits](https://raw.githubusercontent.com/Aviuz/Locks/master/credits.md)
+## [Credits](credits.md)
