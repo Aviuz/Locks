@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using Verse;
 using Verse.AI;
+using Verse.Sound;
 
 namespace Locks
 {
@@ -28,6 +29,7 @@ namespace Locks
                 Pawn actor = toil.actor;
                 Building_Door door = (Building_Door)actor.CurJob.targetA.Thing;
                 LockUtility.GetData(door).Locked = LockUtility.GetData(door).WantLocked;
+                SoundDefOf.FlickSwitch.PlayOneShot(new TargetInfo(door.Position, door.Map, false));
                 door.Map.reachability.ClearCache();
                 //actor.records.Increment(RecordDefOf.SwitchesFlicked);
                 Designation designation = Map.designationManager.DesignationOn(door, LockUtility.DesDef);
