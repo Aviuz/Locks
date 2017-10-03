@@ -15,7 +15,7 @@
 This addon adds new locking door system.
 - Doors can be unlocked to allow enemies and prisoners to pass by (only races that have inteligence "humanlike" or above).
 **Note**: In order to unlock/lock door, colonist must "flick" the door.
-- Doors can now exclude vistiors (wanna lock some traders?).
+- Doors can now exclude visitors (wanna lock some traders?).
 - Doors can now be assigned to colonists (you can now simply restrict rooms to specific colonists without allowed area manager).
 - New Flicking job: Locking/unlocking doors, it has higher priority than normal flicking job. ( "Flicking" doors is only needed when unlocking/locking. It is not required for changing rules for door).
 
