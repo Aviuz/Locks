@@ -1,0 +1,8 @@
+==========================
+Task List for Locks Mod
+==========================
+Agenda:
+  + Completed and not added to changelog
+  - Scheduled for implementation
+  * Considered
+==========================

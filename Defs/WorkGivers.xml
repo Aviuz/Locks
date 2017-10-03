@@ -1,0 +1,11 @@
+<WorkGivers>
+  <WorkGiverDef>
+    <defName>Locks_Flick</defName>
+    <label>lock/unlock door</label>
+    <giverClass>Locks.WorkGiver_ToggleLock</giverClass>
+    <workType>Flicker</workType>
+    <verb>lock/unlock door</verb>
+    <gerund>locking/unlocking door</gerund>
+    <priorityInType>600</priorityInType>
+  </WorkGiverDef>WorkGiver_ToggleLock
+</WorkGivers>

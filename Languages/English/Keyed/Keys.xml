@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+  <Locks_Label>Lock</Locks_Label>
+  <Locks_Description>When unlocked all pawn will be allowed to use this door.\n[Right click for more options]</Locks_Description>
+  <Locks_LockToggle>Lock</Locks_LockToggle>
+  <Locks_UnlockToggle>Unlock</Locks_UnlockToggle>
+  <Locks_AllowVisitors>Allow visitors to use</Locks_AllowVisitors>
+  <Locks_ForbidVisitors>Forbid visitors from using</Locks_ForbidVisitors>
+  <Locks_ClearOwners>Clear owners</Locks_ClearOwners>
+</LanguageData>
