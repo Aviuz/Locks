@@ -96,6 +96,7 @@ namespace Locks
             if (flag && designation == null)
             {
                 t.Map.designationManager.AddDesignation(new Designation(t, DesDef));
+                Messages.Message("Adding designation", MessageSound.SeriousAlert);
             }
             else if (!flag && designation != null)
             {

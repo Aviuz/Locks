@@ -31,7 +31,7 @@ namespace Locks
             {
                 SoundDefOf.Click.PlayOneShotOnCamera(null);
                 LockUtility.GetData(parent).WantLocked = !LockUtility.GetData(parent).WantLocked;
-                parent.Map.reachability.ClearCache();
+                LockUtility.UpdateLockDesignation(parent);
             }
             else if (ev.button == 1)
             {
@@ -52,7 +52,6 @@ namespace Locks
                 {
                     LockUtility.GetData(parent).WantLocked = !LockUtility.GetData(parent).WantLocked;
                     LockUtility.UpdateLockDesignation(parent);
-                    //parent.Map.reachability.ClearCache();
                 })
                 ));
             if (!LockUtility.GetData(parent).Private)

@@ -1,7 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
 <DesignationDefs>
   <DesignationDef>
     <defName>Locks_Flick</defName>
-    <texturePath>lock</texturePath>
+    <texturePath>lock_designator</texturePath>
     <targetType>Thing</targetType>
     <designateCancelable>false</designateCancelable>
   </DesignationDef>
