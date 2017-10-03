@@ -21,8 +21,8 @@ This addon adds new locking door system.
 ## How to use
 Select door and left click "Lock" command if you want to unlock/lock door. Right click for more options.
 
-## Perfomance
-This mod has almost zero impact on perfomance. It's quick and light.
+## Performance
+This mod has almost zero impact on performance. It's quick and light.
 
 ## New mod
 This is new mod. You can experience some bugs and errors.
