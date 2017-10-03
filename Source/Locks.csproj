@@ -89,5 +89,10 @@
       <Link>Organizer\TaskList.txt</Link>
     </Content>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\README.md">
+      <Link>Organizer\README.md</Link>
+    </None>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
