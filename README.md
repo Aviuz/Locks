@@ -27,4 +27,4 @@ This is new mod. You can experience some bugs and errors.
 ## Compatibility
 * There can be compatibility issues with mods that add custom doors with custom security mechanics.
 
-## [Credits](https://github.com/Aviuz/Locks/master/credits.md)
+## [Credits](https://raw.githubusercontent.com/Aviuz/Locks/master/credits.md)
