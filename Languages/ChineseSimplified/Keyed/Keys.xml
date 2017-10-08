@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <Locks_Label>门锁</Locks_Label>
+  <Locks_Description>当门锁被打开时所有犯人被允许使用并通过这扇门。\n【用鼠标右键点击以获得更多选项】</Locks_Description>
+  <Locks_LockToggle>锁上</Locks_LockToggle>
+  <Locks_UnlockToggle>解锁</Locks_UnlockToggle>
+  <Locks_AllowVisitors>允许访客使用</Locks_AllowVisitors>
+  <Locks_ForbidVisitors>禁止访客使用</Locks_ForbidVisitors>
+  <Locks_ClearOwners>清除使用者</Locks_ClearOwners>
+
+</LanguageData>

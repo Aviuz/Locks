@@ -9,7 +9,6 @@ namespace Locks
         static Initialization()
         {
             HarmonyPatches.HPatcher.Init();
-            Log.Message("LOCKS initialized");
         }
     }
 }
