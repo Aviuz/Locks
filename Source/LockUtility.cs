@@ -20,7 +20,7 @@ namespace Locks
         {
             get
             {
-                if(designationDef == null)
+                if (designationDef == null)
                 {
                     designationDef = DefDatabase<DesignationDef>.GetNamed("Locks_Flick");
                 }
@@ -60,7 +60,7 @@ namespace Locks
             if (GetData(door).Private && !GetData(door).Owners.Contains(p))
                 return false;
 
-            if (p.Faction == door.Faction)
+            if (p.Faction == door.Faction && !p.IsPrisoner)
                 return true;
 
             bool guestCondition = !p.IsPrisoner || p.HostFaction != door.Faction;
@@ -69,7 +69,7 @@ namespace Locks
 
             return false;
         }
-        
+
         public static LockData GetData(Building_Door key)
         {
             if (!Map.ContainsKey(key))
