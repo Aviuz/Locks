@@ -41,5 +41,10 @@ namespace Locks
             toil.defaultCompleteMode = ToilCompleteMode.Instant;
             yield return toil;
         }
+
+        public override bool TryMakePreToilReservations()
+        {
+            return true;
+        }
     }
 }

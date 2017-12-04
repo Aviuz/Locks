@@ -162,7 +162,7 @@ namespace Locks
                 {
                     if (!disabledReason.NullOrEmpty())
                     {
-                        Messages.Message(disabledReason, MessageSound.RejectInput);
+                        Messages.Message(disabledReason, MessageTypeDefOf.RejectInput);
                     }
                     return new GizmoResult(GizmoState.Mouseover, null);
                 }
