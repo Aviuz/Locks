@@ -16,6 +16,8 @@ namespace Locks
         private Texture2D lockTexture;
         private Texture2D unlockTexture;
 
+        private Func<bool> isActive;
+
         public LockGizmo(Building_Door door)
         {
             parent = door;
@@ -23,6 +25,7 @@ namespace Locks
             defaultDesc = "Locks_Description".Translate();
             lockTexture = ContentFinder<Texture2D>.Get("lock", false);
             unlockTexture = ContentFinder<Texture2D>.Get("unlock", false);
+            isActive = () => LockUtility.GetData(parent).WantLocked;
         }
 
         public override void ProcessInput(Event ev)
@@ -182,6 +185,14 @@ namespace Locks
                 }
                 return new GizmoResult(GizmoState.Clear, null);
             }
+        }
+
+        public override bool InheritInteractionsFrom(Gizmo other)
+        {
+            LockGizmo lockGizmo = other as LockGizmo;
+            if (lockGizmo != null)
+                return lockGizmo.isActive() == isActive();
+            return false;
         }
     }
 }
