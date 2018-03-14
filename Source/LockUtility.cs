@@ -51,20 +51,23 @@ namespace Locks
             if (canOpenAnyDoor || noFaction)
                 return true;
 
-            if (GetData(door).Locked == false && p.RaceProps != null && p.RaceProps.intelligence >= Intelligence.Humanlike)
+            if (GetData(door).CurrentState.locked == false && p.RaceProps != null && p.RaceProps.intelligence >= Intelligence.Humanlike)
                 return true;
 
             if (p.Faction == null || p.Faction.HostileTo(door.Faction))
                 return false;
 
-            if (GetData(door).Private && !GetData(door).Owners.Contains(p))
+            if (GetData(door).Private && GetData(door).CurrentState.petDoor && p.RaceProps.Animal && p.RaceProps.baseBodySize <= 0.85 && p.Faction == door.Faction)
+                return true;
+
+            if (GetData(door).Private && !GetData(door).CurrentState.owners.Contains(p))
                 return false;
 
             if (p.Faction == door.Faction && !p.IsPrisoner)
                 return true;
 
             bool guestCondition = !p.IsPrisoner || p.HostFaction != door.Faction;
-            if (GetData(door).Mode == LockMode.Allies && guestCondition)
+            if (GetData(door).CurrentState.mode == LockMode.Allies && guestCondition)
                 return true;
 
             return false;
@@ -89,8 +92,7 @@ namespace Locks
             Building_Door door = t as Building_Door;
             if (door != null)
             {
-                if (GetData(door).Locked != GetData(door).WantLocked)
-                    flag = true;
+                flag = GetData(door).NeedChange;
             }
             Designation designation = t.Map.designationManager.DesignationOn(t, DesDef);
             if (flag && designation == null)

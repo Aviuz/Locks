@@ -1,4 +1,11 @@
 Changelog:
+2.0.0
+- changed that every change need to be "flicked", instead of locking/unlocking
+- locks now need to be changed by one of new owners
+- added "add pet door", and "remove pet door" that will allow to control whetever small animals should pass the door
+- changed that every change to lock settings when mulitple doors are selected affects all doors
+- added Clutter Structure comaptibility by enabling "unlocking" from Locks mod, other mechanics works as in CS
+- added alert that will trigger when locks can't be changed due to work settings
 1.0.2
 - updated to RimWorld Beta 18 (Rimworld v. 0.18.0)
 1.0.1

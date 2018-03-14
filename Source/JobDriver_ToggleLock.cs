@@ -28,7 +28,8 @@ namespace Locks
             {
                 Pawn actor = toil.actor;
                 Building_Door door = (Building_Door)actor.CurJob.targetA.Thing;
-                LockUtility.GetData(door).Locked = LockUtility.GetData(door).WantLocked;
+                this.FailOn(() => !LockUtility.GetData(door).CanChangeLocks(actor));
+                LockUtility.GetData(door).CurrentState.CopyFrom(LockUtility.GetData(door).WantedState);
                 SoundDefOf.FlickSwitch.PlayOneShot(new TargetInfo(door.Position, door.Map, false));
                 door.Map.reachability.ClearCache();
                 //actor.records.Increment(RecordDefOf.SwitchesFlicked);

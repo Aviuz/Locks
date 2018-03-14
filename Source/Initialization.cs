@@ -9,6 +9,7 @@ namespace Locks
         static Initialization()
         {
             HarmonyPatches.HPatcher.Init();
+            CompatibilityPatches.ClutterStructure.Init();
         }
     }
 }

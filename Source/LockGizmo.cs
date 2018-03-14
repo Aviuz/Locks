@@ -53,22 +53,46 @@ namespace Locks
                                         "Locks_LockToggle".Translate(),
                 new Action(() =>
                 {
-                    LockUtility.GetData(parent).WantLocked = !LockUtility.GetData(parent).WantLocked;
-                    LockUtility.UpdateLockDesignation(parent);
+                    bool value = !LockUtility.GetData(parent).WantLocked;
+                    foreach (Building_Door door in Find.Selector.SelectedObjects.Where(o => o is Building_Door))
+                    {
+                        LockUtility.GetData(door).WantLocked = value;
+                        LockUtility.UpdateLockDesignation(door);
+                    }
                 })
                 ));
-            if (!LockUtility.GetData(parent).Private)
+            if (!LockUtility.GetData(parent).WantedPrivate)
                 list.Add(new FloatMenuOption(
-                    LockUtility.GetData(parent).Mode == LockMode.Allies ?
+                    LockUtility.GetData(parent).WantedState.mode == LockMode.Allies ?
                                         "Locks_ForbidVisitors".Translate() :
                                         "Locks_AllowVisitors".Translate(),
                     new Action(() =>
                     {
-                        if (LockUtility.GetData(parent).Mode == LockMode.Allies)
-                            LockUtility.GetData(parent).Mode = LockMode.Colony;
+                        LockMode value;
+                        if (LockUtility.GetData(parent).WantedState.mode == LockMode.Allies)
+                            value = LockMode.Colony;
                         else
-                            LockUtility.GetData(parent).Mode = LockMode.Allies;
-                        parent.Map.reachability.ClearCache();
+                            value = LockMode.Allies;
+                        foreach (Building_Door door in Find.Selector.SelectedObjects.Where(o => o is Building_Door))
+                        {
+                            LockUtility.GetData(door).WantedState.mode = value;
+                            LockUtility.UpdateLockDesignation(door);
+                        }
+                    })
+                    ));
+            if (LockUtility.GetData(parent).WantedPrivate)
+                list.Add(new FloatMenuOption(
+                    LockUtility.GetData(parent).WantedState.petDoor ?
+                                            "Locks_RemovePetDoor".Translate() :
+                                            "Locks_AddPetDoor".Translate(),
+                    new Action(() =>
+                    {
+                        bool value = !LockUtility.GetData(parent).WantedState.petDoor;
+                        foreach (Building_Door door in Find.Selector.SelectedObjects.Where(o => o is Building_Door))
+                        {
+                            LockUtility.GetData(door).WantedState.petDoor = value;
+                            LockUtility.UpdateLockDesignation(door);
+                        }
                     })
                     ));
             list.Add(new FloatMenuOption(
@@ -76,16 +100,27 @@ namespace Locks
                 new Action(() =>
                 {
                     Find.WindowStack.Add(new Dialog_AssignBuildingOwner(LockUtility.GetData(parent)));
-                    parent.Map.reachability.ClearCache();
+                    foreach (Building_Door door in Find.Selector.SelectedObjects.Where(o => o is Building_Door))
+                    {
+                        if (door != parent)
+                        {
+                            LockUtility.GetData(door).WantedState.owners.Clear();
+                            LockUtility.GetData(door).WantedState.owners.AddRange(LockUtility.GetData(parent).WantedState.owners);
+                        }
+                        LockUtility.UpdateLockDesignation(door);
+                    }
                 })
                 ));
-            if (LockUtility.GetData(parent).Private)
+            if (LockUtility.GetData(parent).WantedPrivate)
                 list.Add(new FloatMenuOption(
                     "Locks_ClearOwners".Translate(),
                     new Action(() =>
                     {
-                        LockUtility.GetData(parent).Owners.Clear();
-                        parent.Map.reachability.ClearCache();
+                        foreach (Building_Door door in Find.Selector.SelectedObjects.Where(o => o is Building_Door))
+                        {
+                            LockUtility.GetData(door).WantedState.owners.Clear();
+                            LockUtility.UpdateLockDesignation(door);
+                        }
                     })
                     ));
             return list;

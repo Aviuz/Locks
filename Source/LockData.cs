@@ -7,26 +7,73 @@ using RimWorld;
 
 namespace Locks
 {
-    public enum LockMode
-    {
-        Allies,
-        Colony
-    }
-
     public class LockData : IExposable, IAssignableBuilding
     {
         private Building_Door parent;
 
-        public LockMode Mode;
-        public bool Locked;
-        public bool WantLocked;
-        public List<Pawn> Owners;
+        public LockState CurrentState;
+        public LockState WantedState;
+
+        public LockData()
+        {
+            CurrentState = new LockState(LockMode.Allies, true, false, new List<Pawn>());
+            WantedState = new LockState(LockMode.Allies, true, false, new List<Pawn>());
+        }
+
+        // Utilities
+        #region Utilities
+        public bool NeedChange
+        {
+            get
+            {
+                return CurrentState != WantedState;
+            }
+        }
+
+        public bool WantLocked
+        {
+            get
+            {
+                return WantedState.locked;
+            }
+
+            set
+            {
+                WantedState.locked = value;
+            }
+        }
 
         public bool Private
         {
             get
             {
-                return Owners.Count > 0;
+                return CurrentState.owners.Count > 0;
+            }
+        }
+
+        public bool WantedPrivate
+        {
+            get
+            {
+                return WantedState.owners.Count > 0;
+            }
+        }
+
+        public bool CanChangeLocks(Pawn pawn)
+        {
+            return WantedState.owners.Count == 0 || WantedState.owners.Contains(pawn);
+        }
+        #endregion
+
+        // IAssignableBuilding
+        #region IAssignableBuilding
+        public int MaxAssignedPawnsCount => WantedState.owners.Count + 1;
+
+        public IEnumerable<Pawn> AssignedPawns
+        {
+            get
+            {
+                return WantedState.owners;
             }
         }
 
@@ -38,45 +85,39 @@ namespace Locks
             }
         }
 
-        public IEnumerable<Pawn> AssignedPawns
+        public void TryAssignPawn(Pawn pawn)
         {
-            get
-            {
-                return Owners;
-            }
+            WantedState.owners.Add(pawn);
+            UpdateOwners();
         }
 
-        public int MaxAssignedPawnsCount => Owners.Count + 1;
-
-        public LockData()
+        public void TryUnassignPawn(Pawn pawn)
         {
-            Mode = LockMode.Allies;
-            Locked = true;
-            WantLocked = true;
-            Owners = new List<Pawn>();
+            WantedState.owners.Remove(pawn);
+            UpdateOwners();
+        }
+
+        public void UpdateOwners()
+        {
+            foreach (Building_Door door in Find.Selector.SelectedObjects.Where(o => o is Building_Door && o != parent))
+            {
+                LockUtility.GetData(door).WantedState.owners.Clear();
+                LockUtility.GetData(door).WantedState.owners.AddRange(LockUtility.GetData(parent).WantedState.owners);
+                LockUtility.UpdateLockDesignation(door);
+            }
+            LockUtility.UpdateLockDesignation(parent);
+        }
+        #endregion
+
+        public void ExposeData()
+        {
+            CurrentState.ExposeData("current");
+            WantedState.ExposeData("wanted");
         }
 
         public void UpdateReference(Building_Door door)
         {
             parent = door;
-        }
-
-        public void ExposeData()
-        {
-            Scribe_Values.Look(ref Mode, "Locks_LockData_Mode", LockMode.Allies, false);
-            Scribe_Values.Look(ref Locked, "Locks_LockData_Locked", true, false);
-            Scribe_Values.Look(ref WantLocked, "Locks_LockData_WantLocked", true, false);
-            Scribe_Collections.Look(ref Owners, "Locks_LockData_Owners", LookMode.Reference);
-        }
-
-        public void TryAssignPawn(Pawn pawn)
-        {
-            Owners.Add(pawn);
-        }
-
-        public void TryUnassignPawn(Pawn pawn)
-        {
-            Owners.Remove(pawn);
         }
     }
 }

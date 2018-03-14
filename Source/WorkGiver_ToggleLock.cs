@@ -26,11 +26,23 @@ namespace Locks
 
         public override bool HasJobOnThing(Pawn pawn, Thing t, bool forced = false)
         {
+            Building_Door door = (Building_Door)t;
+            if (!LockUtility.GetData(door).CanChangeLocks(pawn))
+            {
+                return false;
+            }
             return pawn.Map.designationManager.DesignationOn(t, LockUtility.DesDef) != null && pawn.CanReserveAndReach(t, PathEndMode.Touch, pawn.NormalMaxDanger(), 1, -1, null, forced);
         }
 
         public override Job JobOnThing(Pawn pawn, Thing t, bool forced = false)
         {
+
+            Building_Door door = (Building_Door)t;
+            if (!LockUtility.GetData(door).CanChangeLocks(pawn))
+            {
+                JobFailReason.Is("Locks_FailOnWrongUser".Translate(pawn));
+                return null;
+            }
             return new Job(LockUtility.JobDef, t);
         }
     }

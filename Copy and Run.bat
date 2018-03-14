@@ -1,9 +1,3 @@
-:: ========= Build ==========
-
-devenv "Source\Locks.sln" /build Debug
-
-
-
 :: ========= Copy ==========
  
 rd "D:\Program Files\Steam\steamapps\common\RimWorld\Mods\Locks" /s /q

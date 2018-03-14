@@ -37,6 +37,7 @@
     </Reference>
     <Reference Include="Assembly-CSharp">
       <HintPath>..\..\Prison Labor Mod\Source\Libraries\Assembly-CSharp.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -46,9 +47,11 @@
     <Reference Include="System.Xml" />
     <Reference Include="UnityEngine">
       <HintPath>..\..\Prison Labor Mod\Source\Libraries\UnityEngine.dll</HintPath>
+      <Private>False</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CompatibilityPatches\ClutterStructure.cs" />
     <Compile Include="HarmonyPatches\HPatcher.cs" />
     <Compile Include="HarmonyPatches\Patch_AddLockGizmoToDoors.cs" />
     <Compile Include="HarmonyPatches\Patch_AddLockDataToSave.cs" />
@@ -58,6 +61,7 @@
     <Compile Include="JobDriver_ToggleLock.cs" />
     <Compile Include="LockData.cs" />
     <Compile Include="LockGizmo.cs" />
+    <Compile Include="LockState.cs" />
     <Compile Include="LockUtility.cs" />
     <Compile Include="WorkGiver_ToggleLock.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
