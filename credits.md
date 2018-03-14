@@ -1,3 +1,7 @@
+# Thanks to:
+**JonnyNova** for helping with programming.
+
+# Used resources:
 Icon made by Freepik from www.flaticon.com 
 
 Reflection powered by **[Harmony](https://github.com/pardeike/Harmony/wiki)**
