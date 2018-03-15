@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using Verse;
 
-namespace Locks.Language
+namespace Locks
 {
     internal class Alert_LocksCantBeChanged : Alert
     {
@@ -27,7 +27,7 @@ namespace Locks.Language
                     {
                         if (desList[i].def == LockUtility.DesDef)
                         {
-                            if (!LockUtility.GetData(desList[i].target.Thing as Building_Door).WantedState.owners.Any(p => p.workSettings.WorkIsActive(DefDatabase<WorkTypeDef>.GetNamed("Flick"))))
+                            if (LockUtility.GetData(desList[i].target.Thing as Building_Door).WantedPrivate && !LockUtility.GetData(desList[i].target.Thing as Building_Door).WantedState.owners.Any(p => p.workSettings.WorkIsActive(DefDatabase<WorkTypeDef>.GetNamed("Flicker"))))
                                 yield return desList[i].target.Thing as Building_Door;
                         }
                     }

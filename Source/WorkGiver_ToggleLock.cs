@@ -29,6 +29,7 @@ namespace Locks
             Building_Door door = (Building_Door)t;
             if (!LockUtility.GetData(door).CanChangeLocks(pawn))
             {
+                JobFailReason.Is("Locks_FailOnWrongUser".Translate(pawn));
                 return false;
             }
             return pawn.Map.designationManager.DesignationOn(t, LockUtility.DesDef) != null && pawn.CanReserveAndReach(t, PathEndMode.Touch, pawn.NormalMaxDanger(), 1, -1, null, forced);

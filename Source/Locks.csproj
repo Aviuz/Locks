@@ -51,6 +51,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Alert_LocksCantBeChanged.cs" />
     <Compile Include="CompatibilityPatches\ClutterStructure.cs" />
     <Compile Include="HarmonyPatches\HPatcher.cs" />
     <Compile Include="HarmonyPatches\Patch_AddLockGizmoToDoors.cs" />

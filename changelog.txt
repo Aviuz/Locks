@@ -1,4 +1,6 @@
 Changelog:
+2.0.1
+- fixed some bugs
 2.0.0
 - changed that every change need to be "flicked", instead of locking/unlocking
 - locks now need to be changed by one of new owners
