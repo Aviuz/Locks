@@ -30,6 +30,14 @@ namespace Locks
             }
         }
 
+        public bool Locked
+        {
+            get
+            {
+                return CurrentState.locked;
+            }
+        }
+
         public bool WantLocked
         {
             get

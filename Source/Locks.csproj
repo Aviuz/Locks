@@ -53,12 +53,14 @@
   <ItemGroup>
     <Compile Include="Alert_LocksCantBeChanged.cs" />
     <Compile Include="CompatibilityPatches\ClutterStructure.cs" />
+    <Compile Include="CompLock.cs" />
     <Compile Include="HarmonyPatches\HPatcher.cs" />
     <Compile Include="HarmonyPatches\Patch_AddLockGizmoToDoors.cs" />
     <Compile Include="HarmonyPatches\Patch_AddLockDataToSave.cs" />
     <Compile Include="HarmonyPatches\Patch_InjectLockCheck.cs" />
     <Compile Include="HarmonyPatches\Patch_RemoveLockData.cs" />
     <Compile Include="Initialization.cs" />
+    <Compile Include="ITab_Lock.cs" />
     <Compile Include="JobDriver_ToggleLock.cs" />
     <Compile Include="LockData.cs" />
     <Compile Include="LockGizmo.cs" />
@@ -85,6 +87,7 @@
     </Content>
     <Content Include="..\Languages\English\Keyed\Keys.xml">
       <Link>Language\Keys.xml</Link>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="..\TaskList.txt">
       <Link>Organizer\TaskList.txt</Link>

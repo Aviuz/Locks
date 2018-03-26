@@ -1,4 +1,7 @@
 Changelog:
+2.1.0
+- added Lock inspector tab for easy use (alternative management)
+- added Lock comp to display text "locked", "unlocked" itp.
 2.0.1
 - fixed some bugs
 2.0.0
