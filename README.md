@@ -21,7 +21,8 @@ This addon adds new locking door system.
 - New Flicking job: Locking/unlocking doors, it has higher priority than normal flicking job. ("Flicking" doors is needed).
 
 ## How to use
-Select door and left click "Lock" command if you want to unlock/lock door. Right click for more options.
+Select door and left click "Lock" command if you want to unlock/lock door.
+Right click for more options.
 Alternatively you can use "Lock" inspector tab.
 
 ## Performance
