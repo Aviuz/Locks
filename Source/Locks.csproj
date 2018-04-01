@@ -25,7 +25,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\Assemblies\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="Alert_LocksCantBeChanged.cs" />
     <Compile Include="CompatibilityPatches\ClutterStructure.cs" />
+    <Compile Include="CompatibilityPatches\RimWorld.cs" />
     <Compile Include="CompLock.cs" />
     <Compile Include="HarmonyPatches\HPatcher.cs" />
     <Compile Include="HarmonyPatches\Patch_AddLockGizmoToDoors.cs" />
