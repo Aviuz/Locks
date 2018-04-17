@@ -3,7 +3,7 @@
 </p>
 <p align="center">
   <a href="https://github.com/Aviuz/Locks/releases">
-    <img src="https://img.shields.io/badge/version-2.1.0-blue.svg?style=flat" alt="v2.1.0" />
+    <img src="https://img.shields.io/badge/version-2.1.1-blue.svg?style=flat" alt="v2.1.1" />
   </a>
 </p>
 
@@ -14,7 +14,7 @@
 ## Description
 This addon adds new locking door system.
 - Doors can be unlocked to allow enemies and prisoners to pass by (only races that have inteligence "humanlike" or above).
-**Note**: In order to unlock/lock door, colonist must "flick" the door.
+**Note**: In order to unlock/lock door, colonist must "flick" the door. Unflicked door will work as unchanged for enemies and prisoners.
 - Doors can exclude visitors (wanna lock some traders?).
 - Pet doors for small animals can now be added to doors.
 - Doors can be assigned to colonists (you can simply restrict rooms to specific colonists without allowed area manager).

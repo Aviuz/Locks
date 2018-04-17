@@ -70,6 +70,14 @@ namespace Locks
             return false;
         }
 
+        public bool Private
+        {
+            get
+            {
+                return owners.Count > 0;
+            }
+        }
+
         public void ExposeData(String postfix)
         {
             Scribe_Values.Look(ref mode, $"Locks_LockData_Mode_{postfix}", LockMode.Allies, false);

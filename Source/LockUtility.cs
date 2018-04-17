@@ -51,23 +51,29 @@ namespace Locks
             if (canOpenAnyDoor || noFaction)
                 return true;
 
+            LockState respectedState;
+            if (!p.IsPrisoner && !door.Faction.HostileTo(p.Faction) && !p.InMentalState)
+                respectedState = GetData(door).WantedState;
+            else
+                respectedState = GetData(door).CurrentState;
+
             if (GetData(door).CurrentState.locked == false && p.RaceProps != null && p.RaceProps.intelligence >= Intelligence.Humanlike)
                 return true;
 
             if (p.Faction == null || p.Faction.HostileTo(door.Faction))
                 return false;
 
-            if (GetData(door).Private && GetData(door).CurrentState.petDoor && p.RaceProps.Animal && p.RaceProps.baseBodySize <= 0.85 && p.Faction == door.Faction)
+            if (respectedState.Private && respectedState.petDoor && p.RaceProps.Animal && p.RaceProps.baseBodySize <= 0.85 && p.Faction == door.Faction)
                 return true;
 
-            if (GetData(door).Private && !GetData(door).CurrentState.owners.Contains(p))
+            if (respectedState.Private && !respectedState.owners.Contains(p))
                 return false;
 
             if (p.Faction == door.Faction && !p.IsPrisoner)
                 return true;
 
             bool guestCondition = !p.IsPrisoner || p.HostFaction != door.Faction;
-            if (GetData(door).CurrentState.mode == LockMode.Allies && guestCondition)
+            if (respectedState.mode == LockMode.Allies && guestCondition)
                 return true;
 
             return false;
@@ -98,6 +104,7 @@ namespace Locks
             if (flag && designation == null)
             {
                 t.Map.designationManager.AddDesignation(new Designation(t, DesDef));
+                door.Map.reachability.ClearCache();
             }
             else if (!flag && designation != null)
             {

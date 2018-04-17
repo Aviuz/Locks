@@ -1,4 +1,7 @@
 Changelog:
+2.1.1
+- wanted state of lock will be respected for colonists and allies when they are sane, instead of current state (exception is lock/unlocked state)
+- fixed bug when selecting another door with lock ITab opened
 2.1.0
 - added Lock inspector tab for easy use (alternative management)
 - added Lock comp to display text "locked", "unlocked" etc.

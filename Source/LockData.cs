@@ -30,43 +30,6 @@ namespace Locks
             }
         }
 
-        public bool Locked
-        {
-            get
-            {
-                return CurrentState.locked;
-            }
-        }
-
-        public bool WantLocked
-        {
-            get
-            {
-                return WantedState.locked;
-            }
-
-            set
-            {
-                WantedState.locked = value;
-            }
-        }
-
-        public bool Private
-        {
-            get
-            {
-                return CurrentState.owners.Count > 0;
-            }
-        }
-
-        public bool WantedPrivate
-        {
-            get
-            {
-                return WantedState.owners.Count > 0;
-            }
-        }
-
         public bool CanChangeLocks(Pawn pawn)
         {
             return WantedState.owners.Count == 0 || WantedState.owners.Contains(pawn);

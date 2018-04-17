@@ -25,7 +25,7 @@ namespace Locks
             defaultDesc = "Locks_Description".Translate();
             lockTexture = ContentFinder<Texture2D>.Get("lock", false);
             unlockTexture = ContentFinder<Texture2D>.Get("unlock", false);
-            isActive = () => LockUtility.GetData(parent).WantLocked;
+            isActive = () => LockUtility.GetData(parent).WantedState.locked;
         }
 
         public override void ProcessInput(Event ev)
@@ -33,7 +33,7 @@ namespace Locks
             if (ev.button == 0)
             {
                 SoundDefOf.Click.PlayOneShotOnCamera(null);
-                LockUtility.GetData(parent).WantLocked = !LockUtility.GetData(parent).WantLocked;
+                LockUtility.GetData(parent).WantedState.locked = !LockUtility.GetData(parent).WantedState.locked;
                 LockUtility.UpdateLockDesignation(parent);
             }
             else if (ev.button == 1)
@@ -48,20 +48,20 @@ namespace Locks
         {
             var list = new List<FloatMenuOption>();
             list.Add(new FloatMenuOption(
-                LockUtility.GetData(parent).WantLocked ?
+                LockUtility.GetData(parent).WantedState.locked ?
                                         "Locks_UnlockToggle".Translate() :
                                         "Locks_LockToggle".Translate(),
                 new Action(() =>
                 {
-                    bool value = !LockUtility.GetData(parent).WantLocked;
+                    bool value = !LockUtility.GetData(parent).WantedState.locked;
                     foreach (Building_Door door in Find.Selector.SelectedObjects.Where(o => o is Building_Door))
                     {
-                        LockUtility.GetData(door).WantLocked = value;
+                        LockUtility.GetData(door).WantedState.locked = value;
                         LockUtility.UpdateLockDesignation(door);
                     }
                 })
                 ));
-            if (!LockUtility.GetData(parent).WantedPrivate)
+            if (!LockUtility.GetData(parent).WantedState.Private)
                 list.Add(new FloatMenuOption(
                     LockUtility.GetData(parent).WantedState.mode == LockMode.Allies ?
                                         "Locks_ForbidVisitors".Translate() :
@@ -80,7 +80,7 @@ namespace Locks
                         }
                     })
                     ));
-            if (LockUtility.GetData(parent).WantedPrivate)
+            if (LockUtility.GetData(parent).WantedState.Private)
                 list.Add(new FloatMenuOption(
                     LockUtility.GetData(parent).WantedState.petDoor ?
                                             "Locks_RemovePetDoor".Translate() :
@@ -111,7 +111,7 @@ namespace Locks
                     }
                 })
                 ));
-            if (LockUtility.GetData(parent).WantedPrivate)
+            if (LockUtility.GetData(parent).WantedState.Private)
                 list.Add(new FloatMenuOption(
                     "Locks_ClearOwners".Translate(),
                     new Action(() =>
@@ -135,7 +135,7 @@ namespace Locks
                 flag = true;
                 GUI.color = GenUI.MouseoverColor;
             }
-            Texture2D badTex = LockUtility.GetData(parent).WantLocked ? lockTexture : unlockTexture;
+            Texture2D badTex = LockUtility.GetData(parent).WantedState.locked ? lockTexture : unlockTexture;
             if (badTex == null)
             {
                 badTex = BaseContent.BadTex;

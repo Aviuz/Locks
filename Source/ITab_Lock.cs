@@ -24,6 +24,8 @@ namespace Locks
         private bool vistitorsAllowed;
         private bool petDoor;
 
+        private Thing lastSelectedThing;
+
         public ITab_Lock()
         {
             this.size = ITab_Lock.WinSize;
@@ -94,17 +96,27 @@ namespace Locks
 
         private void UpdateSettings()
         {
-            Data.WantLocked = locked;
-            Data.WantedState.mode = vistitorsAllowed ? LockMode.Allies : LockMode.Colony;
-            Data.WantedState.petDoor = petDoor;
-            // Owners
-            if (Data.NeedChange)
-                LockUtility.UpdateLockDesignation(SelDoor);
+            if (SelDoor == null)
+                return;
+            if (lastSelectedThing == SelThing)
+            {
+                Data.WantedState.locked = locked;
+                Data.WantedState.mode = vistitorsAllowed ? LockMode.Allies : LockMode.Colony;
+                Data.WantedState.petDoor = petDoor;
+                // Owners
+                if (Data.NeedChange)
+                    LockUtility.UpdateLockDesignation(SelDoor);
+            }
+            else
+            {
+                OnOpen();
+                lastSelectedThing = SelThing;
+            }
         }
 
         public override void OnOpen()
         {
-            locked = Data.WantLocked;
+            locked = Data.WantedState.locked;
             vistitorsAllowed = Data.WantedState.mode == LockMode.Allies ? true : false;
             petDoor = Data.WantedState.petDoor;
             //owners
