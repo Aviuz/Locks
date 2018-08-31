@@ -127,7 +127,7 @@ namespace Locks
             bool checkOn = Data.WantedState.owners.Contains(pawn);
             TextAnchor anchor = Text.Anchor;
             Text.Anchor = TextAnchor.MiddleLeft;
-            Widgets.Label(rect, pawn.NameStringShort);
+            Widgets.Label(rect, pawn.Name.ToStringShort);
             if (Widgets.ButtonInvisible(rect, false))
             {
                 if (checkOn)
@@ -137,11 +137,11 @@ namespace Locks
                 checkOn = !checkOn;
                 if (checkOn)
                 {
-                    SoundDefOf.CheckboxTurnedOn.PlayOneShotOnCamera(null);
+                    SoundDefOf.Checkbox_TurnedOn.PlayOneShotOnCamera(null);
                 }
                 else
                 {
-                    SoundDefOf.CheckboxTurnedOff.PlayOneShotOnCamera(null);
+                    SoundDefOf.Checkbox_TurnedOff.PlayOneShotOnCamera(null);
                 }
             }
             Color color = GUI.color;

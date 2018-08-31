@@ -1,4 +1,6 @@
 Changelog:
+2.2.0
+- updated to RimWorld beta 19
 2.1.1
 - wanted state of lock will be respected for colonists and allies when they are sane, instead of current state (exception is lock/unlocked state)
 - fixed bug when selecting another door with lock ITab opened

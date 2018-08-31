@@ -43,7 +43,7 @@ namespace Locks
             yield return toil;
         }
 
-        public override bool TryMakePreToilReservations()
+        public override bool TryMakePreToilReservations(bool forced)
         {
             return true;
         }
