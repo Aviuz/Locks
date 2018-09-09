@@ -10,6 +10,9 @@
 <p align="center">
   Locks mod for RimWorld
 </p>
+<p align="center">
+    <a href=https://steamcommunity.com/sharedfiles/filedetails/?id=1157085076>Steam Workshop</a> | <a href=https://ludeon.com/forums/index.php?topic=35913.0>Ludeon Forums</a>
+</p>
 
 ## Description
 This addon adds new locking door system.
