@@ -1,5 +1,6 @@
 ﻿using RimWorld;
 using System.Collections.Generic;
+using System.Linq;
 using Verse;
 
 namespace Locks
@@ -17,8 +18,7 @@ namespace Locks
         static void InjectLockTab()
         {
             var door_defs = new List<ThingDef>();
-            door_defs.Add(DefDatabase<ThingDef>.GetNamed("Door"));
-            door_defs.Add(DefDatabase<ThingDef>.GetNamed("Autodoor"));
+            door_defs.AddRange(DefDatabase<ThingDef>.AllDefs.Where(d => d.thingClass == typeof(Building_Door)));
             foreach (var door_def in door_defs)
             {
                 if (door_def.inspectorTabs == null)
