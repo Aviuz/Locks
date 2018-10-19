@@ -36,7 +36,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="Assembly-CSharp">
-      <HintPath>..\..\Prison Labor Mod\Source\Libraries\Assembly-CSharp.dll</HintPath>
+      <HintPath>..\..\..\Documents\Visual Studio 2017\ExternalLibraries\RimWorld\Assembly-CSharp.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />

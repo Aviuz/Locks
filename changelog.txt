@@ -1,4 +1,6 @@
 Changelog:
+2.2.1
+- updated to RimWorld 1.0
 2.2.0
 - updated to RimWorld beta 19
 2.1.1
