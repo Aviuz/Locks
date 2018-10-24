@@ -11,14 +11,14 @@ namespace Locks
 {
     class LockGizmo : Command
     {
-        private Building_Door parent;
+        private Building parent;
 
         private Texture2D lockTexture;
         private Texture2D unlockTexture;
 
         private Func<bool> isActive;
 
-        public LockGizmo(Building_Door door)
+        public LockGizmo(Building door)
         {
             parent = door;
             defaultLabel = "Locks_Label".Translate();
@@ -54,7 +54,7 @@ namespace Locks
                 new Action(() =>
                 {
                     bool value = !LockUtility.GetData(parent).WantedState.locked;
-                    foreach (Building_Door door in Find.Selector.SelectedObjects.Where(o => o is Building_Door))
+                    foreach (Building door in Find.Selector.SelectedObjects.Where(o => o is Building))
                     {
                         LockUtility.GetData(door).WantedState.locked = value;
                         LockUtility.UpdateLockDesignation(door);
@@ -73,7 +73,7 @@ namespace Locks
                             value = LockMode.Colony;
                         else
                             value = LockMode.Allies;
-                        foreach (Building_Door door in Find.Selector.SelectedObjects.Where(o => o is Building_Door))
+                        foreach (Building door in Find.Selector.SelectedObjects.Where(o => o is Building))
                         {
                             LockUtility.GetData(door).WantedState.mode = value;
                             LockUtility.UpdateLockDesignation(door);
@@ -88,7 +88,7 @@ namespace Locks
                     new Action(() =>
                     {
                         bool value = !LockUtility.GetData(parent).WantedState.petDoor;
-                        foreach (Building_Door door in Find.Selector.SelectedObjects.Where(o => o is Building_Door))
+                        foreach (Building door in Find.Selector.SelectedObjects.Where(o => o is Building))
                         {
                             LockUtility.GetData(door).WantedState.petDoor = value;
                             LockUtility.UpdateLockDesignation(door);
@@ -100,7 +100,7 @@ namespace Locks
                 new Action(() =>
                 {
                     Find.WindowStack.Add(new Dialog_AssignBuildingOwner(LockUtility.GetData(parent)));
-                    foreach (Building_Door door in Find.Selector.SelectedObjects.Where(o => o is Building_Door))
+                    foreach (Building door in Find.Selector.SelectedObjects.Where(o => o is Building))
                     {
                         if (door != parent)
                         {
@@ -116,7 +116,7 @@ namespace Locks
                     "Locks_ClearOwners".Translate(),
                     new Action(() =>
                     {
-                        foreach (Building_Door door in Find.Selector.SelectedObjects.Where(o => o is Building_Door))
+                        foreach (Building door in Find.Selector.SelectedObjects.Where(o => o is Building))
                         {
                             LockUtility.GetData(door).WantedState.owners.Clear();
                             LockUtility.UpdateLockDesignation(door);

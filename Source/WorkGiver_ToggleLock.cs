@@ -26,7 +26,7 @@ namespace Locks
 
         public override bool HasJobOnThing(Pawn pawn, Thing t, bool forced = false)
         {
-            Building_Door door = (Building_Door)t;
+            Building door = (Building)t;
             if (!LockUtility.GetData(door).CanChangeLocks(pawn))
             {
                 JobFailReason.Is("Locks_FailOnWrongUser".Translate(pawn));
@@ -38,7 +38,7 @@ namespace Locks
         public override Job JobOnThing(Pawn pawn, Thing t, bool forced = false)
         {
 
-            Building_Door door = (Building_Door)t;
+            Building door = (Building)t;
             if (!LockUtility.GetData(door).CanChangeLocks(pawn))
             {
                 JobFailReason.Is("Locks_FailOnWrongUser".Translate(pawn));

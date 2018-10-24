@@ -9,7 +9,7 @@ namespace Locks
 {
     public class LockData : IExposable, IAssignableBuilding
     {
-        private Building_Door parent;
+        private Building parent;
 
         public LockState CurrentState;
         public LockState WantedState;
@@ -91,7 +91,7 @@ namespace Locks
             WantedState.ExposeData("wanted");
         }
 
-        public void UpdateReference(Building_Door door)
+        public void UpdateReference(Building door)
         {
             parent = door;
         }

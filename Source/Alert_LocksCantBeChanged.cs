@@ -15,7 +15,7 @@ namespace Locks
             defaultExplanation = "Locks_AlertLocksCantBeChangedDefaultDesc".Translate();
         }
 
-        private IEnumerable<Building_Door> UnchangableDoors
+        private IEnumerable<Building> UnchangableDoors
         {
             get
             {
@@ -27,8 +27,8 @@ namespace Locks
                     {
                         if (desList[i].def == LockUtility.DesDef)
                         {
-                            if (LockUtility.GetData(desList[i].target.Thing as Building_Door).WantedState.Private && !LockUtility.GetData(desList[i].target.Thing as Building_Door).WantedState.owners.Any(p => p.workSettings.WorkIsActive(DefDatabase<WorkTypeDef>.GetNamed("BasicWorker"))))
-                                yield return desList[i].target.Thing as Building_Door;
+                            if (LockUtility.GetData(desList[i].target.Thing as Building).WantedState.Private && !LockUtility.GetData(desList[i].target.Thing as Building).WantedState.owners.Any(p => p.workSettings.WorkIsActive(DefDatabase<WorkTypeDef>.GetNamed("BasicWorker"))))
+                                yield return desList[i].target.Thing as Building;
                         }
                     }
                 }

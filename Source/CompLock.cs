@@ -21,11 +21,11 @@ namespace Locks
         {
             string text = "Locks_StatePrefix".Translate() + " ";
 
-            if (LockUtility.GetData((Building_Door)this.parent).CurrentState.locked)
+            if (LockUtility.GetData((Building)this.parent).CurrentState.locked)
                 text += "Locks_StateLocked".Translate();
             else
                 text += "Locks_StateUnlocked".Translate();
-            if (LockUtility.GetData((Building_Door)this.parent).NeedChange)
+            if (LockUtility.GetData((Building)this.parent).NeedChange)
                 text += $" ({"Locks_StateChanging".Translate()})";
 
             return text;

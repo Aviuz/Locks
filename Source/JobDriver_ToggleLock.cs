@@ -27,7 +27,7 @@ namespace Locks
             toil.initAction = delegate
             {
                 Pawn actor = toil.actor;
-                Building_Door door = (Building_Door)actor.CurJob.targetA.Thing;
+                Building door = (Building)actor.CurJob.targetA.Thing;
                 this.FailOn(() => !LockUtility.GetData(door).CanChangeLocks(actor));
                 LockUtility.GetData(door).CurrentState.CopyFrom(LockUtility.GetData(door).WantedState);
                 SoundDefOf.FlickSwitch.PlayOneShot(new TargetInfo(door.Position, door.Map, false));

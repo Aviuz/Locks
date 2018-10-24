@@ -11,7 +11,7 @@ namespace Locks
 {
     public static class LockUtility
     {
-        private static readonly Dictionary<Building_Door, LockData> Map = new Dictionary<Building_Door, LockData>();
+        private static readonly Dictionary<Building, LockData> Map = new Dictionary<Building, LockData>();
 
         private static DesignationDef designationDef;
         private static JobDef jobDef;
@@ -42,7 +42,7 @@ namespace Locks
             }
         }
 
-        public static bool PawnCanOpen(Building_Door door, Pawn p)
+        public static bool PawnCanOpen(Building door, Pawn p)
         {
             Lord lord = p.GetLord();
 
@@ -79,7 +79,7 @@ namespace Locks
             return false;
         }
 
-        public static LockData GetData(Building_Door key)
+        public static LockData GetData(Building key)
         {
             if (!Map.ContainsKey(key))
                 Map[key] = new LockData();
@@ -87,7 +87,7 @@ namespace Locks
             return Map[key];
         }
 
-        public static void Remove(Building_Door key)
+        public static void Remove(Building key)
         {
             Map.Remove(key);
         }
@@ -95,7 +95,7 @@ namespace Locks
         public static void UpdateLockDesignation(Thing t)
         {
             bool flag = false;
-            Building_Door door = t as Building_Door;
+            Building door = t as Building;
             if (door != null)
             {
                 flag = GetData(door).NeedChange;
