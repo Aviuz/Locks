@@ -53,17 +53,15 @@
   <ItemGroup>
     <Compile Include="Alert_LocksCantBeChanged.cs" />
     <Compile Include="CompatibilityPatches\ClutterStructure.cs" />
+    <Compile Include="CompatibilityPatches\DoorsExpanded.cs" />
     <Compile Include="CompLock.cs" />
-    <Compile Include="HarmonyPatches\HPatcher.cs" />
     <Compile Include="HarmonyPatches\Patch_AddLockGizmoToDoors.cs" />
-    <Compile Include="HarmonyPatches\Patch_AddLockDataToSave.cs" />
     <Compile Include="HarmonyPatches\Patch_InjectLockCheck.cs" />
-    <Compile Include="HarmonyPatches\Patch_RemoveLockData.cs" />
     <Compile Include="Initialization.cs" />
     <Compile Include="ITab_Lock.cs" />
     <Compile Include="JobDriver_ToggleLock.cs" />
-    <Compile Include="LockData.cs" />
     <Compile Include="LockGizmo.cs" />
+    <Compile Include="Locks.cs" />
     <Compile Include="LockState.cs" />
     <Compile Include="LockUtility.cs" />
     <Compile Include="WorkGiver_ToggleLock.cs" />

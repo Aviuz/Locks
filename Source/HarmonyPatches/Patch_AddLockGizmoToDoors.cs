@@ -10,30 +10,12 @@ using UnityEngine;
 
 namespace Locks.HarmonyPatches
 {
-    [HarmonyPatch(typeof(Building_Door))]
-    [HarmonyPatch("GetGizmos")]
+    [HarmonyPatch(typeof(Building_Door), nameof(Building_Door.GetGizmos))]
     public class Patch_AddLockGizmoToDoors
     {
-        private static IEnumerable<CodeInstruction> Transpiler(ILGenerator gen, IEnumerable<CodeInstruction> instr)
+        static IEnumerable<Gizmo> Postfix(IEnumerable<Gizmo> __result, Building __instance)
         {
-            OpCode[] opCodes = { OpCodes.Ret };
-            String[] strings = { "" };
-            int step = 0;
-
-            foreach (var ci in instr)
-            {
-                if (HPatcher.IsFragment(opCodes, strings, ci, ref step))
-                {
-                    yield return new CodeInstruction(OpCodes.Ldarg_0);
-                    yield return new CodeInstruction(OpCodes.Call, typeof(Patch_AddLockGizmoToDoors).GetMethod("AddLockGizmo"));
-                }
-                yield return ci;
-            }
-        }
-
-        public static IEnumerable<Gizmo> AddLockGizmo(IEnumerable<Gizmo> collection, Building_Door door)
-        {
-            return collection.Add(new LockGizmo(door));
+            return LockUtility.AddLockGizmo(__result, __instance);
         }
     }
 }

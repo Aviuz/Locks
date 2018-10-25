@@ -99,5 +99,18 @@ namespace Locks
             }
         }
 
+        public static IEnumerable<Gizmo> AddLockGizmo(IEnumerable<Gizmo> gizmos, Building door)
+        {
+            foreach (var gizmo in gizmos)
+            {
+                yield return gizmo;
+            }
+
+            if (door.Faction == Faction.OfPlayer)
+            {
+                yield return new LockGizmo(door);
+            }
+        }
+
     }
 }
