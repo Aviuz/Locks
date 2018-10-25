@@ -12,6 +12,7 @@ namespace Locks
     class LockGizmo : Command
     {
         private Building parent;
+        private CompLock compLock;
 
         private Texture2D lockTexture;
         private Texture2D unlockTexture;
@@ -21,11 +22,12 @@ namespace Locks
         public LockGizmo(Building door)
         {
             parent = door;
+            compLock = parent.GetComp<CompLock>();
             defaultLabel = "Locks_Label".Translate();
             defaultDesc = "Locks_Description".Translate();
             lockTexture = ContentFinder<Texture2D>.Get("lock", false);
             unlockTexture = ContentFinder<Texture2D>.Get("unlock", false);
-            isActive = () => LockUtility.GetData(parent).WantedState.locked;
+            isActive = () => compLock.wantedState.locked;
         }
 
         public override void ProcessInput(Event ev)
@@ -33,7 +35,7 @@ namespace Locks
             if (ev.button == 0)
             {
                 SoundDefOf.Click.PlayOneShotOnCamera(null);
-                LockUtility.GetData(parent).WantedState.locked = !LockUtility.GetData(parent).WantedState.locked;
+                compLock.wantedState.locked = !compLock.wantedState.locked;
                 LockUtility.UpdateLockDesignation(parent);
             }
             else if (ev.button == 1)
@@ -48,49 +50,49 @@ namespace Locks
         {
             var list = new List<FloatMenuOption>();
             list.Add(new FloatMenuOption(
-                LockUtility.GetData(parent).WantedState.locked ?
+                compLock.wantedState.locked ?
                                         "Locks_UnlockToggle".Translate() :
                                         "Locks_LockToggle".Translate(),
                 new Action(() =>
                 {
-                    bool value = !LockUtility.GetData(parent).WantedState.locked;
+                    bool value = !compLock.wantedState.locked;
                     foreach (Building door in Find.Selector.SelectedObjects.Where(o => o is Building))
                     {
-                        LockUtility.GetData(door).WantedState.locked = value;
+                        door.GetComp<CompLock>().wantedState.locked = value;
                         LockUtility.UpdateLockDesignation(door);
                     }
                 })
                 ));
-            if (!LockUtility.GetData(parent).WantedState.Private)
+            if (!compLock.wantedState.Private)
                 list.Add(new FloatMenuOption(
-                    LockUtility.GetData(parent).WantedState.mode == LockMode.Allies ?
+                    compLock.wantedState.mode == LockMode.Allies ?
                                         "Locks_ForbidVisitors".Translate() :
                                         "Locks_AllowVisitors".Translate(),
                     new Action(() =>
                     {
                         LockMode value;
-                        if (LockUtility.GetData(parent).WantedState.mode == LockMode.Allies)
+                        if (compLock.wantedState.mode == LockMode.Allies)
                             value = LockMode.Colony;
                         else
                             value = LockMode.Allies;
                         foreach (Building door in Find.Selector.SelectedObjects.Where(o => o is Building))
                         {
-                            LockUtility.GetData(door).WantedState.mode = value;
+                            door.GetComp<CompLock>().wantedState.mode = value;
                             LockUtility.UpdateLockDesignation(door);
                         }
                     })
                     ));
-            if (LockUtility.GetData(parent).WantedState.Private)
+            if (compLock.wantedState.Private)
                 list.Add(new FloatMenuOption(
-                    LockUtility.GetData(parent).WantedState.petDoor ?
+                    compLock.wantedState.petDoor ?
                                             "Locks_RemovePetDoor".Translate() :
                                             "Locks_AddPetDoor".Translate(),
                     new Action(() =>
                     {
-                        bool value = !LockUtility.GetData(parent).WantedState.petDoor;
+                        bool value = !compLock.wantedState.petDoor;
                         foreach (Building door in Find.Selector.SelectedObjects.Where(o => o is Building))
                         {
-                            LockUtility.GetData(door).WantedState.petDoor = value;
+                            door.GetComp<CompLock>().wantedState.petDoor = value;
                             LockUtility.UpdateLockDesignation(door);
                         }
                     })
@@ -99,26 +101,26 @@ namespace Locks
                 "CommandBedSetOwnerLabel".Translate(),
                 new Action(() =>
                 {
-                    Find.WindowStack.Add(new Dialog_AssignBuildingOwner(LockUtility.GetData(parent)));
+                    Find.WindowStack.Add(new Dialog_AssignBuildingOwner(compLock));
                     foreach (Building door in Find.Selector.SelectedObjects.Where(o => o is Building))
                     {
                         if (door != parent)
                         {
-                            LockUtility.GetData(door).WantedState.owners.Clear();
-                            LockUtility.GetData(door).WantedState.owners.AddRange(LockUtility.GetData(parent).WantedState.owners);
+                            door.GetComp<CompLock>().wantedState.owners.Clear();
+                            door.GetComp<CompLock>().wantedState.owners.AddRange(compLock.wantedState.owners);
                         }
                         LockUtility.UpdateLockDesignation(door);
                     }
                 })
                 ));
-            if (LockUtility.GetData(parent).WantedState.Private)
+            if (compLock.wantedState.Private)
                 list.Add(new FloatMenuOption(
                     "Locks_ClearOwners".Translate(),
                     new Action(() =>
                     {
                         foreach (Building door in Find.Selector.SelectedObjects.Where(o => o is Building))
                         {
-                            LockUtility.GetData(door).WantedState.owners.Clear();
+                            door.GetComp<CompLock>().wantedState.owners.Clear();
                             LockUtility.UpdateLockDesignation(door);
                         }
                     })
@@ -135,7 +137,7 @@ namespace Locks
                 flag = true;
                 GUI.color = GenUI.MouseoverColor;
             }
-            Texture2D badTex = LockUtility.GetData(parent).WantedState.locked ? lockTexture : unlockTexture;
+            Texture2D badTex = compLock.wantedState.locked ? lockTexture : unlockTexture;
             if (badTex == null)
             {
                 badTex = BaseContent.BadTex;

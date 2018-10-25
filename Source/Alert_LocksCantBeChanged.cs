@@ -27,7 +27,10 @@ namespace Locks
                     {
                         if (desList[i].def == LockUtility.DesDef)
                         {
-                            if (LockUtility.GetData(desList[i].target.Thing as Building).WantedState.Private && !LockUtility.GetData(desList[i].target.Thing as Building).WantedState.owners.Any(p => p.workSettings.WorkIsActive(DefDatabase<WorkTypeDef>.GetNamed("BasicWorker"))))
+                            var building = desList[i].target.Thing as Building;
+                            var compLock = building.GetComp<CompLock>();
+                            
+                            if (compLock.wantedState.Private && !compLock.AssignedPawns.Any(p => p.workSettings.WorkIsActive(DefDatabase<WorkTypeDef>.GetNamed("BasicWorker"))))
                                 yield return desList[i].target.Thing as Building;
                         }
                     }

@@ -1,23 +1,19 @@
 ﻿using Harmony;
 using RimWorld;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Emit;
-using System.Text;
+using Verse;
 
 namespace Locks.HarmonyPatches
 {
-    [HarmonyPatch(typeof(Building_Door))]
-    [HarmonyPatch("PawnCanOpen")]
+    [HarmonyPatch(typeof(Building_Door), nameof(Building_Door.PawnCanOpen))]
     public class Patch_InjectLockCheck
     {
-        private static IEnumerable<CodeInstruction> Transpiler(ILGenerator gen, IEnumerable<CodeInstruction> instr)
+        private static bool Prefix(Building_Door __instance, out bool __result, Pawn p)
         {
-            yield return new CodeInstruction(OpCodes.Ldarg_0);
-            yield return new CodeInstruction(OpCodes.Ldarg_1);
-            yield return new CodeInstruction(OpCodes.Call, typeof(LockUtility).GetMethod("PawnCanOpen"));
-            yield return new CodeInstruction(OpCodes.Ret);
+            __result = false;
+            var compLock = __instance.GetComp<CompLock>();
+            if (compLock == null) return true;
+            __result = LockUtility.PawnCanOpen(__instance, p);
+            return false;
         }
     }
 }

@@ -27,7 +27,8 @@ namespace Locks
         public override bool HasJobOnThing(Pawn pawn, Thing t, bool forced = false)
         {
             Building door = (Building)t;
-            if (!LockUtility.GetData(door).CanChangeLocks(pawn))
+            var compLock = door.GetComp<CompLock>();
+            if (!compLock.CanChangeLocks(pawn))
             {
                 JobFailReason.Is("Locks_FailOnWrongUser".Translate(pawn));
                 return false;
@@ -37,9 +38,9 @@ namespace Locks
 
         public override Job JobOnThing(Pawn pawn, Thing t, bool forced = false)
         {
-
             Building door = (Building)t;
-            if (!LockUtility.GetData(door).CanChangeLocks(pawn))
+            var compLock = door.GetComp<CompLock>();
+            if (!compLock.CanChangeLocks(pawn))
             {
                 JobFailReason.Is("Locks_FailOnWrongUser".Translate(pawn));
                 return null;

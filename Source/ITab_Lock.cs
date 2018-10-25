@@ -33,21 +33,8 @@ namespace Locks
             this.tutorTag = "Locks";
         }
 
-        public Building SelDoor
-        {
-            get
-            {
-                return SelThing as Building;
-            }
-        }
-
-        public LockData Data
-        {
-            get
-            {
-                return LockUtility.GetData(SelDoor);
-            }
-        }
+        private Building SelDoor => SelThing as Building;
+        private CompLock Data => SelDoor.GetComp<CompLock>();
 
         protected override void FillTab()
         {
@@ -100,9 +87,9 @@ namespace Locks
                 return;
             if (lastSelectedThing == SelThing)
             {
-                Data.WantedState.locked = locked;
-                Data.WantedState.mode = vistitorsAllowed ? LockMode.Allies : LockMode.Colony;
-                Data.WantedState.petDoor = petDoor;
+                Data.wantedState.locked = locked;
+                Data.wantedState.mode = vistitorsAllowed ? LockMode.Allies : LockMode.Colony;
+                Data.wantedState.petDoor = petDoor;
                 // Owners
                 if (Data.NeedChange)
                     LockUtility.UpdateLockDesignation(SelDoor);
@@ -116,24 +103,24 @@ namespace Locks
 
         public override void OnOpen()
         {
-            locked = Data.WantedState.locked;
-            vistitorsAllowed = Data.WantedState.mode == LockMode.Allies ? true : false;
-            petDoor = Data.WantedState.petDoor;
+            locked = Data.wantedState.locked;
+            vistitorsAllowed = Data.wantedState.mode == LockMode.Allies ? true : false;
+            petDoor = Data.wantedState.petDoor;
             //owners
         }
 
         private void OwnerCheckbox(Rect rect, Pawn pawn)
         {
-            bool checkOn = Data.WantedState.owners.Contains(pawn);
+            bool checkOn = Data.wantedState.owners.Contains(pawn);
             TextAnchor anchor = Text.Anchor;
             Text.Anchor = TextAnchor.MiddleLeft;
             Widgets.Label(rect, pawn.Name.ToStringShort);
             if (Widgets.ButtonInvisible(rect, false))
             {
                 if (checkOn)
-                    Data.WantedState.owners.Remove(pawn);
+                    Data.wantedState.owners.Remove(pawn);
                 else
-                    Data.WantedState.owners.Add(pawn);
+                    Data.wantedState.owners.Add(pawn);
                 checkOn = !checkOn;
                 if (checkOn)
                 {

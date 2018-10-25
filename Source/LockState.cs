@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Harmony;
+using RimWorld;
 using Verse;
 
 namespace Locks
@@ -12,19 +14,42 @@ namespace Locks
         Colony
     }
 
-    public struct LockState
+    public class LockState : IExposable, IAssignableBuilding
     {
         public LockMode mode;
         public bool locked;
         public bool petDoor;
         public List<Pawn> owners;
 
+        public IEnumerable<Pawn> AssigningCandidates => owners.AsEnumerable();
+        public IEnumerable<Pawn> AssignedPawns => owners.AsEnumerable();
+        public int MaxAssignedPawnsCount => owners.Count + 1;
+
+        public bool Private => owners.Count > 0;
+
+        public LockState()
+        {
+            mode = LockMode.Allies;
+            locked = true;
+            petDoor = false;
+            owners = new List<Pawn>();
+        }
+        
         public LockState(LockMode mode, bool locked, bool petDoor, List<Pawn> owners)
         {
             this.mode = mode;
             this.locked = locked;
             this.petDoor = petDoor;
             this.owners = owners;
+        }
+        
+        public LockState(LockState other)
+        {
+            mode = other.mode;
+            locked = other.locked;
+            petDoor = other.petDoor;
+            owners = new List<Pawn>();
+            owners.AddRange(other.owners);
         }
 
         public void CopyFrom(LockState copy)
@@ -70,20 +95,28 @@ namespace Locks
             return false;
         }
 
-        public bool Private
+        public void TryAssignPawn(Pawn pawn)
         {
-            get
-            {
-                return owners.Count > 0;
-            }
+            if(!owners.Contains(pawn))
+                owners.Add(pawn);
         }
 
-        public void ExposeData(String postfix)
+        public void TryUnassignPawn(Pawn pawn)
         {
-            Scribe_Values.Look(ref mode, $"Locks_LockData_Mode_{postfix}", LockMode.Allies, false);
-            Scribe_Values.Look(ref locked, $"Locks_LockData_Locked_{postfix}", true, false);
-            Scribe_Values.Look(ref petDoor, $"Locks_LockData_PetDoor_{postfix}", false, false);
-            Scribe_Collections.Look(ref owners, $"Locks_LockData_Owners_{postfix}", LookMode.Reference);
+            owners.Remove(pawn);
+        }
+
+        public bool AssignedAnything(Pawn pawn)
+        {
+            return false;
+        }
+
+        public void ExposeData()
+        {
+            Scribe_Values.Look(ref mode, "mode", LockMode.Allies, false);
+            Scribe_Values.Look(ref locked, "locked", true, false);
+            Scribe_Values.Look(ref petDoor, "petDoor", false, false);
+            Scribe_Collections.Look(ref owners, "owners", LookMode.Reference);
         }
     }
 }
