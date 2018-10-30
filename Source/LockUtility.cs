@@ -11,6 +11,8 @@ namespace Locks
 {
     public static class LockUtility
     {
+        public static float MaxPetSize = 0.86f;
+
         private static readonly Dictionary<Building_Door, LockData> Map = new Dictionary<Building_Door, LockData>();
 
         private static DesignationDef designationDef;
@@ -63,7 +65,7 @@ namespace Locks
             if (p.Faction == null || p.Faction.HostileTo(door.Faction))
                 return false;
 
-            if (respectedState.Private && respectedState.petDoor && p.RaceProps.Animal && p.RaceProps.baseBodySize <= 0.85 && p.Faction == door.Faction)
+            if (respectedState.Private && respectedState.petDoor && p.RaceProps.Animal && p.RaceProps.baseBodySize <= MaxPetSize && p.Faction == door.Faction)
                 return true;
 
             if (respectedState.Private && !respectedState.owners.Contains(p))
