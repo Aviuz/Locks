@@ -114,5 +114,21 @@ namespace Locks
             }
         }
 
+        public static bool IsVisible(this LockState state, string propertyName)
+        {
+            switch (propertyName)
+            {
+                case nameof(LockState.locked):
+                    return true;
+                case nameof(LockState.mode):
+                    return state.locked && !state.Private;
+                case nameof(LockState.petDoor):
+                    return state.locked;
+                case nameof(LockState.owners):
+                    return state.locked;
+                default:
+                    return true;
+            }
+        }
     }
 }

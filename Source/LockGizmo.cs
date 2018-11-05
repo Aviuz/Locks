@@ -61,7 +61,8 @@ namespace Locks
                     }
                 })
                 ));
-            if (!LockUtility.GetData(parent).WantedState.Private)
+            if (LockUtility.GetData(parent).WantedState.IsVisible(nameof(LockState.mode)))
+            {
                 list.Add(new FloatMenuOption(
                     LockUtility.GetData(parent).WantedState.mode == LockMode.Allies ?
                                         "Locks_ForbidVisitors".Translate() :
@@ -80,7 +81,9 @@ namespace Locks
                         }
                     })
                     ));
-            if (LockUtility.GetData(parent).WantedState.Private)
+            }
+            if (LockUtility.GetData(parent).WantedState.IsVisible(nameof(LockState.petDoor)))
+            {
                 list.Add(new FloatMenuOption(
                     LockUtility.GetData(parent).WantedState.petDoor ?
                                             "Locks_RemovePetDoor".Translate() :
@@ -95,23 +98,28 @@ namespace Locks
                         }
                     })
                     ));
-            list.Add(new FloatMenuOption(
-                "CommandBedSetOwnerLabel".Translate(),
-                new Action(() =>
-                {
-                    Find.WindowStack.Add(new Dialog_AssignBuildingOwner(LockUtility.GetData(parent)));
-                    foreach (Building_Door door in Find.Selector.SelectedObjects.Where(o => o is Building_Door))
+            }
+            if (LockUtility.GetData(parent).WantedState.IsVisible(nameof(LockState.owners)))
+            {
+                list.Add(new FloatMenuOption(
+                    "CommandBedSetOwnerLabel".Translate(),
+                    new Action(() =>
                     {
-                        if (door != parent)
+                        Find.WindowStack.Add(new Dialog_AssignBuildingOwner(LockUtility.GetData(parent)));
+                        foreach (Building_Door door in Find.Selector.SelectedObjects.Where(o => o is Building_Door))
                         {
-                            LockUtility.GetData(door).WantedState.owners.Clear();
-                            LockUtility.GetData(door).WantedState.owners.AddRange(LockUtility.GetData(parent).WantedState.owners);
+                            if (door != parent)
+                            {
+                                LockUtility.GetData(door).WantedState.owners.Clear();
+                                LockUtility.GetData(door).WantedState.owners.AddRange(LockUtility.GetData(parent).WantedState.owners);
+                            }
+                            LockUtility.UpdateLockDesignation(door);
                         }
-                        LockUtility.UpdateLockDesignation(door);
-                    }
-                })
-                ));
+                    })
+                    ));
+            }
             if (LockUtility.GetData(parent).WantedState.Private)
+            {
                 list.Add(new FloatMenuOption(
                     "Locks_ClearOwners".Translate(),
                     new Action(() =>
@@ -123,9 +131,10 @@ namespace Locks
                         }
                     })
                     ));
+            }
             return list;
         }
-        
+
         public override GizmoResult GizmoOnGUI(Vector2 topLeft, float maxWidth)
         {
             Rect rect = new Rect(topLeft.x, topLeft.y, this.GetWidth(maxWidth), 75f);

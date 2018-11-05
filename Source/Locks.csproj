@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Alert_LocksCantBeChanged.cs" />
+    <Compile Include="Clipboard.cs" />
     <Compile Include="CompatibilityPatches\ClutterStructure.cs" />
     <Compile Include="CompLock.cs" />
     <Compile Include="HarmonyPatches\HPatcher.cs" />

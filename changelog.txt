@@ -1,4 +1,8 @@
 Changelog:
+2.3.0
+- added copy/paste buttons
+- added cancel button
+- now settings that do not apply in comparision to other settings will not be displayed on tab "Lock"
 2.2.2
 - changed max size for pet door to 0.86 up from 0.85
 2.2.1
