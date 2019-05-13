@@ -50,7 +50,8 @@ namespace Locks
 
             bool canOpenAnyDoor = lord != null && lord.LordJob != null && lord.LordJob.CanOpenAnyDoor(p);
             bool noFaction = door.Faction == null;
-            if (canOpenAnyDoor || noFaction)
+            bool specialGuest = WildManUtility.WildManShouldReachOutsideNow(p) || (p.guest != null && p.guest.Released);
+            if (canOpenAnyDoor || noFaction || specialGuest)
                 return true;
 
             LockState respectedState;
@@ -65,7 +66,7 @@ namespace Locks
             if (p.Faction == null || p.Faction.HostileTo(door.Faction))
                 return false;
 
-            if (respectedState.Private && respectedState.petDoor && p.RaceProps.Animal && p.RaceProps.baseBodySize <= MaxPetSize && p.Faction == door.Faction)
+            if (respectedState.Private && respectedState.petDoor && p.RaceProps != null && p.RaceProps.Animal && p.RaceProps.baseBodySize <= MaxPetSize && p.Faction == door.Faction)
                 return true;
 
             if (respectedState.Private && !respectedState.owners.Contains(p))
