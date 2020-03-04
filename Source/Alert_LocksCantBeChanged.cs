@@ -35,12 +35,14 @@ namespace Locks
             }
         }
 
-        public override string GetExplanation()
+        public override TaggedString GetExplanation()
         {
-            var stringBuilder = new StringBuilder();
-            foreach (var current in UnchangableDoors)
-                stringBuilder.AppendLine("    " + current.Label);
-            return string.Format("Locks_AlertLocksCantBeChangedDesc".Translate(), stringBuilder);
+            return base.GetExplanation();
+            // TODO keha
+            //var stringBuilder = new StringBuilder();
+            //foreach (var current in UnchangableDoors)
+            //    stringBuilder.AppendLine("    " + current.Label);
+            //return string.Format("Locks_AlertLocksCantBeChangedDesc".Translate(), stringBuilder);
         }
 
         public override AlertReport GetReport()
