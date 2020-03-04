@@ -37,12 +37,10 @@ namespace Locks
 
         public override TaggedString GetExplanation()
         {
-            return base.GetExplanation();
-            // TODO keha
-            //var stringBuilder = new StringBuilder();
-            //foreach (var current in UnchangableDoors)
-            //    stringBuilder.AppendLine("    " + current.Label);
-            //return string.Format("Locks_AlertLocksCantBeChangedDesc".Translate(), stringBuilder);
+            var stringBuilder = new StringBuilder();
+            foreach (var current in UnchangableDoors)
+                stringBuilder.AppendLine("    " + current.Label);
+            return string.Format("Locks_AlertLocksCantBeChangedDesc".Translate(), stringBuilder);
         }
 
         public override AlertReport GetReport()
