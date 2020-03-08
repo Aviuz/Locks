@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ModMetaData>
-	<name>Locks</name>
-	<author>Avius</author>
+  <name>Locks</name>
+  <author>Avius</author>
   <supportedVersions>
     <li>1.0</li>
     <li>1.1</li>
