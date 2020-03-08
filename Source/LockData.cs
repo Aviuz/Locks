@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,7 +7,7 @@ using RimWorld;
 
 namespace Locks
 {
-    public class LockData : IExposable, IAssignableBuilding
+    public class LockData : CompAssignableToPawn, IExposable
     {
         private Building_Door parent;
 
@@ -36,35 +36,15 @@ namespace Locks
         }
         #endregion
 
-        // IAssignableBuilding
-        #region IAssignableBuilding
-        public int MaxAssignedPawnsCount => WantedState.owners.Count + 1;
-
-        public IEnumerable<Pawn> AssignedPawns
+        public override void TryAssignPawn(Pawn pawn)
         {
-            get
-            {
-                return WantedState.owners;
-            }
-        }
-
-        public IEnumerable<Pawn> AssigningCandidates
-        {
-            get
-            {
-                return parent.Map.mapPawns.FreeColonists;
-            }
-        }
-
-        public void TryAssignPawn(Pawn pawn)
-        {
-            WantedState.owners.Add(pawn);
+            base.TryAssignPawn(pawn);
             UpdateOwners();
         }
 
-        public void TryUnassignPawn(Pawn pawn)
+        public override void TryUnassignPawn(Pawn pawn, bool sort = true)
         {
-            WantedState.owners.Remove(pawn);
+            base.TryUnassignPawn(pawn, sort);
             UpdateOwners();
         }
 
@@ -78,12 +58,6 @@ namespace Locks
             }
             LockUtility.UpdateLockDesignation(parent);
         }
-
-        public bool AssignedAnything(Pawn pawn)
-        {
-            return true;
-        }
-        #endregion
 
         public void ExposeData()
         {

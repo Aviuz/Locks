@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Harmony;
 using RimWorld;
 using System.Reflection.Emit;
+using HarmonyLib;
 using Verse;
 using UnityEngine;
 
@@ -33,7 +33,8 @@ namespace Locks.HarmonyPatches
 
         public static IEnumerable<Gizmo> AddLockGizmo(IEnumerable<Gizmo> collection, Building_Door door)
         {
-            return collection.Add(new LockGizmo(door));
+            Log.Message("AddLockGizmo called");
+            return collection.AddItem(new LockGizmo(door));
         }
     }
 }
