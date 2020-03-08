@@ -1,11 +1,11 @@
-﻿using Harmony;
-using RimWorld;
+﻿using RimWorld;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
 using System.Text;
+using HarmonyLib;
 using Verse;
 
 namespace Locks.CompatibilityPatches
@@ -17,7 +17,7 @@ namespace Locks.CompatibilityPatches
             var doorDef = DefDatabase<ThingDef>.GetNamed("ReinforcedDoor", false);
             if (doorDef != null)
             {
-                var harmony = HarmonyInstance.Create("Harmony_Locks_ClutterStructure");
+                var harmony = new Harmony("Harmony_Locks_ClutterStructure");
                 harmony.Patch(
                 doorDef.thingClass.GetMethod("PawnCanOpen"),
                 new HarmonyMethod(null), new HarmonyMethod(null), new HarmonyMethod(typeof(ClutterStructure).GetMethod("DisableClutterTranspiler")));

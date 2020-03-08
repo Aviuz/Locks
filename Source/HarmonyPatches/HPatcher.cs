@@ -1,11 +1,11 @@
-﻿using Harmony;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
 using System.Text;
+using HarmonyLib;
 using Verse;
 
 namespace Locks.HarmonyPatches
@@ -14,7 +14,7 @@ namespace Locks.HarmonyPatches
     {
         public static void Init()
         {
-            var harmony = HarmonyInstance.Create("Harmony_Locks");
+            var harmony = new Harmony("Harmony_Locks");
             try
             {
                 harmony.PatchAll(Assembly.GetExecutingAssembly());

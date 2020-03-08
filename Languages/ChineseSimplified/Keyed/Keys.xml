@@ -23,6 +23,7 @@
   <Locks_ForbidVisitors>禁止访客使用</Locks_ForbidVisitors>
   <Locks_AddPetDoor>添加宠物门</Locks_AddPetDoor>
   <Locks_RemovePetDoor>移除宠物门</Locks_RemovePetDoor>
+  <Locks_SetOwners>Set Owners</Locks_SetOwners>
   <Locks_ClearOwners>清除使用者</Locks_ClearOwners>
 
   <Locks_FailOnWrongUser>门锁不属于 {0}</Locks_FailOnWrongUser>
