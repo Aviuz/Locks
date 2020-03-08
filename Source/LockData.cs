@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using Verse;
 using RimWorld;
+using System.Reflection;
 
 namespace Locks
 {
-    public class LockData : CompAssignableToPawn, IExposable
+    public class LockData : IExposable
     {
         private Building_Door parent;
 
@@ -36,16 +37,23 @@ namespace Locks
         }
         #endregion
 
-        public override void TryAssignPawn(Pawn pawn)
+        public CompAssignableToPawn CompAssignableToPawn
         {
-            base.TryAssignPawn(pawn);
-            UpdateOwners();
-        }
-
-        public override void TryUnassignPawn(Pawn pawn, bool sort = true)
-        {
-            base.TryUnassignPawn(pawn, sort);
-            UpdateOwners();
+            get
+            {
+                var comp = parent.GetComp<CompAssignableToPawn>();
+                if (comp == null)
+                {
+                    comp = new CompAssignableToPawn();
+                    comp.parent = parent;
+                    var flags = BindingFlags.NonPublic | BindingFlags.Instance;
+                    var comps = typeof(ThingWithComps).GetField("comps", flags).GetValue(parent) as List<ThingComp>;
+                    comps.Add(comp);
+                    comp.Initialize(new CompProperties_AssignableToPawn() { compClass = typeof(CompAssignableToPawn), drawAssignmentOverlay = false, maxAssignedPawnsCount = 999 });
+                    typeof(CompAssignableToPawn).GetField("assignedPawns", flags).SetValue(comp, WantedState.owners);
+                }
+                return comp;
+            }
         }
 
         public void UpdateOwners()
