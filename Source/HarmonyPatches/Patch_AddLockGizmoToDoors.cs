@@ -33,7 +33,6 @@ namespace Locks.HarmonyPatches
 
         public static IEnumerable<Gizmo> AddLockGizmo(IEnumerable<Gizmo> collection, Building_Door door)
         {
-            Log.Message("AddLockGizmo called");
             return collection.AddItem(new LockGizmo(door));
         }
     }
