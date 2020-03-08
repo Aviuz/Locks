@@ -102,7 +102,7 @@ namespace Locks
             if (LockUtility.GetData(parent).WantedState.IsVisible(nameof(LockState.owners)))
             {
                 list.Add(new FloatMenuOption(
-                    "CommandBedSetOwnerLabel".Translate(),
+                    "Locks_SetOwners".Translate(),
                     new Action(() =>
                     {
                         Find.WindowStack.Add(new Dialog_AssignBuildingOwner(LockUtility.GetData(parent).CompAssignableToPawn));
