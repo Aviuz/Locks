@@ -1,4 +1,6 @@
 Changelog:
+2.4.0
+- added compatibility with RimWorld 1.1s (thanks to https://github.com/MerGatto)
 2.3.0
 - added copy/paste buttons
 - added cancel button
