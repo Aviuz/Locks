@@ -1,4 +1,4 @@
-﻿using RimWorld;
+using RimWorld;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,12 +6,13 @@ using System.Text;
 using UnityEngine;
 using Verse;
 using Verse.Sound;
+using Multiplayer.API;
 
 namespace Locks
 {
     class LockGizmo : Command
     {
-        private Building_Door parent;
+        public Building_Door parent;
 
         private Texture2D lockTexture;
         private Texture2D unlockTexture;
@@ -32,9 +33,7 @@ namespace Locks
         {
             if (ev.button == 0)
             {
-                SoundDefOf.Click.PlayOneShotOnCamera(null);
-                LockUtility.GetData(parent).WantedState.locked = !LockUtility.GetData(parent).WantedState.locked;
-                LockUtility.UpdateLockDesignation(parent);
+                InvertLockDesignation();
             }
             else if (ev.button == 1)
             {
@@ -42,6 +41,53 @@ namespace Locks
                 var floatMenu = new FloatMenu(GetMenuOptions());
                 Find.WindowStack.Add(floatMenu);
             }
+        }
+
+        [SyncMethod]
+        private void InvertLockDesignation()
+        {
+            SoundDefOf.Click.PlayOneShotOnCamera(null);
+            LockUtility.GetData(parent).WantedState.locked = !LockUtility.GetData(parent).WantedState.locked;
+            LockUtility.UpdateLockDesignation(parent);
+        }
+
+        [SyncMethod]
+        private void InvertLockFloatMenu(Building_Door door, bool value)
+        {
+            LockUtility.GetData(door).WantedState.locked = value;
+            LockUtility.UpdateLockDesignation(door);
+        }
+
+        [SyncMethod]
+        private void InvertVisitorFloatMenu(Building_Door door, LockMode value)
+        {
+            LockUtility.GetData(door).WantedState.mode = value;
+            LockUtility.UpdateLockDesignation(door);
+        }
+
+        [SyncMethod]
+        private void InvertPetDoorFloatMenu(Building_Door door, bool value)
+        {
+            LockUtility.GetData(door).WantedState.petDoor = value;
+            LockUtility.UpdateLockDesignation(door);
+        }
+
+        [SyncMethod]
+        private void SetOwnersFloatMenu(Building_Door door)
+        {
+            if (door != parent)
+            {
+                LockUtility.GetData(door).WantedState.owners.Clear();
+                LockUtility.GetData(door).WantedState.owners.AddRange(LockUtility.GetData(parent).WantedState.owners);
+            }
+            LockUtility.UpdateLockDesignation(door);
+        }
+
+        [SyncMethod]
+        private void ClearOwnersFloatMenu(Building_Door door)
+        {
+            LockUtility.GetData(door).WantedState.owners.Clear();
+            LockUtility.UpdateLockDesignation(door);
         }
 
         public List<FloatMenuOption> GetMenuOptions()
@@ -56,8 +102,7 @@ namespace Locks
                     bool value = !LockUtility.GetData(parent).WantedState.locked;
                     foreach (Building_Door door in Find.Selector.SelectedObjects.Where(o => o is Building_Door))
                     {
-                        LockUtility.GetData(door).WantedState.locked = value;
-                        LockUtility.UpdateLockDesignation(door);
+                        InvertLockFloatMenu(door, value);
                     }
                 })
                 ));
@@ -76,8 +121,7 @@ namespace Locks
                             value = LockMode.Allies;
                         foreach (Building_Door door in Find.Selector.SelectedObjects.Where(o => o is Building_Door))
                         {
-                            LockUtility.GetData(door).WantedState.mode = value;
-                            LockUtility.UpdateLockDesignation(door);
+                            InvertVisitorFloatMenu(door, value);
                         }
                     })
                     ));
@@ -93,8 +137,7 @@ namespace Locks
                         bool value = !LockUtility.GetData(parent).WantedState.petDoor;
                         foreach (Building_Door door in Find.Selector.SelectedObjects.Where(o => o is Building_Door))
                         {
-                            LockUtility.GetData(door).WantedState.petDoor = value;
-                            LockUtility.UpdateLockDesignation(door);
+                            InvertPetDoorFloatMenu(door, value);
                         }
                     })
                     ));
@@ -108,12 +151,7 @@ namespace Locks
                         Find.WindowStack.Add(new Dialog_AssignBuildingOwner(LockUtility.GetData(parent).CompAssignableToPawn));
                         foreach (Building_Door door in Find.Selector.SelectedObjects.Where(o => o is Building_Door))
                         {
-                            if (door != parent)
-                            {
-                                LockUtility.GetData(door).WantedState.owners.Clear();
-                                LockUtility.GetData(door).WantedState.owners.AddRange(LockUtility.GetData(parent).WantedState.owners);
-                            }
-                            LockUtility.UpdateLockDesignation(door);
+                            SetOwnersFloatMenu(door);
                         }
                     })
                     ));
@@ -126,8 +164,7 @@ namespace Locks
                     {
                         foreach (Building_Door door in Find.Selector.SelectedObjects.Where(o => o is Building_Door))
                         {
-                            LockUtility.GetData(door).WantedState.owners.Clear();
-                            LockUtility.UpdateLockDesignation(door);
+                            ClearOwnersFloatMenu(door);
                         }
                     })
                     ));
