@@ -37,6 +37,10 @@
       <HintPath>packages\Lib.Harmony.2.0.0.8\lib\net472\0Harmony.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="0MultiplayerAPI, Version=0.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Assemblies\0MultiplayerAPI.dll</HintPath>
+    </Reference>
     <Reference Include="Assembly-CSharp">
       <HintPath>packages\Rimworld\Assembly-CSharp.dll</HintPath>
       <Private>False</Private>
@@ -69,6 +73,7 @@
     <Compile Include="Alert_LocksCantBeChanged.cs" />
     <Compile Include="Clipboard.cs" />
     <Compile Include="CompatibilityPatches\ClutterStructure.cs" />
+    <Compile Include="CompatibilityPatches\Multiplayer.cs" />
     <Compile Include="CompLock.cs" />
     <Compile Include="HarmonyPatches\HPatcher.cs" />
     <Compile Include="HarmonyPatches\Patch_AddLockGizmoToDoors.cs" />
