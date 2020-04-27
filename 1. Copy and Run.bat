@@ -1,7 +1,7 @@
 :: ========= Variables =========
 
 SET mod_name=Locks
-SET target_directory=D:\Program Files\Steam\steamapps\common\RimWorld\Mods\%mod_name%
+SET target_directory=D:\Gry\Steam\steamapps\common\RimWorld\Mods\%mod_name%
 
 
 :: ========= Copy ==========

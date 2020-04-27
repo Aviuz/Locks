@@ -1,4 +1,6 @@
 Changelog:
+2.5.0
+- added compatibility with Multiplayer Mod (thanks to https://github.com/Cody-Spring)
 2.4.0
 - added compatibility with RimWorld 1.1s (thanks to https://github.com/MerGatto)
 2.3.0
