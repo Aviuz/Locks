@@ -37,8 +37,9 @@
       <HintPath>packages\Lib.Harmony.2.0.0.8\lib\net472\0Harmony.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="0MultiplayerAPI">
-      <HintPath>..\Libraries\0MultiplayerAPI.dll</HintPath>
+    <Reference Include="0MultiplayerAPI, Version=0.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Assemblies\0MultiplayerAPI.dll</HintPath>
     </Reference>
     <Reference Include="Assembly-CSharp">
       <HintPath>..\..\..\RimWorld1-1-2598Win64\RimWorldWin64_Data\Managed\Assembly-CSharp.dll</HintPath>
