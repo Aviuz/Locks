@@ -172,7 +172,7 @@ namespace Locks
             return list;
         }
 
-        public override GizmoResult GizmoOnGUI(Vector2 topLeft, float maxWidth)
+        public override GizmoResult GizmoOnGUI(Vector2 topLeft, float maxWidth, GizmoRenderParms parms)
         {
             Rect rect = new Rect(topLeft.x, topLeft.y, this.GetWidth(maxWidth), 75f);
             bool flag = false;
