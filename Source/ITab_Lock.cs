@@ -17,7 +17,7 @@ namespace Locks
         private static readonly Vector2 WinSize = new Vector2(310f + WindowGap, ButtonsHeight + OwnersWindowHeight + OwnersTitleHeight + MainSettingsHeight + WindowGap + 2 * Spacing + WarningHeight);
         private const float ButtonsHeight = 25f;
         private const float WindowGap = 15f;
-        private const float MainSettingsHeight = 3 * 32f;
+        private const float MainSettingsHeight = 4 * 32f;
         private const float OwnersTitleHeight = 24f;
         private const float OwnersWindowHeight = 200f;
         private const float WarningHeight = 24f;
@@ -27,6 +27,7 @@ namespace Locks
         private bool locked;
         private bool vistitorsAllowed;
         private bool petDoor;
+        private bool pensDoor;
 
         private Thing lastSelectedThing;
 
@@ -56,12 +57,12 @@ namespace Locks
         protected override void FillTab()
         {
             Rect mainRect = new Rect(0f, 0f, ITab_Lock.WinSize.x, ITab_Lock.WinSize.y).ContractedBy(WindowGap);
-            Rect upperSettingsRect = new Rect(0f, 0f, mainRect.width, MainSettingsHeight);
-            Rect ownersTitleRect = new Rect(0f, mainRect.height - OwnersWindowHeight - OwnersTitleHeight - WarningHeight - 2* Spacing - ButtonsHeight, mainRect.width, OwnersTitleHeight);
-            Rect ownersListRect = new Rect(0f, mainRect.height - OwnersWindowHeight - WarningHeight - 2*Spacing- ButtonsHeight, mainRect.width, OwnersWindowHeight);
+            Rect upperSettingsRect = new Rect(0f, 0f + WindowGap, mainRect.width, MainSettingsHeight);
+            Rect ownersTitleRect = new Rect(0f, mainRect.height - OwnersWindowHeight - OwnersTitleHeight - WarningHeight - 2 * Spacing - ButtonsHeight, mainRect.width, OwnersTitleHeight);
+            Rect ownersListRect = new Rect(0f, mainRect.height - OwnersWindowHeight - WarningHeight - 2 * Spacing - ButtonsHeight, mainRect.width, OwnersWindowHeight);
             Rect warningRect = new Rect(0f, mainRect.height - WarningHeight - Spacing - ButtonsHeight, mainRect.width, WarningHeight);
             Rect cancelButtonRect = new Rect(mainRect.width - ButtonWidth, mainRect.height - WarningHeight, ButtonWidth, WarningHeight);
-            Rect copyButtonsRect = new Rect(mainRect.width/2 - Spacing - ButtonWidth, mainRect.height - ButtonsHeight, ButtonWidth, ButtonsHeight);
+            Rect copyButtonsRect = new Rect(mainRect.width / 2 - Spacing - ButtonWidth, mainRect.height - ButtonsHeight, ButtonWidth, ButtonsHeight);
             Rect pasteButtonsRect = new Rect(mainRect.width / 2 + Spacing, mainRect.height - ButtonsHeight, ButtonWidth, ButtonsHeight);
             Text.Font = GameFont.Small;
             float viewRectCalcHeight = (Text.LineHeight + Spacing) * SelDoor.Map.mapPawns.FreeColonists.Count();
@@ -78,6 +79,8 @@ namespace Locks
                 listing.CheckboxLabeled("Locks_ITabVisitorsAllowed".Translate(), ref vistitorsAllowed, "Locks_ITabVisitorsAllowedDesc".Translate());
             if (Data.WantedState.IsVisible(nameof(LockState.petDoor)))
                 listing.CheckboxLabeled("Locks_ITabPetDoor".Translate(), ref petDoor, "Locks_ITabPetDoorDesc".Translate());
+            if (Data.WantedState.IsVisible(nameof(LockState.pensDoor)))
+                listing.CheckboxLabeled("Locks_ITabPensDoor".Translate(), ref pensDoor, "Locks_ITabPensDoorDesc".Translate());
             listing.End();
 
             if (Data.WantedState.IsVisible(nameof(LockState.owners)))
@@ -141,6 +144,7 @@ namespace Locks
                 Data.WantedState.locked = locked;
                 Data.WantedState.mode = vistitorsAllowed ? LockMode.Allies : LockMode.Colony;
                 Data.WantedState.petDoor = petDoor;
+                Data.WantedState.pensDoor = pensDoor;
                 if (Data.NeedChange)
                     LockUtility.UpdateLockDesignation(SelDoor);
             }
@@ -156,6 +160,7 @@ namespace Locks
             locked = Data.WantedState.locked;
             vistitorsAllowed = Data.WantedState.mode == LockMode.Allies ? true : false;
             petDoor = Data.WantedState.petDoor;
+            pensDoor = Data.WantedState.pensDoor;
         }
 
         private void OwnerCheckbox(Rect rect, Pawn pawn)

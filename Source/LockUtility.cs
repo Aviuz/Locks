@@ -65,6 +65,15 @@ namespace Locks
 
             if (p.Faction == null || p.Faction.HostileTo(door.Faction))
                 return false;
+            Log.Message($"State check: {respectedState.pensDoor}, { p.RaceProps.FenceBlocked} {!door.def.building.roamerCanOpen} {!p.roping.IsRopedByPawn}");
+            if(  p.roping.RopedByPawn != null)
+            {
+                Log.Message($"{!PawnCanOpen(door, p.roping.RopedByPawn)}");
+            }
+            if (respectedState.pensDoor && p.RaceProps.FenceBlocked && !door.def.building.roamerCanOpen && (!p.roping.IsRopedByPawn || !PawnCanOpen(door, p.roping.RopedByPawn)))
+            {
+                return false;
+            }
 
             if (respectedState.Private && respectedState.petDoor && p.RaceProps != null && p.RaceProps.Animal && p.RaceProps.baseBodySize <= MaxPetSize && p.Faction == door.Faction)
                 return true;
@@ -124,6 +133,8 @@ namespace Locks
                 case nameof(LockState.mode):
                     return state.locked && !state.Private;
                 case nameof(LockState.petDoor):
+                    return state.locked;
+                case nameof(LockState.pensDoor):
                     return state.locked;
                 case nameof(LockState.owners):
                     return state.locked;

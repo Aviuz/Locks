@@ -73,6 +73,12 @@ namespace Locks
         }
 
         [SyncMethod]
+        private void InvertPensDoorFloatMenu(Building_Door door, bool value)
+        {
+            LockUtility.GetData(door).WantedState.pensDoor = value;
+            LockUtility.UpdateLockDesignation(door);
+        }
+        [SyncMethod]
         private void SetOwnersFloatMenu(Building_Door door)
         {
             if (door != parent)
@@ -138,6 +144,23 @@ namespace Locks
                         foreach (Building_Door door in Find.Selector.SelectedObjects.Where(o => o is Building_Door))
                         {
                             InvertPetDoorFloatMenu(door, value);
+                        }
+                    })
+                    ));
+            }
+
+            if (LockUtility.GetData(parent).WantedState.IsVisible(nameof(LockState.pensDoor)))
+            {
+                list.Add(new FloatMenuOption(
+                    LockUtility.GetData(parent).WantedState.pensDoor ?
+                                            "Locks_RemovePensDoor".Translate() :
+                                            "Locks_AddPensDoor".Translate(),
+                    new Action(() =>
+                    {
+                        bool value = !LockUtility.GetData(parent).WantedState.pensDoor;
+                        foreach (Building_Door door in Find.Selector.SelectedObjects.Where(o => o is Building_Door))
+                        {
+                            InvertPensDoorFloatMenu(door, value);
                         }
                     })
                     ));

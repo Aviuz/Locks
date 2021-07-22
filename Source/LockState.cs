@@ -17,13 +17,15 @@ namespace Locks
         public LockMode mode;
         public bool locked;
         public bool petDoor;
+        public bool pensDoor;
         public List<Pawn> owners;
 
-        public LockState(LockMode mode, bool locked, bool petDoor, List<Pawn> owners)
+        public LockState(LockMode mode, bool locked, bool petDoor, bool pensDoor, List<Pawn> owners)
         {
             this.mode = mode;
             this.locked = locked;
             this.petDoor = petDoor;
+            this.pensDoor = pensDoor;
             this.owners = owners;
         }
 
@@ -32,6 +34,7 @@ namespace Locks
             mode = copy.mode;
             locked = copy.locked;
             petDoor = copy.petDoor;
+            pensDoor = copy.pensDoor;
             owners.Clear();
             owners.AddRange(copy.owners);
         }
@@ -43,6 +46,8 @@ namespace Locks
             if (a.locked != b.locked)
                 return false;
             if (a.petDoor != b.petDoor)
+                return false;
+            if (a.pensDoor != b.pensDoor)
                 return false;
             foreach (var p in a.owners)
                 if (!b.owners.Contains(p))
@@ -60,6 +65,8 @@ namespace Locks
             if (a.locked != b.locked)
                 return true;
             if (a.petDoor != b.petDoor)
+                return true;
+            if (a.pensDoor != b.pensDoor)
                 return true;
             foreach (var p in a.owners)
                 if (!b.owners.Contains(p))
@@ -83,6 +90,7 @@ namespace Locks
             Scribe_Values.Look(ref mode, $"Locks_LockData_Mode_{postfix}", LockMode.Allies, false);
             Scribe_Values.Look(ref locked, $"Locks_LockData_Locked_{postfix}", true, false);
             Scribe_Values.Look(ref petDoor, $"Locks_LockData_PetDoor_{postfix}", false, false);
+            Scribe_Values.Look(ref pensDoor, $"Locks_LockData_PensDoor_{postfix}", false, false);
             Scribe_Collections.Look(ref owners, $"Locks_LockData_Owners_{postfix}", LookMode.Reference);
         }
     }
