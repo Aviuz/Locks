@@ -60,20 +60,16 @@ namespace Locks
             else
                 respectedState = GetData(door).CurrentState;
 
+            if (respectedState.pensDoor && p.RaceProps.FenceBlocked && !door.def.building.roamerCanOpen && (!p.roping.IsRopedByPawn || !PawnCanOpen(door, p.roping.RopedByPawn)))
+            {
+                return false;
+            }
+
             if (GetData(door).CurrentState.locked == false && p.RaceProps != null && p.RaceProps.intelligence >= Intelligence.Humanlike)
                 return true;
 
             if (p.Faction == null || p.Faction.HostileTo(door.Faction))
                 return false;
-            Log.Message($"State check: {respectedState.pensDoor}, { p.RaceProps.FenceBlocked} {!door.def.building.roamerCanOpen} {!p.roping.IsRopedByPawn}");
-            if(  p.roping.RopedByPawn != null)
-            {
-                Log.Message($"{!PawnCanOpen(door, p.roping.RopedByPawn)}");
-            }
-            if (respectedState.pensDoor && p.RaceProps.FenceBlocked && !door.def.building.roamerCanOpen && (!p.roping.IsRopedByPawn || !PawnCanOpen(door, p.roping.RopedByPawn)))
-            {
-                return false;
-            }
 
             if (respectedState.Private && respectedState.petDoor && p.RaceProps != null && p.RaceProps.Animal && p.RaceProps.baseBodySize <= MaxPetSize && p.Faction == door.Faction)
                 return true;
@@ -84,10 +80,15 @@ namespace Locks
             if (p.Faction == door.Faction && !p.IsPrisoner)
                 return true;
 
+
             bool guestCondition = !p.IsPrisoner || p.HostFaction != door.Faction;
             if (respectedState.mode == LockMode.Allies && guestCondition)
                 return true;
 
+            if (door.Map != null && door.Map.Parent.doorsAlwaysOpenForPlayerPawns && p.Faction == Faction.OfPlayer && !p.IsPrisonerOfColony)
+            {
+                return true;
+            }
             return false;
         }
 
@@ -135,7 +136,7 @@ namespace Locks
                 case nameof(LockState.petDoor):
                     return state.locked;
                 case nameof(LockState.pensDoor):
-                    return state.locked;
+                    return true;
                 case nameof(LockState.owners):
                     return state.locked;
                 default:

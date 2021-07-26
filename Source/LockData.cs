@@ -17,8 +17,8 @@ namespace Locks
 
         public LockData()
         {
-            CurrentState = new LockState(LockMode.Allies, true, false, false, new List<Pawn>());
-            WantedState = new LockState(LockMode.Allies, true, false, false, new List<Pawn>());
+            CurrentState = new LockState(LockMode.Allies, true, false, true, new List<Pawn>());
+            WantedState = new LockState(LockMode.Allies, true, false, true, new List<Pawn>());
         }
 
         // Utilities
