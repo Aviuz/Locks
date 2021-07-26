@@ -66,27 +66,31 @@ namespace Locks
                 return true;
             }
 
-            if (respectedState.pensDoor && p.RaceProps != null && p.RaceProps.Animal && p.RaceProps.FenceBlocked 
-                && !door.def.building.roamerCanOpen && (!p.roping.IsRopedByPawn || !PawnCanOpen(door, p.roping.RopedByPawn)))
+            if (respectedState.pensDoor && p.RaceProps.FenceBlocked && !door.def.building.roamerCanOpen && (!p.roping.IsRopedByPawn || !PawnCanOpen(door, p.roping.RopedByPawn)))
             {
                 return false;
             }
             if (p.Faction == null || p.Faction.HostileTo(door.Faction))
+            {
                 return false;
-
+            }
             if (respectedState.Private && respectedState.petDoor && p.RaceProps != null && p.RaceProps.Animal && p.RaceProps.baseBodySize <= MaxPetSize && p.Faction == door.Faction)
+            {
                 return true;
+            }
 
             if (respectedState.Private && !respectedState.owners.Contains(p))
-                return false;
+            { return false; }
 
             if (p.Faction == door.Faction && !p.IsPrisoner)
+            {
                 return true;
-
-
+            }
             bool guestCondition = !p.IsPrisoner || p.HostFaction != door.Faction;
             if (respectedState.mode == LockMode.Allies && guestCondition)
+            {
                 return true;
+            }
 
             if (door.Map != null && door.Map.Parent.doorsAlwaysOpenForPlayerPawns && p.Faction == Faction.OfPlayer && !p.IsPrisonerOfColony)
             {
