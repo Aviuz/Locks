@@ -60,14 +60,17 @@ namespace Locks
             else
                 respectedState = GetData(door).CurrentState;
 
-            if (respectedState.pensDoor && p.RaceProps.FenceBlocked && !door.def.building.roamerCanOpen && (!p.roping.IsRopedByPawn || !PawnCanOpen(door, p.roping.RopedByPawn)))
+
+            if (GetData(door).CurrentState.locked == false && p.RaceProps != null && p.RaceProps.intelligence >= Intelligence.Humanlike)
+            {
+                return true;
+            }
+
+            if (respectedState.pensDoor && p.RaceProps != null && p.RaceProps.Animal && p.RaceProps.FenceBlocked 
+                && !door.def.building.roamerCanOpen && (!p.roping.IsRopedByPawn || !PawnCanOpen(door, p.roping.RopedByPawn)))
             {
                 return false;
             }
-
-            if (GetData(door).CurrentState.locked == false && p.RaceProps != null && p.RaceProps.intelligence >= Intelligence.Humanlike)
-                return true;
-
             if (p.Faction == null || p.Faction.HostileTo(door.Faction))
                 return false;
 
