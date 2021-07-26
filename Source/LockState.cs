@@ -61,19 +61,35 @@ namespace Locks
         public static bool operator !=(LockState a, LockState b)
         {
             if (a.mode != b.mode)
+            {
                 return true;
+            }
             if (a.locked != b.locked)
+            {
                 return true;
+            }
             if (a.petDoor != b.petDoor)
+            {
                 return true;
+            }
             if (a.pensDoor != b.pensDoor)
+            {
                 return true;
+            }
             foreach (var p in a.owners)
+            {
                 if (!b.owners.Contains(p))
+                {
                     return true;
+                }
+            }
             foreach (var p in b.owners)
+            {
                 if (!a.owners.Contains(p))
+                {
                     return true;
+                }
+            }
             return false;
         }
 
