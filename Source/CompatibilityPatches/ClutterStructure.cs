@@ -20,7 +20,7 @@ namespace Locks.CompatibilityPatches
                 var harmony = new Harmony("Harmony_Locks_ClutterStructure");
                 harmony.Patch(
                 doorDef.thingClass.GetMethod("PawnCanOpen"),
-                new HarmonyMethod(null), new HarmonyMethod(null), new HarmonyMethod(typeof(ClutterStructure).GetMethod("DisableClutterTranspiler")));
+                transpiler: new HarmonyMethod(typeof(ClutterStructure).GetMethod("DisableClutterTranspiler")));
             }
         }
 

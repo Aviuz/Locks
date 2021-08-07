@@ -10,7 +10,7 @@ namespace Locks
 {
     public class LockData : IExposable
     {
-        private Building_Door parent;
+        private ThingWithComps parent;
 
         public LockState CurrentState;
         public LockState WantedState;
@@ -56,24 +56,13 @@ namespace Locks
             }
         }
 
-        public void UpdateOwners()
-        {
-            foreach (Building_Door door in Find.Selector.SelectedObjects.Where(o => o is Building_Door && o != parent))
-            {
-                LockUtility.GetData(door).WantedState.owners.Clear();
-                LockUtility.GetData(door).WantedState.owners.AddRange(LockUtility.GetData(parent).WantedState.owners);
-                LockUtility.UpdateLockDesignation(door);
-            }
-            LockUtility.UpdateLockDesignation(parent);
-        }
-
         public void ExposeData()
         {
             CurrentState.ExposeData("current");
             WantedState.ExposeData("wanted");
         }
 
-        public void UpdateReference(Building_Door door)
+        public void UpdateReference(ThingWithComps door)
         {
             parent = door;
         }

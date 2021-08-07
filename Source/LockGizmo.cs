@@ -12,14 +12,14 @@ namespace Locks
 {
     class LockGizmo : Command
     {
-        public Building_Door parent;
+        public ThingWithComps parent;
 
         private Texture2D lockTexture;
         private Texture2D unlockTexture;
 
         private Func<bool> isActive;
 
-        public LockGizmo(Building_Door door)
+        public LockGizmo(ThingWithComps door)
         {
             parent = door;
             defaultLabel = "Locks_Label".Translate();
@@ -52,34 +52,34 @@ namespace Locks
         }
 
         [SyncMethod]
-        private void InvertLockFloatMenu(Building_Door door, bool value)
+        private void InvertLockFloatMenu(ThingWithComps door, bool value)
         {
             LockUtility.GetData(door).WantedState.locked = value;
             LockUtility.UpdateLockDesignation(door);
         }
 
         [SyncMethod]
-        private void InvertVisitorFloatMenu(Building_Door door, LockMode value)
+        private void InvertVisitorFloatMenu(ThingWithComps door, LockMode value)
         {
             LockUtility.GetData(door).WantedState.mode = value;
             LockUtility.UpdateLockDesignation(door);
         }
 
         [SyncMethod]
-        private void InvertPetDoorFloatMenu(Building_Door door, bool value)
+        private void InvertPetDoorFloatMenu(ThingWithComps door, bool value)
         {
             LockUtility.GetData(door).WantedState.petDoor = value;
             LockUtility.UpdateLockDesignation(door);
         }
 
         [SyncMethod]
-        private void InvertPensDoorFloatMenu(Building_Door door, bool value)
+        private void InvertPensDoorFloatMenu(ThingWithComps door, bool value)
         {
             LockUtility.GetData(door).WantedState.pensDoor = value;
             LockUtility.UpdateLockDesignation(door);
         }
         [SyncMethod]
-        private void SetOwnersFloatMenu(Building_Door door)
+        private void SetOwnersFloatMenu(ThingWithComps door)
         {
             if (door != parent)
             {
@@ -90,7 +90,7 @@ namespace Locks
         }
 
         [SyncMethod]
-        private void ClearOwnersFloatMenu(Building_Door door)
+        private void ClearOwnersFloatMenu(ThingWithComps door)
         {
             LockUtility.GetData(door).WantedState.owners.Clear();
             LockUtility.UpdateLockDesignation(door);
@@ -106,7 +106,7 @@ namespace Locks
                 new Action(() =>
                 {
                     bool value = !LockUtility.GetData(parent).WantedState.locked;
-                    foreach (Building_Door door in Find.Selector.SelectedObjects.Where(o => o is Building_Door))
+                    foreach (ThingWithComps door in Find.Selector.SelectedObjects.Where(o => WhereCheck(o)))
                     {
                         InvertLockFloatMenu(door, value);
                     }
@@ -125,7 +125,7 @@ namespace Locks
                             value = LockMode.Colony;
                         else
                             value = LockMode.Allies;
-                        foreach (Building_Door door in Find.Selector.SelectedObjects.Where(o => o is Building_Door))
+                        foreach (ThingWithComps door in Find.Selector.SelectedObjects.Where(o => WhereCheck(o)))
                         {
                             InvertVisitorFloatMenu(door, value);
                         }
@@ -141,7 +141,7 @@ namespace Locks
                     new Action(() =>
                     {
                         bool value = !LockUtility.GetData(parent).WantedState.petDoor;
-                        foreach (Building_Door door in Find.Selector.SelectedObjects.Where(o => o is Building_Door))
+                        foreach (ThingWithComps door in Find.Selector.SelectedObjects.Where(o => WhereCheck(o)))
                         {
                             InvertPetDoorFloatMenu(door, value);
                         }
@@ -158,7 +158,7 @@ namespace Locks
                     new Action(() =>
                     {
                         bool value = !LockUtility.GetData(parent).WantedState.pensDoor;
-                        foreach (Building_Door door in Find.Selector.SelectedObjects.Where(o => o is Building_Door))
+                        foreach (ThingWithComps door in Find.Selector.SelectedObjects.Where(o => WhereCheck(o)))
                         {
                             InvertPensDoorFloatMenu(door, value);
                         }
@@ -172,7 +172,7 @@ namespace Locks
                     new Action(() =>
                     {
                         Find.WindowStack.Add(new Dialog_AssignBuildingOwner(LockUtility.GetData(parent).CompAssignableToPawn));
-                        foreach (Building_Door door in Find.Selector.SelectedObjects.Where(o => o is Building_Door))
+                        foreach (ThingWithComps door in Find.Selector.SelectedObjects.Where(o => WhereCheck(o)))
                         {
                             SetOwnersFloatMenu(door);
                         }
@@ -185,7 +185,7 @@ namespace Locks
                     "Locks_ClearOwners".Translate(),
                     new Action(() =>
                     {
-                        foreach (Building_Door door in Find.Selector.SelectedObjects.Where(o => o is Building_Door))
+                        foreach (ThingWithComps door in Find.Selector.SelectedObjects.Where(o => WhereCheck(o)))
                         {
                             ClearOwnersFloatMenu(door);
                         }
@@ -193,6 +193,10 @@ namespace Locks
                     ));
             }
             return list;
+        }
+        private bool WhereCheck(object o)
+        {
+            return o is ThingWithComps thingWithComps && thingWithComps.TryGetComp<CompLock>() != null;
         }
 
         public override GizmoResult GizmoOnGUI(Vector2 topLeft, float maxWidth, GizmoRenderParms parms)
