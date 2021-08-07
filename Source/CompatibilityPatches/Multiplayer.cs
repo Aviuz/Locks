@@ -27,7 +27,7 @@ namespace Locks.CompatibilityPatches
             }
             else
             {
-                Building_Door door = sync.Read<Building_Door>();
+                ThingWithComps door = sync.Read<ThingWithComps>();
                 inst = new LockGizmo(door);
             }
         }

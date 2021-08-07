@@ -13,7 +13,7 @@ namespace Locks
     {
         public static float MaxPetSize = 0.86f;
 
-        private static readonly Dictionary<Building_Door, LockData> Map = new Dictionary<Building_Door, LockData>();
+        private static readonly Dictionary<ThingWithComps, LockData> Map = new Dictionary<ThingWithComps, LockData>();
 
         private static DesignationDef designationDef;
         private static JobDef jobDef;
@@ -44,7 +44,7 @@ namespace Locks
             }
         }
 
-        public static bool PawnCanOpen(Building_Door door, Pawn p)
+        public static bool PawnCanOpen(ThingWithComps door, Pawn p)
         {
             Lord lord = p.GetLord();
 
@@ -99,7 +99,7 @@ namespace Locks
             return false;
         }
 
-        public static LockData GetData(Building_Door key)
+        public static LockData GetData(ThingWithComps key)
         {
             if (!Map.ContainsKey(key))
                 Map[key] = new LockData();
@@ -107,7 +107,7 @@ namespace Locks
             return Map[key];
         }
 
-        public static void Remove(Building_Door key)
+        public static void Remove(ThingWithComps key)
         {
             Map.Remove(key);
         }
@@ -115,8 +115,8 @@ namespace Locks
         public static void UpdateLockDesignation(Thing t)
         {
             bool flag = false;
-            Building_Door door = t as Building_Door;
-            if (door != null)
+            ThingWithComps door = t as ThingWithComps;
+            if (door.TryGetComp<CompLock>() != null)
             {
                 flag = GetData(door).NeedChange;
             }

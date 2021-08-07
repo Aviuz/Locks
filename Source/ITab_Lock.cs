@@ -38,11 +38,11 @@ namespace Locks
             this.tutorTag = "Locks";
         }
 
-        public Building_Door SelDoor
+        public ThingWithComps SelDoor
         {
             get
             {
-                return SelThing as Building_Door;
+                return SelThing as ThingWithComps;
             }
         }
 

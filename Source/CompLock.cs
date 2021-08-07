@@ -11,7 +11,7 @@ namespace Locks
     {
         public CompProperties_Lock()
         {
-            compClass = typeof(CompLock);
+            this.compClass = typeof(CompLock);
         }
     }
 
@@ -21,14 +21,29 @@ namespace Locks
         {
             string text = "Locks_StatePrefix".Translate() + " ";
 
-            if (LockUtility.GetData((Building_Door)this.parent).CurrentState.locked)
+            if (LockUtility.GetData(this.parent).CurrentState.locked)
                 text += "Locks_StateLocked".Translate();
             else
                 text += "Locks_StateUnlocked".Translate();
-            if (LockUtility.GetData((Building_Door)this.parent).NeedChange)
+            if (LockUtility.GetData(this.parent).NeedChange)
                 text += $" ({"Locks_StateChanging".Translate()})";
 
             return text;
+        }
+
+        public override void PostDeSpawn(Map map)
+        {
+            LockUtility.Remove(this.parent);
+        }
+
+        public override void PostExposeData()
+        {
+            LockUtility.GetData(this.parent).ExposeData();
+        }
+
+        public override IEnumerable<Gizmo> CompGetGizmosExtra()
+        {
+            yield return new LockGizmo(this.parent);
         }
     }
 }

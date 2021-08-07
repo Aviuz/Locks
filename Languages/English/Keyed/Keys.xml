@@ -15,7 +15,7 @@
   <Locks_ITabPetDoor>Pet door</Locks_ITabPetDoor>
   <Locks_ITabPetDoorDesc>When enabled small animals, like dogs can pass through door. This setting is not required for doors without owners.</Locks_ITabPetDoorDesc>
   <Locks_ITabPensDoor>Pens door</Locks_ITabPensDoor>
-  <Locks_ITabPensDoorDesc>When enabled door will work as pens door. This setting is not required for doors without owners.</Locks_ITabPensDoorDesc>
+  <Locks_ITabPensDoorDesc>When enabled, pens animals can't pass through the door. Some doors may not block animals (e.g. Animal Flap). Check "roamerCanOpen" in defs.</Locks_ITabPensDoorDesc>
   <Locks_ITabOwners>Owners</Locks_ITabOwners>
   <Locks_ITabChangeLocksNotification>Change lock in order to apply settings!</Locks_ITabChangeLocksNotification>
   
