@@ -1,7 +1,7 @@
 Changelog:
 2.7.0
 - Big rework to integrate Doors Expanded with basic locks
-- Doors Expanded and Doors Expanded (Dev) should work with locks. Propably not compatibile with saves with "Locks (DoorsExpanded)". Since 2.7.0 and rimworld 1.3 Locks (DoorsExpanded) has to be turned off.
+- Doors Expanded and Doors Expanded (Dev) should work with locks. Probably not compatible with saves with "Locks (DoorsExpanded)". Since 2.7.0 and Rimworld 1.3 Locks (DoorsExpanded) has to be turned off.
 - Clutter Structure harmony patches fixes
 2.6.2
 - Pens door are turned on by default
