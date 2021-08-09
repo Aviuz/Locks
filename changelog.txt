@@ -1,4 +1,6 @@
 Changelog:
+2.7.1
+- Fix for mod checks
 2.7.0
 - Big rework to integrate Doors Expanded with basic locks
 - Doors Expanded and Doors Expanded (Dev) should work with locks. Probably not compatible with saves with "Locks (DoorsExpanded)". Since 2.7.0 and Rimworld 1.3 Locks (DoorsExpanded) has to be turned off.

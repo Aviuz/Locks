@@ -14,7 +14,7 @@ namespace Locks.CompatibilityPatches
     {
         public static void Init()
         {
-            var mod = LoadedModManager.RunningMods.First(m => m.Name == "Doors Expanded (Dev)" || m.Name == "Doors Expanded");
+            var mod = LoadedModManager.RunningMods.FirstOrDefault(m => m.Name == "Doors Expanded (Dev)" || m.Name == "Doors Expanded");
             if (mod != null)
             {
                 var doorDef = AccessTools.Method("DoorsExpanded.Building_DoorExpanded:PawnCanOpen");
@@ -28,6 +28,10 @@ namespace Locks.CompatibilityPatches
                 {
                     Log.Error("Locks: found doors expanded but can't find door expanded building def");
                 }
+            }
+            else
+            {
+                Log.Message("Locks: Doors expanded not found ");
             }
         }
 
