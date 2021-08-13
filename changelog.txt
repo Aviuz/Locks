@@ -1,4 +1,6 @@
 Changelog:
+2.7.2
+- Add compatibility with Linkable Doors
 2.7.1
 - Fix for mod checks
 2.7.0

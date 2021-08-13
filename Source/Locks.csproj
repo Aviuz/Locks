@@ -104,11 +104,17 @@
     <Content Include="..\1.3\Patches\AddCompLockDoorsExpanded.xml">
       <Link>Patches\AddCompLockDoorsExpanded.xml</Link>
     </Content>
+    <Content Include="..\1.3\Patches\AddCompLockLinkableDoors.xml">
+      <Link>Patches\AddCompLockLinkableDoors.xml</Link>
+    </Content>
     <Content Include="..\1.3\Patches\AddInspectTab.xml">
       <Link>Patches\AddInspectTab.xml</Link>
     </Content>
     <Content Include="..\1.3\Patches\AddInspectTabLockDoorsExpanded.xml">
       <Link>Patches\AddInspectTabLockDoorsExpanded.xml</Link>
+    </Content>
+    <Content Include="..\1.3\Patches\AddInspectTabLockLinkableDoors.xml">
+      <Link>Patches\AddInspectTabLockLinkableDoors.xml</Link>
     </Content>
     <Content Include="..\About\About.xml">
       <Link>Organizer\About.xml</Link>
