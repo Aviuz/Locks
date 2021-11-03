@@ -1,4 +1,5 @@
-﻿using RimWorld;
+﻿using Locks.CompatibilityPatches;
+using RimWorld;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -78,13 +79,22 @@ namespace Locks
             {
                 return true;
             }
-
+            if (!respectedState.allowAnimals && p.RaceProps != null && p.RaceProps.Animal)
+            {
+                return false;
+            }
             if (respectedState.Private && !respectedState.owners.Contains(p))
-            { return false; }
+            {
+                return false;
+            }
 
-            if (p.Faction == door.Faction && !p.IsPrisoner)
+            if (p.Faction == door.Faction && !p.IsPrisoner && !p.IsSlave)
             {
                 return true;
+            }
+            if (!respectedState.allowSlave && p.Faction == door.Faction && p.IsSlave)
+            {
+                return false;
             }
             bool guestCondition = !p.IsPrisoner || p.HostFaction != door.Faction;
             if (respectedState.mode == LockMode.Allies && guestCondition)
@@ -145,6 +155,10 @@ namespace Locks
                 case nameof(LockState.pensDoor):
                     return true;
                 case nameof(LockState.owners):
+                    return state.locked;
+                case nameof(LockState.allowAnimals):
+                    return state.locked;
+                case nameof(LockState.allowSlave):
                     return state.locked;
                 default:
                     return true;

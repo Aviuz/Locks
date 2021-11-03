@@ -1,4 +1,10 @@
 Changelog:
+2.7.3
+- Add German translation (https://github.com/thephluxer)
+- Add Italian transaltion - not complete (https://github.com/StoneNimRod) 
+- New option "Slaves allowed" for doors
+- New option "Animals allowed" for doors
+- Compatibility patches for SoS2 (I dont use this mod so any feedback welcome)
 2.7.2
 - Add compatibility with Linkable Doors
 2.7.1

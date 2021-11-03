@@ -73,6 +73,7 @@
     <Compile Include="Alert_LocksCantBeChanged.cs" />
     <Compile Include="Clipboard.cs" />
     <Compile Include="CompatibilityPatches\ClutterStructure.cs" />
+    <Compile Include="CompatibilityPatches\SoS2.cs" />
     <Compile Include="CompatibilityPatches\DoorsExpanded.cs" />
     <Compile Include="CompatibilityPatches\Multiplayer.cs" />
     <Compile Include="CompLock.cs" />
@@ -107,6 +108,9 @@
     <Content Include="..\1.3\Patches\AddCompLockLinkableDoors.xml">
       <Link>Patches\AddCompLockLinkableDoors.xml</Link>
     </Content>
+    <Content Include="..\1.3\Patches\AddCompLockSoS2.xml">
+      <Link>Patches\AddCompLockSoS2.xml</Link>
+    </Content>
     <Content Include="..\1.3\Patches\AddInspectTab.xml">
       <Link>Patches\AddInspectTab.xml</Link>
     </Content>
@@ -115,6 +119,9 @@
     </Content>
     <Content Include="..\1.3\Patches\AddInspectTabLockLinkableDoors.xml">
       <Link>Patches\AddInspectTabLockLinkableDoors.xml</Link>
+    </Content>
+    <Content Include="..\1.3\Patches\AddInspectTabSoS2.xml">
+      <Link>Patches\AddInspectTabSoS2.xml</Link>
     </Content>
     <Content Include="..\About\About.xml">
       <Link>Organizer\About.xml</Link>
