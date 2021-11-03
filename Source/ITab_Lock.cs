@@ -17,7 +17,7 @@ namespace Locks
         private static readonly Vector2 WinSize = new Vector2(310f + WindowGap, ButtonsHeight + OwnersWindowHeight + OwnersTitleHeight + MainSettingsHeight + WindowGap + 2 * Spacing + WarningHeight);
         private const float ButtonsHeight = 25f;
         private const float WindowGap = 15f;
-        private const float MainSettingsHeight = 4 * 32f;
+        private const float MainSettingsHeight = 6 * 32f;
         private const float OwnersTitleHeight = 24f;
         private const float OwnersWindowHeight = 200f;
         private const float WarningHeight = 24f;
@@ -28,6 +28,8 @@ namespace Locks
         private bool vistitorsAllowed;
         private bool petDoor;
         private bool pensDoor;
+        private bool slaveDoor;
+        private bool animalsAllowed;
 
         private Thing lastSelectedThing;
 
@@ -75,12 +77,20 @@ namespace Locks
             listing.Begin(upperSettingsRect);
             if (Data.WantedState.IsVisible(nameof(LockState.locked)))
                 listing.CheckboxLabeled("Locks_ITabLocked".Translate(), ref locked, "Locks_ITabLockedDesc".Translate());
+            if (Data.WantedState.IsVisible(nameof(LockState.allowSlave)))
+            {
+                listing.CheckboxLabeled("Locks_ITabSlaveDoors".Translate(), ref slaveDoor, "Locks_ITabSlaveDoorsDesc".Translate());
+            }
             if (Data.WantedState.IsVisible(nameof(LockState.mode)))
                 listing.CheckboxLabeled("Locks_ITabVisitorsAllowed".Translate(), ref vistitorsAllowed, "Locks_ITabVisitorsAllowedDesc".Translate());
             if (Data.WantedState.IsVisible(nameof(LockState.petDoor)))
                 listing.CheckboxLabeled("Locks_ITabPetDoor".Translate(), ref petDoor, "Locks_ITabPetDoorDesc".Translate());
             if (Data.WantedState.IsVisible(nameof(LockState.pensDoor)))
                 listing.CheckboxLabeled("Locks_ITabPensDoor".Translate(), ref pensDoor, "Locks_ITabPensDoorDesc".Translate());
+            if (Data.WantedState.IsVisible(nameof(LockState.allowAnimals)))
+            {
+                listing.CheckboxLabeled("Locks_ITabAnimalAllowed".Translate(), ref animalsAllowed, "Locks_ITabAnimalAllowedDesc".Translate());
+            }
             listing.End();
 
             if (Data.WantedState.IsVisible(nameof(LockState.owners)))
@@ -145,6 +155,8 @@ namespace Locks
                 Data.WantedState.mode = vistitorsAllowed ? LockMode.Allies : LockMode.Colony;
                 Data.WantedState.petDoor = petDoor;
                 Data.WantedState.pensDoor = pensDoor;
+                Data.WantedState.allowSlave = slaveDoor;
+                Data.WantedState.allowAnimals = animalsAllowed;
                 if (Data.NeedChange)
                     LockUtility.UpdateLockDesignation(SelDoor);
             }
@@ -158,9 +170,11 @@ namespace Locks
         public override void OnOpen()
         {
             locked = Data.WantedState.locked;
-            vistitorsAllowed = Data.WantedState.mode == LockMode.Allies ? true : false;
+            vistitorsAllowed = Data.WantedState.mode == LockMode.Allies;
             petDoor = Data.WantedState.petDoor;
             pensDoor = Data.WantedState.pensDoor;
+            slaveDoor = Data.WantedState.allowSlave;
+            animalsAllowed = Data.WantedState.allowAnimals;
         }
 
         private void OwnerCheckbox(Rect rect, Pawn pawn)
