@@ -92,11 +92,11 @@ namespace Locks
             {
                 return true;
             }
-            if (!respectedState.allowSlave && p.Faction == door.Faction && p.IsSlave)
+            if (respectedState.allowSlave && p.Faction == door.Faction && p.IsSlave)
             {
-                return false;
+                return true;
             }
-            bool guestCondition = !p.IsPrisoner || p.HostFaction != door.Faction;
+            bool guestCondition = p.GuestStatus == GuestStatus.Guest || !p.IsPrisoner && !p.IsSlave && p.HostFaction != door.Faction;
             if (respectedState.mode == LockMode.Allies && guestCondition)
             {
                 return true;
