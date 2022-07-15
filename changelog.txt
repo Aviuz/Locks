@@ -1,4 +1,9 @@
 Changelog:
+2.7.5
+- Pens door option will be turned on only for fence gate
+- Added child lock option - age can by configured in mod options
+- Revolting slaves and prisoners should respect locks - can be configured in options
+- Wild man should be only able to use locked doors with "allow visitiors" option on
 2.7.4
 - Fixes for "Slaves allowed" option
 2.7.3
