@@ -17,6 +17,7 @@ namespace Locks
 
     public class CompLock : ThingComp
     {
+        private static readonly string FENCE = "FenceGate";
         public override string CompInspectStringExtra()
         {
             string text = "Locks_StatePrefix".Translate() + " ";
@@ -44,6 +45,15 @@ namespace Locks
         public override IEnumerable<Gizmo> CompGetGizmosExtra()
         {
             yield return new LockGizmo(this.parent);
+        }
+
+        public override void PostSpawnSetup(bool respawningAfterLoad)
+        {
+            if (this.parent.def.defName == FENCE)
+            {
+                LockUtility.GetData(this.parent).CurrentState.pensDoor = true;
+                LockUtility.GetData(this.parent).WantedState.pensDoor = true;
+            }
         }
     }
 }

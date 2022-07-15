@@ -79,6 +79,7 @@
     <Compile Include="CompLock.cs" />
     <Compile Include="HarmonyPatches\HPatcher.cs" />
     <Compile Include="HarmonyPatches\Patch_InjectLockCheck.cs" />
+    <Compile Include="HarmonyPatches\RespectLockPatches.cs" />
     <Compile Include="Initialization.cs" />
     <Compile Include="ITab_Lock.cs" />
     <Compile Include="JobDriver_ToggleLock.cs" />
@@ -86,6 +87,8 @@
     <Compile Include="LockGizmo.cs" />
     <Compile Include="LockState.cs" />
     <Compile Include="LockUtility.cs" />
+    <Compile Include="Options\LocksMod.cs" />
+    <Compile Include="Options\LocksSettings.cs" />
     <Compile Include="WorkGiver_ToggleLock.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

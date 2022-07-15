@@ -1,4 +1,5 @@
 ﻿using Locks.CompatibilityPatches;
+using Locks.Options;
 using RimWorld;
 using System;
 using System.Collections.Generic;
@@ -51,7 +52,7 @@ namespace Locks
 
             bool canOpenAnyDoor = lord != null && lord.LordJob != null && lord.LordJob.CanOpenAnyDoor(p);
             bool noFaction = door.Faction == null;
-            bool specialGuest = WildManUtility.WildManShouldReachOutsideNow(p) || (p.guest != null && p.guest.Released);
+            bool specialGuest = p.guest != null && p.guest.Released;
             if (canOpenAnyDoor || noFaction || specialGuest)
                 return true;
 
@@ -71,6 +72,11 @@ namespace Locks
             {
                 return false;
             }
+            if (respectedState.mode == LockMode.Allies && WildManUtility.WildManShouldReachOutsideNow(p))
+            {
+                return true;
+            }
+
             if (p.Faction == null || p.Faction.HostileTo(door.Faction))
             {
                 return false;
@@ -87,6 +93,11 @@ namespace Locks
             {
                 return false;
             }
+            if (respectedState.childLock && p.RaceProps != null && p.RaceProps.Humanlike && p.Faction == door.Faction && p.ageTracker != null
+                && p.ageTracker.AgeBiologicalYears < LocksSettings.childLockAge)
+            {
+                return false;
+            }
 
             if (p.Faction == door.Faction && !p.IsPrisoner && !p.IsSlave)
             {
@@ -96,6 +107,7 @@ namespace Locks
             {
                 return true;
             }
+
             bool guestCondition = p.GuestStatus == GuestStatus.Guest || !p.IsPrisoner && !p.IsSlave && p.HostFaction != door.Faction;
             if (respectedState.mode == LockMode.Allies && guestCondition)
             {
@@ -106,6 +118,7 @@ namespace Locks
             {
                 return true;
             }
+
             return false;
         }
 
@@ -159,6 +172,8 @@ namespace Locks
                 case nameof(LockState.allowAnimals):
                     return state.locked;
                 case nameof(LockState.allowSlave):
+                    return state.locked;
+                case nameof(LockState.childLock):
                     return state.locked;
                 default:
                     return true;
