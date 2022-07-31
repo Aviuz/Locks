@@ -1,4 +1,7 @@
 Changelog:
+2.7.6
+- Fence gate force turn on pens doors option after load fixed
+- Compatibility patches for [LTS]Furnitures. Hope it works fine.
 2.7.5
 - Pens door option will be turned on only for fence gate
 - Added child lock option - age can by configured in mod options

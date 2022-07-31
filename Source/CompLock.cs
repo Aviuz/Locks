@@ -49,7 +49,7 @@ namespace Locks
 
         public override void PostSpawnSetup(bool respawningAfterLoad)
         {
-            if (this.parent.def.defName == FENCE)
+            if (this.parent.def.defName == FENCE && !respawningAfterLoad)
             {
                 LockUtility.GetData(this.parent).CurrentState.pensDoor = true;
                 LockUtility.GetData(this.parent).WantedState.pensDoor = true;
