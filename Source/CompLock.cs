@@ -1,4 +1,5 @@
-﻿using RimWorld;
+﻿using Locks.Options;
+using RimWorld;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -49,7 +50,7 @@ namespace Locks
 
         public override void PostSpawnSetup(bool respawningAfterLoad)
         {
-            if (this.parent.def.defName == FENCE && !respawningAfterLoad)
+            if ((this.parent.def.defName == FENCE || LocksSettings.alwaysPensDoor) && !respawningAfterLoad)
             {
                 LockUtility.GetData(this.parent).CurrentState.pensDoor = true;
                 LockUtility.GetData(this.parent).WantedState.pensDoor = true;

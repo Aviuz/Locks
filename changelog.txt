@@ -1,4 +1,8 @@
 Changelog:
+2.7.7
+- Fixes for patch [LTS]Furnitures.
+- Compatibility patches for Architect Expanded - Fences (Continued).
+- Added option to auto turn on pens door after construction.
 2.7.6
 - Fence gate force turn on pens doors option after load fixed
 - Compatibility patches for [LTS]Furnitures. Hope it works fine.

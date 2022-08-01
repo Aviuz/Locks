@@ -1,21 +1,26 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Patch>
-    <Operation Class="PatchOperationConditional">
+  <Operation Class="PatchOperationFindMod">
+    <mods>
+      <li>[LTS]Furnishing</li>
+    </mods>
+    <match Class="PatchOperationConditional">
+      <xpath>/Defs/ThingDef[@ParentName = "LTS_MedievalDoor" or @ParentName = "LTS_FuturisticDoor" or @ParentName = "LTS_SimpleDoor" or @ParentName = "LTS_SingleDoor" or @ParentName = "LTS_FancyDoor" or (@ParentName = "LTS_DoorBase" and not(@Abstract="True"))]/inspectorTabs</xpath>
+      <nomatch Class="PatchOperationAdd">
+        <xpath>/Defs/ThingDef[@ParentName = "LTS_MedievalDoor" or @ParentName = "LTS_FuturisticDoor" or @ParentName = "LTS_SimpleDoor" or @ParentName = "LTS_SingleDoor" or @ParentName = "LTS_FancyDoor" or (@ParentName = "LTS_DoorBase" and not(@Abstract="True"))]</xpath>
+        <value>
+          <inspectorTabs>
+            <li>Locks.ITab_Lock</li>
+          </inspectorTabs>
+        </value>
+      </nomatch>
+      <match Class="PatchOperationAdd">
         <xpath>/Defs/ThingDef[@ParentName = "LTS_MedievalDoor" or @ParentName = "LTS_FuturisticDoor" or @ParentName = "LTS_SimpleDoor" or @ParentName = "LTS_SingleDoor" or @ParentName = "LTS_FancyDoor" or (@ParentName = "LTS_DoorBase" and not(@Abstract="True"))]/inspectorTabs</xpath>
-        <nomatch Class="PatchOperationAdd">
-            <xpath>/Defs/ThingDef[@ParentName = "LTS_MedievalDoor" or @ParentName = "LTS_FuturisticDoor" or @ParentName = "LTS_SimpleDoor" or @ParentName = "LTS_SingleDoor" or @ParentName = "LTS_FancyDoor" or (@ParentName = "LTS_DoorBase" and not(@Abstract="True"))]</xpath>
-            <value>
-                <inspectorTabs>
-                    <li>Locks.ITab_Lock</li>
-                </inspectorTabs>
-            </value>
-        </nomatch>
-        <match Class="PatchOperationAdd">
-            <xpath>/Defs/ThingDef[@ParentName = "LTS_MedievalDoor" or @ParentName = "LTS_FuturisticDoor" or @ParentName = "LTS_SimpleDoor" or @ParentName = "LTS_SingleDoor" or @ParentName = "LTS_FancyDoor" or (@ParentName = "LTS_DoorBase" and not(@Abstract="True"))]/inspectorTabs</xpath>
-            <value>
-                <li>Locks.ITab_Lock</li>
-            </value>
-        </match>
-    </Operation>
+        <value>
+          <li>Locks.ITab_Lock</li>
+        </value>
+      </match>
+    </match>
+  </Operation>
 
 </Patch>

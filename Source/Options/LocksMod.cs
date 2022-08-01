@@ -15,6 +15,8 @@ namespace Locks.Options
         private const string CHILD_LOCK_DESC = "Lock_ChildrenLock_Description";
         private const string PRISON_BREAK= "Locks_PrisonBreak";
         private const string SLAVE_REBELION ="Locks_SlaveRebel";
+        private const string ALWAYS_PENS_DOOR = "Locks_AlwaysPensDoor";
+        private const string ALWAYS_PENS_DOOR_DESC = "Locks_AlwaysPensDoor_Description";
 
         public LocksMod(ModContentPack content) : base(content)
         {
@@ -36,6 +38,9 @@ namespace Locks.Options
             listingStandard.Gap(12f);
 
             listingStandard.CheckboxLabeled(SLAVE_REBELION.Translate(), ref LocksSettings.revoltRespectsLocks);
+            listingStandard.Gap(12f);
+
+            listingStandard.CheckboxLabeled(ALWAYS_PENS_DOOR.Translate(), ref LocksSettings.alwaysPensDoor, ALWAYS_PENS_DOOR_DESC.Translate());
             listingStandard.Gap(12f);
 
             listingStandard.End();
