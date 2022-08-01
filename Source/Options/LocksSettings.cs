@@ -12,6 +12,7 @@ namespace Locks.Options
         public static int childLockAge = 6;
         public static bool prisonerBreakRespectsLock = true;
         public static bool revoltRespectsLocks = true;
+        public static bool alwaysPensDoor = false;
 
         public override void ExposeData()
         {
@@ -19,6 +20,8 @@ namespace Locks.Options
 
             Scribe_Values.Look<bool>(ref prisonerBreakRespectsLock, "Locks_BreakRespectsLocks", true, true);
             Scribe_Values.Look<bool>(ref revoltRespectsLocks, "Locks_RevoltRespectLocks", true, true);
+
+            Scribe_Values.Look<bool>(ref alwaysPensDoor, "Locks_AlwaysPensDoor", false, true);
         }
     }
 }

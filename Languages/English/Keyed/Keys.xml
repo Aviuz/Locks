@@ -3,6 +3,8 @@
     <Locks_ModName>Locks</Locks_ModName>
     <Locks_ChildrenLock>Child lock minimal age: {0}</Locks_ChildrenLock>
     <Lock_ChildrenLock_Description>Minimal age needed for humanlike pawn to open doors</Lock_ChildrenLock_Description>
+    <Locks_AlwaysPensDoor>Always pens door</Locks_AlwaysPensDoor>
+    <Locks_AlwaysPensDoor_Description>When enabled every door will has "pens door" option turn on after construction.</Locks_AlwaysPensDoor_Description>
     
     <Locks_Label>Lock</Locks_Label>
     <Locks_Description>When unlocked all pawn will be allowed to use this door.\n[Right click for more options]</Locks_Description>
@@ -29,7 +31,7 @@
     <Locks_ITabAnimalAllowedDesc>When disabled all animals will not be allowed to pass through this door. This setting is checked after pens and pet door settings.</Locks_ITabAnimalAllowedDesc>
     <Locks_ITabChildrenLock>Children lock</Locks_ITabChildrenLock>
     <Locks_ITabChildrenLockDesc>When enabled only humanlike pawn over age (check options) are allowed to pass through this door. Works only on pawn from that same faction as door.</Locks_ITabChildrenLockDesc>
-    
+   
     
     <Locks_ITabOwners>Owners</Locks_ITabOwners>
     <Locks_ITabChangeLocksNotification>Change lock in order to apply settings!</Locks_ITabChangeLocksNotification>
