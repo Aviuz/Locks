@@ -5,22 +5,21 @@
       <li>[LTS]Furnishing</li>
     </mods>
     <match Class="PatchOperationConditional">
-      <xpath>/Defs/ThingDef[@Name = "LTS_DoorBase"]/inspectorTabs</xpath>
+      <xpath>/Defs/ThingDef[@Name = "LTS_DoorBase"]/comps</xpath>
       <nomatch Class="PatchOperationAdd">
         <xpath>/Defs/ThingDef[@Name = "LTS_DoorBase"]</xpath>
         <value>
-          <inspectorTabs>
-            <li>Locks.ITab_Lock</li>
-          </inspectorTabs>
+          <comps>
+            <li Class="Locks.CompProperties_Lock"/>
+          </comps>
         </value>
       </nomatch>
       <match Class="PatchOperationAdd">
-        <xpath>/Defs/ThingDef[@Name = "LTS_DoorBase"]/inspectorTabs</xpath>
+        <xpath>/Defs/ThingDef[@Name = "LTS_DoorBase"]/comps</xpath>
         <value>
-          <li>Locks.ITab_Lock</li>
+          <li Class="Locks.CompProperties_Lock"/>
         </value>
       </match>
     </match>
   </Operation>
-
 </Patch>

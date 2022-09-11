@@ -1,5 +1,8 @@
 Changelog:
 2.7.7
+- More fixes for [LTS]Furnitures.
+- Chinese translation update(https://github.com/shiuanyue)
+2.7.7
 - Fixes for patch [LTS]Furnitures.
 - Compatibility patches for Architect Expanded - Fences (Continued).
 - Added option to auto turn on pens door after construction.
