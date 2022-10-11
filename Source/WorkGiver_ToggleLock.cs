@@ -14,13 +14,10 @@ namespace Locks
         [DebuggerHidden]
         public override IEnumerable<Thing> PotentialWorkThingsGlobal(Pawn pawn)
         {
-            List<Designation> desList = pawn.Map.designationManager.allDesignations;
+            List<Designation> desList = pawn.Map.designationManager.designationsByDef[LockUtility.DesDef];
             for (int i = 0; i < desList.Count; i++)
             {
-                if (desList[i].def == LockUtility.DesDef)
-                {
-                    yield return desList[i].target.Thing;
-                }
+                yield return desList[i].target.Thing;
             }
         }
 
