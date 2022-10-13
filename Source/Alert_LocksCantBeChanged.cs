@@ -22,14 +22,13 @@ namespace Locks
                 var maps = Find.Maps;
                 foreach (var map in maps)
                 {
-                    List<Designation> desList = map.designationManager.allDesignations;
+                    List<Designation> desList = map.designationManager.designationsByDef[LockUtility.DesDef];
                     for (int i = 0; i < desList.Count; i++)
                     {
-                        if (desList[i].def == LockUtility.DesDef)
-                        {
-                            if (LockUtility.GetData(desList[i].target.Thing as Building_Door).WantedState.Private && !LockUtility.GetData(desList[i].target.Thing as Building_Door).WantedState.owners.Any(p => p.workSettings != null && p.workSettings.WorkIsActive(DefDatabase<WorkTypeDef>.GetNamed("BasicWorker"))))
-                                yield return desList[i].target.Thing as Building_Door;
-                        }
+
+                        if (LockUtility.GetData(desList[i].target.Thing as Building_Door).WantedState.Private && !LockUtility.GetData(desList[i].target.Thing as Building_Door).WantedState.owners.Any(p => p.workSettings != null && p.workSettings.WorkIsActive(DefDatabase<WorkTypeDef>.GetNamed("BasicWorker"))))
+                            yield return desList[i].target.Thing as Building_Door;
+
                     }
                 }
             }
