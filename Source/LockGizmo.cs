@@ -81,6 +81,12 @@ namespace Locks
         [SyncMethod]
         private void SetOwnersFloatMenu(ThingWithComps door)
         {
+            if (MP.IsInMultiplayer)
+            {
+                // Make sure the comp is initialized in MP, or else it'll fail setting the owners
+                var _ = LockUtility.GetData(parent).CompAssignableToPawn;
+            }
+            
             if (door != parent)
             {
                 LockUtility.GetData(door).WantedState.owners.Clear();
