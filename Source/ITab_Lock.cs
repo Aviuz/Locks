@@ -130,7 +130,7 @@ namespace Locks
                 GUI.color = Color.white;
                 if (Widgets.ButtonText(cancelButtonRect, "Locks_Cancel".Translate()))
                 {
-                    SetWantedStateData(SelDoor, Data.CurrentState);
+                    SetWantedStateData(Data.CurrentState);
                     OnOpen();
                 }
 
@@ -143,7 +143,7 @@ namespace Locks
             }
             if (Clipboard.StoredState.HasValue && Widgets.ButtonText(pasteButtonsRect, "Locks_Paste".Translate()))
             {
-                SetWantedStateData(SelDoor, Clipboard.StoredState.Value);
+                SetWantedStateData(Clipboard.StoredState.Value);
                 OnOpen();
             }
 
@@ -166,7 +166,7 @@ namespace Locks
                     {
                         childLock = childLock
                     };
-                    SetWantedStateData(SelDoor, newState);
+                    SetWantedStateData(newState);
                 }
             }
             else
@@ -195,7 +195,7 @@ namespace Locks
             Widgets.Label(rect, pawn.Name.ToStringShort);
             if (Widgets.ButtonInvisible(rect, false))
             {
-                SetOwnerWantedState(SelDoor, pawn, checkOn);
+                SetOwnerWantedState(pawn, checkOn);
                 checkOn = !checkOn;
                 anythingChanged = true;
                 if (checkOn)
@@ -230,22 +230,31 @@ namespace Locks
                 anythingChanged = true;
         }
 
-        [SyncMethod]
-        private static void SetWantedStateData(ThingWithComps door, LockState newState)
+        [SyncMethod(SyncContext.MapSelected)]
+        private static void SetWantedStateData(LockState newState)
         {
+            var door = Find.Selector.SingleSelectedThing as ThingWithComps;
             var data = LockUtility.GetData(door);
 
+            // Only possible when called from UpdateSettings
             if (newState.owners == null)
-                newState.owners = data.WantedState.owners;
+                newState.owners = new List<Pawn>(data.WantedState.owners);
 
-            data.WantedState = newState;
+            data.WantedState.CopyFrom(newState);
             LockUtility.UpdateLockDesignation(door);
+
+            // Refresh data in multiplayer
+            if (MP.IsInMultiplayer && Find.MainTabsRoot.OpenTab == MainButtonDefOf.Inspect)
+            {
+                var tab = (MainTabWindow_Inspect)Find.MainTabsRoot.OpenTab.TabWindow;
+                tab.CurTabs?.OfType<ITab_Lock>().FirstOrDefault()?.OnOpen();
+            }
         }
 
-        [SyncMethod]
-        private static void SetOwnerWantedState(ThingWithComps door, Pawn pawn, bool checkOn)
+        [SyncMethod(SyncContext.MapSelected)]
+        private static void SetOwnerWantedState(Pawn pawn, bool checkOn)
         {
-            var data = LockUtility.GetData(door);
+            var data = LockUtility.GetData(Find.Selector.SingleSelectedThing as ThingWithComps);
 
             if (checkOn)
                 data.WantedState.owners.Remove(pawn);
