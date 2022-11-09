@@ -130,7 +130,7 @@ namespace Locks
                 GUI.color = Color.white;
                 if (Widgets.ButtonText(cancelButtonRect, "Locks_Cancel".Translate()))
                 {
-                    SetWantedStateData(Data.CurrentState);
+                    SetWantedStateData(SelDoor, Data.CurrentState);
                     OnOpen();
                 }
 
@@ -143,7 +143,7 @@ namespace Locks
             }
             if (Clipboard.StoredState.HasValue && Widgets.ButtonText(pasteButtonsRect, "Locks_Paste".Translate()))
             {
-                SetWantedStateData(Clipboard.StoredState.Value);
+                SetWantedStateData(SelDoor, Clipboard.StoredState.Value);
                 OnOpen();
             }
 
@@ -166,7 +166,7 @@ namespace Locks
                     {
                         childLock = childLock
                     };
-                    SetWantedStateData(newState);
+                    SetWantedStateData(SelDoor, newState);
                 }
             }
             else
@@ -195,7 +195,7 @@ namespace Locks
             Widgets.Label(rect, pawn.Name.ToStringShort);
             if (Widgets.ButtonInvisible(rect, false))
             {
-                SetOwnerWantedState(pawn, checkOn);
+                SetOwnerWantedState(SelDoor, pawn, checkOn);
                 checkOn = !checkOn;
                 anythingChanged = true;
                 if (checkOn)
@@ -231,9 +231,8 @@ namespace Locks
         }
 
         [SyncMethod(SyncContext.MapSelected)]
-        private static void SetWantedStateData(LockState newState)
+        private static void SetWantedStateData(ThingWithComps door, LockState newState)
         {
-            var door = Find.Selector.SingleSelectedThing as ThingWithComps;
             var data = LockUtility.GetData(door);
 
             // Only possible when called from UpdateSettings
@@ -243,18 +242,18 @@ namespace Locks
             data.WantedState.CopyFrom(newState);
             LockUtility.UpdateLockDesignation(door);
 
-            // Refresh data in multiplayer
-            if (MP.IsInMultiplayer && Find.MainTabsRoot.OpenTab == MainButtonDefOf.Inspect)
+            // Refresh data in multiplayer, as the call to this method will be delayed
+            if (MP.IsInMultiplayer && Find.MainTabsRoot.OpenTab == MainButtonDefOf.Inspect && Find.Selector.SingleSelectedObject == door)
             {
                 var tab = (MainTabWindow_Inspect)Find.MainTabsRoot.OpenTab.TabWindow;
                 tab.CurTabs?.OfType<ITab_Lock>().FirstOrDefault()?.OnOpen();
             }
         }
 
-        [SyncMethod(SyncContext.MapSelected)]
-        private static void SetOwnerWantedState(Pawn pawn, bool checkOn)
+        [SyncMethod]
+        private static void SetOwnerWantedState(ThingWithComps door, Pawn pawn, bool checkOn)
         {
-            var data = LockUtility.GetData(Find.Selector.SingleSelectedThing as ThingWithComps);
+            var data = LockUtility.GetData(door);
 
             if (checkOn)
                 data.WantedState.owners.Remove(pawn);
