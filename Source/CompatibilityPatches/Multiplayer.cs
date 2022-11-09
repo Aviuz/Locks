@@ -1,5 +1,4 @@
-﻿using RimWorld;
-using Verse;
+﻿using Verse;
 using Multiplayer.API;
 
 namespace Locks.CompatibilityPatches
@@ -15,7 +14,7 @@ namespace Locks.CompatibilityPatches
                 {
                     MP.RegisterAll();
                     MP.RegisterSyncWorker<LockGizmo>(SyncWorkerForLockGizmo);
-                    MP.RegisterSyncMethod(typeof(RimWorld.CompAssignableToPawn), nameof(LockData.CompAssignableToPawn.TryAssignPawn)).CancelIfAnyArgNull();
+                    MP.RegisterSyncWorker<LockState>(SyncWorkerForLockState);
                 }
             }
         }
@@ -30,6 +29,18 @@ namespace Locks.CompatibilityPatches
                 ThingWithComps door = sync.Read<ThingWithComps>();
                 inst = new LockGizmo(door);
             }
+        }
+
+        static void SyncWorkerForLockState(SyncWorker sync, ref LockState state)
+        {
+            sync.Bind(ref state.mode);
+            sync.Bind(ref state.locked);
+            sync.Bind(ref state.allowSlave);
+            sync.Bind(ref state.petDoor);
+            sync.Bind(ref state.pensDoor);
+            sync.Bind(ref state.allowAnimals);
+            sync.Bind(ref state.childLock);
+            sync.Bind(ref state.owners);
         }
     }
 }
