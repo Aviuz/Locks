@@ -1,4 +1,7 @@
 Changelog:
+2.8.1
+- Multiplayer updated (https://github.com/SokyranTheDragon)
+- Mechs are allowed to use doors asigned to mechanitor
 2.8.0
 - Update to Rimworld 1.4
 2.7.8
