@@ -1,4 +1,6 @@
 Changelog:
+2.8.2
+- Forcing door state for changes with pen, pens and animal allowed state.
 2.8.1
 - Multiplayer updated (https://github.com/SokyranTheDragon)
 - Mechs are allowed to use doors asigned to mechanitor
