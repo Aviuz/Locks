@@ -92,12 +92,29 @@ namespace Locks
       }
 
       if (Data.WantedState.IsVisible(nameof(LockState.petDoor)))
+      {
         CheckboxLabeled(listing, ref anythingChanged, "Locks_ITabPetDoor".Translate(), ref petDoor, "Locks_ITabPetDoorDesc".Translate());
+        if (anythingChanged && petDoor && !animalsAllowed)
+        {
+          animalsAllowed = true;
+        }
+      }
       if (Data.WantedState.IsVisible(nameof(LockState.pensDoor)))
+      {
         CheckboxLabeled(listing, ref anythingChanged, "Locks_ITabPensDoor".Translate(), ref pensDoor, "Locks_ITabPensDoorDesc".Translate());
+        if (anythingChanged && pensDoor && !animalsAllowed)
+        {
+          animalsAllowed = true;
+        }
+      }
       if (Data.WantedState.IsVisible(nameof(LockState.allowAnimals)))
       {
         CheckboxLabeled(listing, ref anythingChanged, "Locks_ITabAnimalAllowed".Translate(), ref animalsAllowed, "Locks_ITabAnimalAllowedDesc".Translate());
+        if (anythingChanged && !animalsAllowed)
+        {
+          pensDoor = false;
+          petDoor = false;
+        }
       }
 
       listing.End();
