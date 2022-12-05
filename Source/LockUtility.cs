@@ -128,7 +128,7 @@ namespace Locks
       {
         foreach (Pawn owner in respectedState.owners)
         {
-          if (owner.mechanitor != null && owner.mechanitor.ControlledPawns.Contains(p))
+          if (owner != null && owner.mechanitor != null && owner.mechanitor.ControlledPawns.Contains(p))
           {
             return true;
           }
