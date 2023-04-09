@@ -4,7 +4,7 @@
   <Locks_ChildrenLock>Блокировка от детей. Минимальный возраст: {0}</Locks_ChildrenLock>
   <Lock_ChildrenLock_Description>Минимальный возраст, необходимый для того, чтобы человекоподобная пешка могла открывать двери</Lock_ChildrenLock_Description>
   <Locks_AlwaysPensDoor>Дверь всегда заперта</Locks_AlwaysPensDoor>
-  <Locks_AlwaysPensDoor_Description>При включении этой функции каждая дверь после строительства будет "заперта".</Locks_AlwaysPensDoor_Description>
+  <Locks_AlwaysPensDoor_Description>При включении этой функции каждая дверь после строительства будет заперта.</Locks_AlwaysPensDoor_Description>
 
   <Locks_Label>Замок</Locks_Label>
   <Locks_Description>После открытия все пешки смогут пользоваться этой дверью.\n[Щелкните правой кнопкой мыши для получения дополнительных опций].</Locks_Description>
