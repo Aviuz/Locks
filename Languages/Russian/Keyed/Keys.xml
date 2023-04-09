@@ -29,7 +29,7 @@
   <Locks_ITabSlaveDoorsDesc>Если этот параметр отключен, рабам не разрешается проходить через эту дверь. Эта настройка не применяется, если установлены владельцы.</Locks_ITabSlaveDoorsDesc>
   <Locks_ITabAnimalAllowed>Разрешить животным</Locks_ITabAnimalAllowed>
   <Locks_ITabAnimalAllowedDesc>Если эта функция отключена, все животные не смогут проходить через эту дверь. Эта настройка проверяется после настроек загона и двери для животных.</Locks_ITabAnimalAllowedDesc>
-  <Locks_ITabChildrenLock>Замок от детей</Locks_ITabChildrenLock>
+  <Locks_ITabChildrenLock>Запретить детям</Locks_ITabChildrenLock>
   <Locks_ITabChildrenLockDesc>Когда включено, только человекоподобные пешки старше возраста (указанного в настройках) могут пройти через эту дверь. Действует только на пешек из той же фракции, что и дверь.</Locks_ITabChildrenLockDesc>
 
 
@@ -54,7 +54,7 @@
   <Locks_AlertLocksCantBeChangedDefaultDesc>Некоторые замки нельзя поменять, потому что владельцы этих замков не выполняют работу мгновенно...</Locks_AlertLocksCantBeChangedDefaultDesc>
 
   <Locks_Cancel>Отмена</Locks_Cancel>
-  <Locks_Copy>Копировать</Locks_Copy>
-  <Locks_Paste>Вставить</Locks_Paste>
+  <Locks_Copy>Копир.</Locks_Copy>
+  <Locks_Paste>Встав.</Locks_Paste>
 
 </LanguageData>
