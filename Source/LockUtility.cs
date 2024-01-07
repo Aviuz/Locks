@@ -70,7 +70,7 @@ namespace Locks
 
       if (respectedState.pensDoor && p.RaceProps.FenceBlocked && !door.def.building.roamerCanOpen && (!p.roping.IsRopedByPawn || !PawnCanOpen(door, p.roping.RopedByPawn)))
       {
-        return false;
+        return p.RaceProps.intelligence == Intelligence.Animal && p.GetLord()?.LordJob is LordJob_TradeWithColony;
       }
       if (respectedState.mode == LockMode.Allies && WildManUtility.WildManShouldReachOutsideNow(p))
       {
