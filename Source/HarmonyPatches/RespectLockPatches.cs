@@ -30,7 +30,7 @@ namespace Locks.HarmonyPatches
   [HarmonyPatch(typeof(LordJob_TradeWithColony), "CanOpenAnyDoor")]
   public class AnimalCaravanaRespectPatch
   {
-    static bool Postfix()
+    static bool Postfix(bool __result)
     {
       return false;
     }
