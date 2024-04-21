@@ -53,8 +53,13 @@ namespace Locks
       bool canOpenAnyDoor = lord != null && lord.LordJob != null && lord.LordJob.CanOpenAnyDoor(p);
       bool noFaction = door.Faction == null;
       bool specialGuest = p.guest != null && p.guest.Released;
-      if (canOpenAnyDoor || noFaction || specialGuest)
+      if (canOpenAnyDoor || specialGuest)
         return true;
+
+      if (noFaction)
+      {
+        return p.RaceProps.canOpenFactionlessDoors;
+      }
 
       LockState respectedState;
       if (!p.IsPrisoner && !door.Faction.HostileTo(p.Faction) && !p.InMentalState)
@@ -117,6 +122,17 @@ namespace Locks
       if (door.Map != null && door.Map.Parent.doorsAlwaysOpenForPlayerPawns && p.Faction == Faction.OfPlayer && !p.IsPrisonerOfColony)
       {
         return true;
+      }
+      if (ModsConfig.AnomalyActive && LocksSettings.anomaliesIgnoreLocks)
+      {
+        if (p.kindDef == PawnKindDefOf.Revenant)
+        {
+          return true;
+        }
+        if (p.IsMutant && p.mutant.Def.canOpenAnyDoor)
+        {
+          return true;
+        }
       }
 
       return false;
