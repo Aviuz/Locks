@@ -19,7 +19,7 @@
     <DebugSymbols>false</DebugSymbols>
     <DebugType>none</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\1.5\Assemblies\</OutputPath>
+    <OutputPath>..\1.4\Assemblies\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -94,46 +94,46 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\1.5\Defs\Designations.xml">
+    <Content Include="..\1.4\Defs\Designations.xml">
       <Link>Defs\Designations.xml</Link>
     </Content>
-    <Content Include="..\1.5\Defs\JobDefs.xml">
+    <Content Include="..\1.4\Defs\JobDefs.xml">
       <Link>Defs\JobDefs.xml</Link>
     </Content>
-    <Content Include="..\1.5\Defs\WorkGivers.xml">
+    <Content Include="..\1.4\Defs\WorkGivers.xml">
       <Link>Defs\WorkGivers.xml</Link>
     </Content>
-    <Content Include="..\1.5\Patches\AddCompLock.xml">
+    <Content Include="..\1.4\Patches\AddCompLock.xml">
       <Link>Patches\AddCompLock.xml</Link>
     </Content>
-    <Content Include="..\1.5\Patches\AddCompLockArchitectExpandedFences.xml">
+    <Content Include="..\1.4\Patches\AddCompLockArchitectExpandedFences.xml">
       <Link>Patches\AddCompLockArchitectExpandedFences.xml</Link>
     </Content>
-    <Content Include="..\1.5\Patches\AddCompLockDoorsExpanded.xml">
+    <Content Include="..\1.4\Patches\AddCompLockDoorsExpanded.xml">
       <Link>Patches\AddCompLockDoorsExpanded.xml</Link>
     </Content>
-    <Content Include="..\1.5\Patches\AddCompLockLinkableDoors.xml">
+    <Content Include="..\1.4\Patches\AddCompLockLinkableDoors.xml">
       <Link>Patches\AddCompLockLinkableDoors.xml</Link>
     </Content>
-    <Content Include="..\1.5\Patches\AddCompLockSoS2.xml">
+    <Content Include="..\1.4\Patches\AddCompLockSoS2.xml">
       <Link>Patches\AddCompLockSoS2.xml</Link>
     </Content>
-    <Content Include="..\1.5\Patches\AddInspectTab.xml">
+    <Content Include="..\1.4\Patches\AddInspectTab.xml">
       <Link>Patches\AddInspectTab.xml</Link>
     </Content>
-    <Content Include="..\1.5\Patches\AddInspectTabLockArchitectExpandedFences.xml">
+    <Content Include="..\1.4\Patches\AddInspectTabLockArchitectExpandedFences.xml">
       <Link>Patches\AddInspectTabLockArchitectExpandedFences.xml</Link>
     </Content>
-    <Content Include="..\1.5\Patches\AddInspectTabLockDoorsExpanded.xml">
+    <Content Include="..\1.4\Patches\AddInspectTabLockDoorsExpanded.xml">
       <Link>Patches\AddInspectTabLockDoorsExpanded.xml</Link>
     </Content>
-    <Content Include="..\1.5\Patches\AddInspectTabLockLinkableDoors.xml">
+    <Content Include="..\1.4\Patches\AddInspectTabLockLinkableDoors.xml">
       <Link>Patches\AddInspectTabLockLinkableDoors.xml</Link>
     </Content>
-    <Content Include="..\1.5\Patches\AddInspectTabLts.xml">
+    <Content Include="..\1.4\Patches\AddInspectTabLts.xml">
       <Link>Patches\AddInspectTabLts.xml</Link>
     </Content>
-    <Content Include="..\1.5\Patches\AddInspectTabSoS2.xml">
+    <Content Include="..\1.4\Patches\AddInspectTabSoS2.xml">
       <Link>Patches\AddInspectTabSoS2.xml</Link>
     </Content>
     <Content Include="..\About\About.xml">
