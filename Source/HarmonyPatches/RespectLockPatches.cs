@@ -26,4 +26,13 @@ namespace Locks.HarmonyPatches
             return !LocksSettings.revoltRespectsLocks;
         }
     }
+
+  [HarmonyPatch(typeof(LordJob_TradeWithColony), "CanOpenAnyDoor")]
+  public class AnimalCaravanaRespectPatch
+  {
+    static bool Postfix()
+    {
+      return false;
+    }
+  }
 }
