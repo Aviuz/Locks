@@ -1,7 +1,6 @@
 Changelog:
 2.9.0
 - Update to Rimworld 1.5
-- New changes only affect Rimworld 1.5
 - Trader animals should respect locks
 - Option for anomalies to respect locks (DLC required)
 2.8.3
