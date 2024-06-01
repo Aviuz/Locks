@@ -1,4 +1,6 @@
 Changelog:
+2.9.2
+- Doors Expanded fixes
 2.9.1
 - Reverted back files version for Rimworld 1.4
 - Future new futures will be only for Rimworld 1.5+
