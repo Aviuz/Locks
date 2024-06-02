@@ -12,7 +12,6 @@ namespace Locks
         {
             HarmonyPatches.HPatcher.Init();
             CompatibilityPatches.ClutterStructure.Init();
-            CompatibilityPatches.DoorsExpanded.Init();
             CompatibilityPatches.SoS2.Init();
         }
     }
