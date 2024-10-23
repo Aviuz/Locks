@@ -147,7 +147,7 @@ namespace Locks
         GUI.color = Color.white;
         if (Widgets.ButtonText(cancelButtonRect, "Locks_Cancel".Translate()))
         {
-          SetWantedStateData(SelDoor, Data.CurrentState);
+          CopyUtils.SetWantedStateData(SelDoor, Data.CurrentState);
           OnOpen();
         }
 
@@ -160,7 +160,7 @@ namespace Locks
       }
       if (Clipboard.StoredState.HasValue && Widgets.ButtonText(pasteButtonsRect, "Locks_Paste".Translate()))
       {
-        SetWantedStateData(SelDoor, Clipboard.StoredState.Value);
+        CopyUtils.SetWantedStateData(SelDoor, Clipboard.StoredState.Value);
         OnOpen();
       }
 
@@ -183,7 +183,7 @@ namespace Locks
           {
             childLock = childLock
           };
-          SetWantedStateData(SelDoor, newState);
+          CopyUtils.SetWantedStateData(SelDoor, newState);
         }
       }
       else
@@ -245,29 +245,6 @@ namespace Locks
       listing.CheckboxLabeled(label, ref checkOn, tooltip, height, labelPct);
       if (current != checkOn)
         anythingChanged = true;
-    }
-
-    /**
-    * Doors in argument insted SelDoor and Data needed for MP
-    */
-    [SyncMethod(SyncContext.MapSelected)]
-    private static void SetWantedStateData(ThingWithComps door, LockState newState)
-    {
-      var data = LockUtility.GetData(door);
-
-      // Only possible when called from UpdateSettings
-      if (newState.owners == null)
-        newState.owners = new List<Pawn>(data.WantedState.owners);
-
-      data.WantedState.CopyFrom(newState);
-      LockUtility.UpdateLockDesignation(door);
-
-      // Refresh data in multiplayer, as the call to this method will be delayed
-      if (MP.IsInMultiplayer && Find.MainTabsRoot.OpenTab == MainButtonDefOf.Inspect && Find.Selector.SingleSelectedObject == door)
-      {
-        var tab = (MainTabWindow_Inspect)Find.MainTabsRoot.OpenTab.TabWindow;
-        tab.CurTabs?.OfType<ITab_Lock>().FirstOrDefault()?.OnOpen();
-      }
     }
 
     /**
