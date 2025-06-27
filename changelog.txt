@@ -1,4 +1,12 @@
 Changelog:
+3.0.0
+- Update for Rimworld 1.6, new feature only available for Rimworld 1.6+
+- Doors that should be considered as fence gate can be added to new def `Locks.FenceDoorsDef`
+- Added copy/paste gizmos for doors
+- New ui for locks setting
+- New option for mechs
+- New gizmo on doors that allow to debug all lock option
+
 2.9.3
 - Save Our Ship 2 fix (https://github.com/ThisIsSP4RTAN)
 2.9.2

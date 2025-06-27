@@ -13,27 +13,15 @@ namespace Locks
 {
   public class ITab_Lock : ITab
   {
-    private Vector2 scrollPosition;
+    private static readonly Vector2 WinSize = new Vector2(310f + WindowGap,
+      ButtonsHeight + MainSettingsHeight + WindowGap + 2 * Spacing + WarningHeight);
 
-    private static readonly Vector2 WinSize = new Vector2(310f + WindowGap, ButtonsHeight + OwnersWindowHeight + OwnersTitleHeight + MainSettingsHeight + WindowGap + 2 * Spacing + WarningHeight);
     private const float ButtonsHeight = 25f;
     private const float WindowGap = 15f;
     private const float MainSettingsHeight = 7 * 32f;
-    private const float OwnersTitleHeight = 24f;
-    private const float OwnersWindowHeight = 200f;
     private const float WarningHeight = 24f;
     private const float Spacing = 2f;
     private const float ButtonWidth = 60f;
-
-    private bool locked;
-    private bool vistitorsAllowed;
-    private bool petDoor;
-    private bool pensDoor;
-    private bool slaveDoor;
-    private bool childLock;
-    private bool animalsAllowed;
-
-    private Thing lastSelectedThing;
 
     public ITab_Lock()
     {
@@ -42,246 +30,139 @@ namespace Locks
       this.tutorTag = "Locks";
     }
 
-    public ThingWithComps SelDoor
-    {
-      get
-      {
-        return SelThing as ThingWithComps;
-      }
-    }
+    private ThingWithComps SelDoor => SelThing as ThingWithComps;
 
-    public LockData Data
-    {
-      get
-      {
-        return LockUtility.GetData(SelDoor);
-      }
-    }
+    private LockData Data => LockUtility.GetData(SelDoor);
+    public override bool IsVisible => SelDoor.Faction == Faction.OfPlayer;
 
     protected override void FillTab()
     {
-      bool anythingChanged = false;
-      Rect mainRect = new Rect(0f, 0f, ITab_Lock.WinSize.x, ITab_Lock.WinSize.y).ContractedBy(WindowGap);
+      Rect mainRect = new Rect(0f, 0f, WinSize.x, WinSize.y).ContractedBy(WindowGap);
       Rect upperSettingsRect = new Rect(0f, 0f + WindowGap, mainRect.width, MainSettingsHeight);
-      Rect ownersTitleRect = new Rect(0f, mainRect.height - OwnersWindowHeight - OwnersTitleHeight - WarningHeight - 2 * Spacing - ButtonsHeight, mainRect.width, OwnersTitleHeight);
-      Rect ownersListRect = new Rect(0f, mainRect.height - OwnersWindowHeight - WarningHeight - 2 * Spacing - ButtonsHeight, mainRect.width, OwnersWindowHeight);
-      Rect warningRect = new Rect(0f, mainRect.height - WarningHeight - Spacing - ButtonsHeight, mainRect.width, WarningHeight);
-      Rect cancelButtonRect = new Rect(mainRect.width - ButtonWidth, mainRect.height - WarningHeight, ButtonWidth, WarningHeight);
-      Rect copyButtonsRect = new Rect(mainRect.width / 2 - Spacing - ButtonWidth, mainRect.height - ButtonsHeight, ButtonWidth, ButtonsHeight);
-      Rect pasteButtonsRect = new Rect(mainRect.width / 2 + Spacing, mainRect.height - ButtonsHeight, ButtonWidth, ButtonsHeight);
-      Text.Font = GameFont.Small;
-      float viewRectCalcHeight = (Text.LineHeight + Spacing) * SelDoor.Map.mapPawns.FreeColonists.Count();
-      Rect viewRect = new Rect(0f, 0f, mainRect.width - 16f, viewRectCalcHeight >= OwnersWindowHeight ? viewRectCalcHeight : OwnersWindowHeight);
+      Rect copyButtonsRect = new Rect(mainRect.width / 2 - Spacing - ButtonWidth * 1.5f,
+        mainRect.height - ButtonsHeight, ButtonWidth, ButtonsHeight);
+      Rect pasteButtonsRect = new Rect(mainRect.width / 2 + ButtonWidth * 0.5f,
+        mainRect.height - ButtonsHeight, ButtonWidth, ButtonsHeight);
+      Rect editButtonRect = new Rect(mainRect.width / 2 + Spacing + 0.5f * ButtonWidth, mainRect.height - ButtonsHeight,
+        ButtonWidth, ButtonsHeight);
       Text.Font = GameFont.Small;
       var listing = new Listing_Standard(GameFont.Small);
       GUI.BeginGroup(mainRect);
-
-      // Upper rect
       listing.Begin(upperSettingsRect);
-      if (Data.WantedState.IsVisible(nameof(LockState.locked)))
-        CheckboxLabeled(listing, ref anythingChanged, "Locks_ITabLocked".Translate(), ref locked, "Locks_ITabLockedDesc".Translate());
-      if (Data.WantedState.IsVisible(nameof(LockState.allowSlave)))
+      var state = Data.WantedState;
+      listing.Label(state.Locked ? "Locks_Locked".Translate() : "Locks_Unlocked".Translate());
+      if (state.Locked)
       {
-        CheckboxLabeled(listing, ref anythingChanged, "Locks_ITabSlaveDoors".Translate(), ref slaveDoor, "Locks_ITabSlaveDoorsDesc".Translate());
-      }
-      if (Data.WantedState.IsVisible(nameof(LockState.mode)))
-        CheckboxLabeled(listing, ref anythingChanged, "Locks_ITabVisitorsAllowed".Translate(), ref vistitorsAllowed, "Locks_ITabVisitorsAllowedDesc".Translate());
-      if (Data.WantedState.IsVisible(nameof(LockState.childLock)))
-      {
-        CheckboxLabeled(listing, ref anythingChanged, "Locks_ITabChildrenLock".Translate(), ref childLock, "Locks_ITabChildrenLockDesc".Translate());
-      }
+        listing.Label(state.ChildLock
+          ? "Locks_ChildrenLockEnabled".Translate()
+          : "Locks_ChildrenLockDisabled".Translate());
 
-      if (Data.WantedState.IsVisible(nameof(LockState.petDoor)))
-      {
-        CheckboxLabeled(listing, ref anythingChanged, "Locks_ITabPetDoor".Translate(), ref petDoor, "Locks_ITabPetDoorDesc".Translate());
-        if (anythingChanged && petDoor && !animalsAllowed)
+
+        listing.Label(state.Mode == LockMode.Allies ? "Locks_Allies".Translate() : "Locks_ColonyOnly".Translate());
+        if (state.ColonistDoor.Any)
         {
-          animalsAllowed = true;
+          listing.Label("Locks_AnyColonistAllowed".Translate());
+        }
+        else
+        {
+          var nonColonist = (state.ColonistDoor.AllowedPawns?.Count ?? 0) == 0;
+          if (nonColonist)
+          {
+            listing.Label("Locks_ColonistNone".Translate());
+          }
+          else
+          {
+            var pawnTooltips = String.Join("\n", state.ColonistDoor.AllowedPawns.Select(pawn => pawn.LabelShort));
+            listing.Label("Locks_FewColonist".Translate(state.ColonistDoor.AllowedPawns.Count),
+              tooltip: "Locks_AllowedColonist".Translate(pawnTooltips));
+          }
+        }
+
+        if (ModsConfig.IdeologyActive)
+        {
+          if (state.SlaveAllowed.Any)
+          {
+            listing.Label("Locks_AnySlaveAllowed".Translate());
+          }
+          else
+          {
+            var nonColonist = (state.SlaveAllowed.AllowedPawns?.Count ?? 0) == 0;
+            var tooltip = nonColonist
+              ? null
+              : "Locks_AllowedSlaves".Translate(String.Join("\n",
+                state.SlaveAllowed.AllowedPawns.Select(pawn => pawn.LabelShort)));
+            listing.Label(nonColonist
+              ? "Locks_SlaveNone".Translate()
+              : "Locks_FewSlave".Translate(state.SlaveAllowed.AllowedPawns.Count), tooltip: tooltip);
+          }
+        }
+
+        listing.Label(AnimalLabel());
+        if (ModsConfig.BiotechActive)
+        {
+          if (state.MechanoidDoor.Any)
+          {
+            listing.Label("Locks_AnyMechanoidAllowed".Translate());
+          }
+          else
+          {
+            if (state.MechanoidDoor.OnlyMechanitorsMechs)
+            {
+              listing.Label("Locks_OnlyMechanitorsMechs".Translate());
+            }
+            else
+            {
+              var toolTip = String.Join("\n",
+                LockUtility.MechKinds.Select(def => state.MechanoidDoor.AllowedMechanoids.Contains(def.defName)));
+              listing.Label("Locks_OnlyAllowedMechs".Translate(state.MechanoidDoor.AllowedMechanoids.Count),
+                tooltip: "Locks_AllowedMechsToolTip".Translate(toolTip));
+            }
+          }
         }
       }
-      if (Data.WantedState.IsVisible(nameof(LockState.pensDoor)))
+      else
       {
-        CheckboxLabeled(listing, ref anythingChanged, "Locks_ITabPensDoor".Translate(), ref pensDoor, "Locks_ITabPensDoorDesc".Translate());
-        if (anythingChanged && pensDoor && !animalsAllowed)
-        {
-          animalsAllowed = true;
-        }
-      }
-      if (Data.WantedState.IsVisible(nameof(LockState.allowAnimals)))
-      {
-        CheckboxLabeled(listing, ref anythingChanged, "Locks_ITabAnimalAllowed".Translate(), ref animalsAllowed, "Locks_ITabAnimalAllowedDesc".Translate());
-        if (anythingChanged && !animalsAllowed)
-        {
-          pensDoor = false;
-          petDoor = false;
-        }
+        listing.Label(AnimalLabel());
       }
 
       listing.End();
 
-      if (Data.WantedState.IsVisible(nameof(LockState.owners)))
-      {
-        // Owners title rect
-        Widgets.Label(ownersTitleRect, $"{"Locks_ITabOwners".Translate()}:");
-
-        // Owners list rect
-        Widgets.DrawBoxSolid(ownersListRect, new Color(0.2f, 0.2f, 0.2f));
-        Widgets.BeginScrollView(ownersListRect, ref scrollPosition, viewRect);
-        float curHeight = 0f;
-        foreach (var pawn in SelThing.Map.mapPawns.FreeColonists)
-        {
-          //Widgets.Label(new Rect(0f, curHeight, viewRect.width, Text.LineHeight), $"{pawn.Name}");
-          OwnerCheckbox(new Rect(0f, curHeight, viewRect.width, Text.LineHeight), pawn, ref anythingChanged);
-          curHeight += Text.LineHeight + Spacing;
-        }
-        Widgets.EndScrollView();
-      }
-
-      if (Data.NeedChange)
-      {
-        // Notification
-        GUI.color = Color.red;
-        Widgets.Label(warningRect, "Locks_ITabChangeLocksNotification".Translate());
-
-        // Cancel button
-        GUI.color = Color.white;
-        if (Widgets.ButtonText(cancelButtonRect, "Locks_Cancel".Translate()))
-        {
-          SetWantedStateData(SelDoor, Data.CurrentState);
-          OnOpen();
-        }
-
-      }
-
       // Copy Paste
       if (Widgets.ButtonText(copyButtonsRect, "Locks_Copy".Translate()))
       {
-        Clipboard.StoredState = Data.WantedState;
+        Clipboard.StoredState = state;
       }
+
       if (Clipboard.StoredState.HasValue && Widgets.ButtonText(pasteButtonsRect, "Locks_Paste".Translate()))
       {
-        SetWantedStateData(SelDoor, Clipboard.StoredState.Value);
+        CopyUtils.SetWantedStateData(SelDoor, Clipboard.StoredState.Value);
         OnOpen();
+      }
+
+      if (Widgets.ButtonText(editButtonRect, "Locks_Edit".Translate()))
+      {
+        Find.WindowStack.Add(new LockOptionsDialog(SelDoor));
       }
 
       //TODO
       //PlayerKnowledgeDatabase.KnowledgeDemonstrated(ConceptDefOf.StorageTab, KnowledgeAmount.FrameDisplayed);
       GUI.EndGroup();
-
-      UpdateSettings(anythingChanged);
     }
 
-    private void UpdateSettings(bool anythingChanged)
+    private String AnimalLabel()
     {
-      if (SelDoor == null)
-        return;
-      if (lastSelectedThing == SelThing)
+      var animalDoor = Data.WantedState.AnimalDoor;
+      if (!animalDoor.Allowed)
       {
-        if (anythingChanged)
-        {
-          var newState = new LockState(vistitorsAllowed ? LockMode.Allies : LockMode.Colony, locked, petDoor, pensDoor, null, slaveDoor, animalsAllowed)
-          {
-            childLock = childLock
-          };
-          SetWantedStateData(SelDoor, newState);
-        }
+        return "Locks_NoneAnimalLabel".Translate();
       }
-      else
+
+      if (animalDoor.PensDoor)
       {
-        OnOpen();
-        lastSelectedThing = SelThing;
+        return "Locks_PensDoorLabel".Translate();
       }
-    }
 
-    public override void OnOpen()
-    {
-      locked = Data.WantedState.locked;
-      vistitorsAllowed = Data.WantedState.mode == LockMode.Allies;
-      petDoor = Data.WantedState.petDoor;
-      pensDoor = Data.WantedState.pensDoor;
-      slaveDoor = Data.WantedState.allowSlave;
-      animalsAllowed = Data.WantedState.allowAnimals;
-      childLock = Data.WantedState.childLock;
-    }
-
-    private void OwnerCheckbox(Rect rect, Pawn pawn, ref bool anythingChanged)
-    {
-      bool checkOn = Data.WantedState.owners.Contains(pawn);
-      TextAnchor anchor = Text.Anchor;
-      Text.Anchor = TextAnchor.MiddleLeft;
-      Widgets.Label(rect, pawn.Name.ToStringShort);
-      if (Widgets.ButtonInvisible(rect, false))
-      {
-        SetOwnerWantedState(SelDoor, pawn, checkOn);
-        checkOn = !checkOn;
-        anythingChanged = true;
-        if (checkOn)
-        {
-          SoundDefOf.Checkbox_TurnedOn.PlayOneShotOnCamera(null);
-        }
-        else
-        {
-          SoundDefOf.Checkbox_TurnedOff.PlayOneShotOnCamera(null);
-        }
-      }
-      Color color = GUI.color;
-      Texture2D image;
-      if (checkOn)
-      {
-        image = Widgets.CheckboxOnTex;
-      }
-      else
-      {
-        image = Widgets.CheckboxOffTex;
-      }
-      Rect position = new Rect(rect.x + rect.width - 24f, rect.y, 24f, 24f);
-      GUI.DrawTexture(position, image);
-      Text.Anchor = anchor;
-    }
-
-    private static void CheckboxLabeled(Listing_Standard listing, ref bool anythingChanged, string label, ref bool checkOn, string tooltip = null, float height = 0.0f, float labelPct = 1f)
-    {
-      var current = checkOn;
-      listing.CheckboxLabeled(label, ref checkOn, tooltip, height, labelPct);
-      if (current != checkOn)
-        anythingChanged = true;
-    }
-
-    /**
-    * Doors in argument insted SelDoor and Data needed for MP
-    */
-    [SyncMethod(SyncContext.MapSelected)]
-    private static void SetWantedStateData(ThingWithComps door, LockState newState)
-    {
-      var data = LockUtility.GetData(door);
-
-      // Only possible when called from UpdateSettings
-      if (newState.owners == null)
-        newState.owners = new List<Pawn>(data.WantedState.owners);
-
-      data.WantedState.CopyFrom(newState);
-      LockUtility.UpdateLockDesignation(door);
-
-      // Refresh data in multiplayer, as the call to this method will be delayed
-      if (MP.IsInMultiplayer && Find.MainTabsRoot.OpenTab == MainButtonDefOf.Inspect && Find.Selector.SingleSelectedObject == door)
-      {
-        var tab = (MainTabWindow_Inspect)Find.MainTabsRoot.OpenTab.TabWindow;
-        tab.CurTabs?.OfType<ITab_Lock>().FirstOrDefault()?.OnOpen();
-      }
-    }
-
-    /**
-     * Doors in argument insted SelDoor and Data needed for MP
-     */
-    [SyncMethod]
-    private static void SetOwnerWantedState(ThingWithComps door, Pawn pawn, bool checkOn)
-    {
-      var data = LockUtility.GetData(door);
-
-      if (checkOn)
-        data.WantedState.owners.Remove(pawn);
-      else
-        data.WantedState.owners.Add(pawn);
+      return animalDoor.OnlyPets ? "Locks_OnlyPetLabel".Translate() : "Locks_AnyAnimalLabel".Translate();
     }
   }
 }
