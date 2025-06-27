@@ -20,12 +20,11 @@ namespace Locks
 
   public class CompLock : ThingComp
   {
-    private static readonly string FENCE = "FenceGate";
     public override string CompInspectStringExtra()
     {
       string text = "Locks_StatePrefix".Translate() + " ";
 
-      if (LockUtility.GetData(this.parent).CurrentState.locked)
+      if (LockUtility.GetData(this.parent).CurrentState.Locked)
         text += "Locks_StateLocked".Translate();
       else
         text += "Locks_StateUnlocked".Translate();
@@ -35,22 +34,23 @@ namespace Locks
       return text;
     }
 
-    public override void PostDeSpawn(Map map)
+    public override void PostDeSpawn(Map map, DestroyMode mode = DestroyMode.Vanish)
     {
-      LockUtility.Remove(this.parent);
+      LockUtility.Remove(parent);
     }
 
     public override void PostExposeData()
     {
-      LockUtility.GetData(this.parent).ExposeData();
+      LockUtility.GetData(parent).ExposeData();
     }
 
     public override IEnumerable<Gizmo> CompGetGizmosExtra()
     {
-      yield return new LockGizmo(this.parent);
+      yield return new LockGizmo(parent);
+      yield return new DebugButtonGizmo(parent);
       Command_Action command_Action = new Command_Action();
       command_Action.icon = ContentFinder<Texture2D>.Get("UI/Commands/CopySettings");
-      command_Action.defaultLabel = "Locks_Copy".Translate();
+      command_Action.defaultLabel = "CommandPasteZoneSettingsLabel".Translate();
       command_Action.action = delegate
       {
         SoundDefOf.Tick_High.PlayOneShotOnCamera();
@@ -62,7 +62,6 @@ namespace Locks
       Command_Action command_Action2 = new Command_Action();
       command_Action2.icon = ContentFinder<Texture2D>.Get("UI/Commands/PasteSettings");
       command_Action2.defaultLabel = "CommandPasteZoneSettingsLabel".Translate();
-      command_Action2.defaultDesc = "CommandPasteZoneSettingsDesc".Translate();
       command_Action2.action = delegate
       {
 
@@ -82,10 +81,10 @@ namespace Locks
 
     public override void PostSpawnSetup(bool respawningAfterLoad)
     {
-      if ((this.parent.def.defName == FENCE || LocksSettings.alwaysPensDoor) && !respawningAfterLoad)
+      if ((LocksDefsOf.Locks_AllFenceDoors.fenceGatesDefNames.Contains(parent.def.defName) || LocksSettings.alwaysPensDoor) && !respawningAfterLoad)
       {
-        LockUtility.GetData(this.parent).CurrentState.pensDoor = true;
-        LockUtility.GetData(this.parent).WantedState.pensDoor = true;
+        LockUtility.GetData(parent).CurrentState.AnimalDoor.PensDoor = true;
+        LockUtility.GetData(parent).WantedState.AnimalDoor.PensDoor = true;
       }
     }
   }

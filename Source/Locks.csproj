@@ -19,7 +19,7 @@
     <DebugSymbols>false</DebugSymbols>
     <DebugType>none</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\1.5\Assemblies\</OutputPath>
+    <OutputPath>..\1.6\Assemblies\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -46,9 +46,43 @@
       <HintPath>..\..\..\Gry\Steam\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\Assembly-CSharp.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Bcl.AsyncInterfaces.10.0.0-preview.5.25277.114\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="mscorlib" />
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Buffers.4.6.1\lib\net462\System.Buffers.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="System.Core" />
+    <Reference Include="System.IO.Pipelines, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.IO.Pipelines.10.0.0-preview.5.25277.114\lib\net462\System.IO.Pipelines.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Memory, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Memory.4.6.3\lib\net462\System.Memory.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.6.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Numerics.Vectors.4.6.1\lib\net462\System.Numerics.Vectors.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Runtime.CompilerServices.Unsafe.6.1.2\lib\net462\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="System.Runtime.InteropServices.RuntimeInformation" />
+    <Reference Include="System.Text.Encodings.Web, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Text.Encodings.Web.10.0.0-preview.5.25277.114\lib\net462\System.Text.Encodings.Web.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.4.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Threading.Tasks.Extensions.4.6.3\lib\net462\System.Threading.Tasks.Extensions.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
@@ -79,6 +113,10 @@
     <Compile Include="CompatibilityPatches\Multiplayer.cs" />
     <Compile Include="CompLock.cs" />
     <Compile Include="CopyUtils.cs" />
+    <Compile Include="CustomRow.cs" />
+    <Compile Include="DebugButtonGizmo.cs" />
+    <Compile Include="DebugDialog.cs" />
+    <Compile Include="Debug\IMarkdown.cs" />
     <Compile Include="FenceDoorsDef.cs" />
     <Compile Include="HarmonyPatches\HPatcher.cs" />
     <Compile Include="HarmonyPatches\Patch_InjectLockCheck.cs" />
@@ -88,6 +126,8 @@
     <Compile Include="JobDriver_ToggleLock.cs" />
     <Compile Include="LockData.cs" />
     <Compile Include="LockGizmo.cs" />
+    <Compile Include="LockOptionDialog.cs" />
+    <Compile Include="LocksDefsOf.cs" />
     <Compile Include="LockState.cs" />
     <Compile Include="LockUtility.cs" />
     <Compile Include="Options\LocksMod.cs" />
@@ -102,50 +142,54 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="RectUtility.cs" />
     <Compile Include="WorkGiver_ToggleLock.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\1.5\Defs\Designations.xml">
+    <Content Include="..\1.6\Defs\Designations.xml">
       <Link>Defs\Designations.xml</Link>
     </Content>
-    <Content Include="..\1.5\Defs\JobDefs.xml">
+    <Content Include="..\1.6\Defs\JobDefs.xml">
       <Link>Defs\JobDefs.xml</Link>
     </Content>
-    <Content Include="..\1.5\Defs\WorkGivers.xml">
+    <Content Include="..\1.6\Defs\WorkGivers.xml">
       <Link>Defs\WorkGivers.xml</Link>
     </Content>
-    <Content Include="..\1.5\Patches\AddCompLock.xml">
+	<Content Include="..\1.6\Defs\CustomDef.xml">
+      <Link>Defs\CustomDef.xml</Link>
+    </Content>
+    <Content Include="..\1.6\Patches\AddCompLock.xml">
       <Link>Patches\AddCompLock.xml</Link>
     </Content>
-    <Content Include="..\1.5\Patches\AddCompLockArchitectExpandedFences.xml">
+    <Content Include="..\1.6\Patches\AddCompLockArchitectExpandedFences.xml">
       <Link>Patches\AddCompLockArchitectExpandedFences.xml</Link>
     </Content>
-    <Content Include="..\1.5\Patches\AddCompLockDoorsExpanded.xml">
+    <Content Include="..\1.6\Patches\AddCompLockDoorsExpanded.xml">
       <Link>Patches\AddCompLockDoorsExpanded.xml</Link>
     </Content>
-    <Content Include="..\1.5\Patches\AddCompLockLinkableDoors.xml">
+    <Content Include="..\1.6\Patches\AddCompLockLinkableDoors.xml">
       <Link>Patches\AddCompLockLinkableDoors.xml</Link>
     </Content>
-    <Content Include="..\1.5\Patches\AddCompLockSoS2.xml">
+    <Content Include="..\1.6\Patches\AddCompLockSoS2.xml">
       <Link>Patches\AddCompLockSoS2.xml</Link>
     </Content>
-    <Content Include="..\1.5\Patches\AddInspectTab.xml">
+    <Content Include="..\1.6\Patches\AddInspectTab.xml">
       <Link>Patches\AddInspectTab.xml</Link>
     </Content>
-    <Content Include="..\1.5\Patches\AddInspectTabLockArchitectExpandedFences.xml">
+    <Content Include="..\1.6\Patches\AddInspectTabLockArchitectExpandedFences.xml">
       <Link>Patches\AddInspectTabLockArchitectExpandedFences.xml</Link>
     </Content>
-    <Content Include="..\1.5\Patches\AddInspectTabLockDoorsExpanded.xml">
+    <Content Include="..\1.6\Patches\AddInspectTabLockDoorsExpanded.xml">
       <Link>Patches\AddInspectTabLockDoorsExpanded.xml</Link>
     </Content>
-    <Content Include="..\1.5\Patches\AddInspectTabLockLinkableDoors.xml">
+    <Content Include="..\1.6\Patches\AddInspectTabLockLinkableDoors.xml">
       <Link>Patches\AddInspectTabLockLinkableDoors.xml</Link>
     </Content>
-    <Content Include="..\1.5\Patches\AddInspectTabLts.xml">
+    <Content Include="..\1.6\Patches\AddInspectTabLts.xml">
       <Link>Patches\AddInspectTabLts.xml</Link>
     </Content>
-    <Content Include="..\1.5\Patches\AddInspectTabSoS2.xml">
+    <Content Include="..\1.6\Patches\AddInspectTabSoS2.xml">
       <Link>Patches\AddInspectTabSoS2.xml</Link>
     </Content>
     <Content Include="..\About\About.xml">
@@ -188,5 +232,7 @@
       <ErrorText>Ten projekt zawiera odwołania do pakietów NuGet, których nie ma na tym komputerze. Użyj przywracania pakietów NuGet, aby je pobrać. Aby uzyskać więcej informacji, zobacz http://go.microsoft.com/fwlink/?LinkID=322105. Brakujący plik: {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('packages\NuGet.Build.Tasks.Pack.6.11.0\build\NuGet.Build.Tasks.Pack.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\NuGet.Build.Tasks.Pack.6.11.0\build\NuGet.Build.Tasks.Pack.targets'))" />
+    <Error Condition="!Exists('packages\System.ValueTuple.4.6.1\build\net471\System.ValueTuple.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\System.ValueTuple.4.6.1\build\net471\System.ValueTuple.targets'))" />
   </Target>
+  <Import Project="packages\System.ValueTuple.4.6.1\build\net471\System.ValueTuple.targets" Condition="Exists('packages\System.ValueTuple.4.6.1\build\net471\System.ValueTuple.targets')" />
 </Project>

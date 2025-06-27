@@ -12,16 +12,12 @@ namespace Locks
   public class CopyUtils
   {
     /**
-    * Doors in argument insted SelDoor and Data needed for MP
+    * Doors in argument instead SelDoor and Data needed for MP
     */
     [SyncMethod(SyncContext.MapSelected)]
     public static void SetWantedStateData(ThingWithComps door, LockState newState)
     {
       var data = LockUtility.GetData(door);
-
-      // Only possible when called from UpdateSettings
-      if (newState.owners == null)
-        newState.owners = new List<Pawn>(data.WantedState.owners);
 
       data.WantedState.CopyFrom(newState);
       LockUtility.UpdateLockDesignation(door);

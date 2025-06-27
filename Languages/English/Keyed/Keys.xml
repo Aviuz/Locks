@@ -6,13 +6,15 @@
   <Locks_AlwaysPensDoor>Always pens door</Locks_AlwaysPensDoor>
   <Locks_AlwaysPensDoor_Description>When enabled every door will has "pens door" option turn on after construction.</Locks_AlwaysPensDoor_Description>
   <Locks_AnomaliesIgnoreLocks>Anomalies ignore locks</Locks_AnomaliesIgnoreLocks>
-  <Locks_AnomaliesIgnoreLocks_Description>When disables anomalies will respects door locks settings.</Locks_AnomaliesIgnoreLocks_Description>
-
+  <Locks_AnomaliesIgnoreLocks_Description>When disables anomalies will respect door locks settings.</Locks_AnomaliesIgnoreLocks_Description>
+  <Locks_DebugWidget>Debug widget</Locks_DebugWidget>
+  <Locks_DebugWidget_Description>Enable debug button on each player door to help check door status for selected pawn</Locks_DebugWidget_Description>
+  
   <Locks_Label>Lock</Locks_Label>
   <Locks_Description>When unlocked all pawn will be allowed to use this door.\n[Right click for more options]</Locks_Description>
 
   <Locks_PrisonBreak>Escaping prisoners respecting locks</Locks_PrisonBreak>
-  <Locks_SlaveRebel>Rebeling slaves respecting locks</Locks_SlaveRebel>
+  <Locks_SlaveRebel>Rebelling slaves respecting locks</Locks_SlaveRebel>
 
   <Locks_StatePrefix>Door</Locks_StatePrefix>
   <Locks_StateLocked>locked</Locks_StateLocked>
@@ -31,8 +33,6 @@
   <Locks_ITabSlaveDoorsDesc>When disabled slaves are not allowed to pass through this door. This setting do not apply when owners are set.</Locks_ITabSlaveDoorsDesc>
   <Locks_ITabAnimalAllowed>Animals allowed</Locks_ITabAnimalAllowed>
   <Locks_ITabAnimalAllowedDesc>When disabled all animals will not be allowed to pass through this door. This setting is checked after pens and pet door settings.</Locks_ITabAnimalAllowedDesc>
-  <Locks_ITabChildrenLock>Children lock</Locks_ITabChildrenLock>
-  <Locks_ITabChildrenLockDesc>When enabled only humanlike pawn over age (check options) are allowed to pass through this door. Works only on pawn from that same faction as door.</Locks_ITabChildrenLockDesc>
 
 
   <Locks_ITabOwners>Owners</Locks_ITabOwners>
@@ -56,6 +56,55 @@
   <Locks_AlertLocksCantBeChangedDefaultDesc>Some locks can't be changed, because owners of those locks do not perform flick jobs.</Locks_AlertLocksCantBeChangedDefaultDesc>
 
   <Locks_Cancel>Cancel</Locks_Cancel>
+  <Locks_Close>Close</Locks_Close>
   <Locks_Copy>Copy</Locks_Copy>
   <Locks_Paste>Paste</Locks_Paste>
+  <Locks_Edit>Edit</Locks_Edit>
+  
+  <Locks_Locked>Locked</Locks_Locked>
+  <Locks_Unlocked>Unlocked</Locks_Unlocked>
+  <Locks_Allies>Allies allowed</Locks_Allies>
+  <Locks_ColonyOnly>Colony only</Locks_ColonyOnly>
+  <Locks_AnyColonistAllowed>Colonists: any</Locks_AnyColonistAllowed>
+  <Locks_ColonistNone>Colonists: none</Locks_ColonistNone>
+  <Locks_FewColonist>Colonists: {0} allowed</Locks_FewColonist>
+  <Locks_AllowedColonist>Colonists allowed: \n{0}</Locks_AllowedColonist>
+  <Locks_AnySlaveAllowed>Slaves: any</Locks_AnySlaveAllowed>
+  <Locks_SlaveNone>Slaves: none</Locks_SlaveNone>
+  <Locks_FewSlave>Slaves: {0} allowed</Locks_FewSlave>
+  <Locks_AllowedSlaves>Slaves allowed: \n{0}</Locks_AllowedSlaves>
+  <Locks_AnyMechanoidAllowed>Mechs: any</Locks_AnyMechanoidAllowed>
+  <Locks_OnlyMechanitorsMechs>Mechs: only mechanitors</Locks_OnlyMechanitorsMechs>
+  <Locks_OnlyAllowedMechs>Mechs: {0} types allowed</Locks_OnlyAllowedMechs>
+  <Locks_AllowedMechsToolTip>Types allowed: \n{0}</Locks_AllowedMechsToolTip>
+  <Locks_NoneAnimalLabel>Animals: none</Locks_NoneAnimalLabel>
+  <Locks_PensDoorLabel>Animals: pens</Locks_PensDoorLabel>
+  <Locks_OnlyPetLabel>Animals: pets</Locks_OnlyPetLabel>
+  <Locks_AnyAnimalLabel>Animals: any</Locks_AnyAnimalLabel>
+  <Locks_Any>Any</Locks_Any>
+  <Locks_None>None</Locks_None>
+  <Locks_Selected>Selected</Locks_Selected>
+  <Locks_Allowed>Allowed: </Locks_Allowed>
+  <Locks_MechanitorsOwned>Mechanitors</Locks_MechanitorsOwned>
+  <Locks_AnimalMode>Animals mode:</Locks_AnimalMode>
+  <Locks_PetDoor>Pets door</Locks_PetDoor>
+  <Locks_PensDoor>Pens door</Locks_PensDoor>
+  <Locks_VisitorsAllowed>Visitors allowed</Locks_VisitorsAllowed>
+  
+  <Locks_ChildrenLockEnabled>Child lock enabled</Locks_ChildrenLockEnabled>
+  <Locks_ChildrenLockDisabled>Child lock disabled</Locks_ChildrenLockDisabled>
+
+  <Locks_ITabChildrenLock>Children lock</Locks_ITabChildrenLock>
+  <Locks_ITabChildrenLockDesc>When enabled only humanlike pawn over age (check options) are allowed to pass through this door. Works only on pawn from that same faction as door.</Locks_ITabChildrenLockDesc>
+  
+  <Locks_GeneralRow>General</Locks_GeneralRow>
+  <Locks_ColonistRow>Colonist</Locks_ColonistRow>
+  <Locks_SlavesRow>Slaves</Locks_SlavesRow>
+  <Locks_MechsRow>Mechs</Locks_MechsRow>
+  
+  <Locks_UpdateButton>Update</Locks_UpdateButton>
+  <Locks_CancelButton>Cancel</Locks_CancelButton>
+  <Locks_DebugCheck>Locks: Debug Check</Locks_DebugCheck>
+  <Locks_DebugCheck_Desc>Check if selected pawn can use door. Window also contains debug information which should be shared with locks developer.</Locks_DebugCheck_Desc>
+  <Locks_SaveDebug>Save</Locks_SaveDebug>
 </LanguageData>

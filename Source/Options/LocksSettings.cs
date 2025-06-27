@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
 using Verse;
 
 namespace Locks.Options
@@ -12,18 +8,34 @@ namespace Locks.Options
     public static int childLockAge = 6;
     public static bool prisonerBreakRespectsLock = true;
     public static bool revoltRespectsLocks = true;
-    public static bool alwaysPensDoor = false;
+    public static bool alwaysPensDoor;
     public static bool anomaliesIgnoreLocks = true;
+    public static bool debugButton = true;
 
     public override void ExposeData()
     {
-      Scribe_Values.Look<int>(ref childLockAge, "Locks_childLockAge", 6, true);
+      Scribe_Values.Look(ref childLockAge, "Locks_childLockAge", 6, true);
 
-      Scribe_Values.Look<bool>(ref prisonerBreakRespectsLock, "Locks_BreakRespectsLocks", true, true);
-      Scribe_Values.Look<bool>(ref revoltRespectsLocks, "Locks_RevoltRespectLocks", true, true);
+      Scribe_Values.Look(ref prisonerBreakRespectsLock, "Locks_BreakRespectsLocks", true, true);
+      Scribe_Values.Look(ref revoltRespectsLocks, "Locks_RevoltRespectLocks", true, true);
 
-      Scribe_Values.Look<bool>(ref alwaysPensDoor, "Locks_AlwaysPensDoor", false, true);
-      Scribe_Values.Look<bool>(ref alwaysPensDoor, "Locks_AnomaliesIgnoreLocks", true, true);
+      Scribe_Values.Look(ref alwaysPensDoor, "Locks_AlwaysPensDoor", false, true);
+      Scribe_Values.Look(ref anomaliesIgnoreLocks, "Locks_AnomaliesIgnoreLocks", true, true);
+      Scribe_Values.Look(ref debugButton, "Locks_DebugButton", true, true);
+    }
+
+    public static StringBuilder ToMarkdown()
+    {
+      var builder = new StringBuilder();
+      builder.AppendLine("|Name|Value|");
+      builder.AppendLine("|----|----|");
+      builder.AppendLine($"|childLockAge|{childLockAge}|");
+      builder.AppendLine($"|prisonerBreakRespectsLock|{prisonerBreakRespectsLock}|");
+      builder.AppendLine($"|revoltRespectsLocks|{revoltRespectsLocks}|");
+      builder.AppendLine($"|alwaysPensDoor|{alwaysPensDoor}|");
+      builder.AppendLine($"|anomaliesIgnoreLocks|{anomaliesIgnoreLocks}|");
+      builder.AppendLine($"|debugButton|{debugButton}|");
+      return builder;
     }
   }
 }

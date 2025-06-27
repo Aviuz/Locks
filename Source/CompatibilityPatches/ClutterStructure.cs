@@ -48,7 +48,7 @@ namespace Locks.CompatibilityPatches
 
         public static bool CanSurpass(Building_Door door, Pawn p)
         {
-            return LockUtility.GetData(door).CurrentState.locked == false && p.RaceProps != null && p.RaceProps.intelligence >= Intelligence.Humanlike;
+            return LockUtility.GetData(door).CurrentState.Locked == false && p.RaceProps != null && p.RaceProps.intelligence >= Intelligence.Humanlike;
         }
     }
 }

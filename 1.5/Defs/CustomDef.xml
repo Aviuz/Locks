@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Defs>
-	<Locks.FenceDoorsDef>
-		<fenceGatesDefNames>
-			<li>FenceGate</li>
-		</fenceGatesDefNames>
-	</Locks.FenceDoorsDef>
-</Defs>
