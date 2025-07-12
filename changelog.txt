@@ -1,4 +1,6 @@
 Changelog:
+3.0.1
+- Bug fixes
 3.0.0
 - Update for Rimworld 1.6, new feature only available for Rimworld 1.6+
 - Doors that should be considered as fence gate can be added to new def `Locks.FenceDoorsDef`

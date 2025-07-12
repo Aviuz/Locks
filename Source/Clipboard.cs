@@ -23,7 +23,11 @@ namespace Locks
             set
             {
                 if (value.HasValue)
+                {
+                    var copyState = LockState.DefaultConfiguration();
+                    copyState.CopyFrom(value.Value);
                     clipboardStack.Insert(0, value.Value);
+                }
                 if (clipboardStack.Count > MaxItemCount)
                     clipboardStack.RemoveAt(MaxItemCount);
             }

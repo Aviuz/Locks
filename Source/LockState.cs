@@ -76,7 +76,7 @@ namespace Locks
       AllowedMechanoids = allowedMechanoids;
     }
 
-    public MechanoidDoor(MechanoidDoor copy) : this(copy.Any, copy.OnlyMechanitorsMechs, copy.AllowedMechanoids)
+    public MechanoidDoor(MechanoidDoor copy) : this(copy.Any, copy.OnlyMechanitorsMechs, new List<string>(copy.AllowedMechanoids))
     {
     }
 
@@ -260,7 +260,7 @@ namespace Locks
 
     public static bool operator !=(LockState a, LockState b)
     {
-      return !(a == b);
+      return !Equals(a, b);
     }
 
     public bool Private => !ColonistDoor.Any;
