@@ -34,7 +34,7 @@ namespace Locks
 
     public bool Equals(DoorAllowed other)
     {
-      return Any == other.Any && Equals(AllowedPawns, other.AllowedPawns);
+      return Any == other.Any && AllowedPawns.Equals(other.AllowedPawns);
     }
 
     public override bool Equals(object obj)
@@ -83,7 +83,7 @@ namespace Locks
     public bool Equals(MechanoidDoor other)
     {
       return Any == other.Any && OnlyMechanitorsMechs == other.OnlyMechanitorsMechs &&
-             Equals(AllowedMechanoids, other.AllowedMechanoids);
+             AllowedMechanoids.Equals(other.AllowedMechanoids);
     }
 
     public override bool Equals(object obj)
