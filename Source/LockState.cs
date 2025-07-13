@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Locks.Debug;
 using Verse;
@@ -34,7 +35,9 @@ namespace Locks
 
     public bool Equals(DoorAllowed other)
     {
-      return Any == other.Any && AllowedPawns.Equals(other.AllowedPawns);
+      return Any == other.Any && 
+             AllowedPawns.Count == other.AllowedPawns.Count
+             && AllowedPawns.All(other.AllowedPawns.Contains);
     }
 
     public override bool Equals(object obj)
@@ -83,7 +86,8 @@ namespace Locks
     public bool Equals(MechanoidDoor other)
     {
       return Any == other.Any && OnlyMechanitorsMechs == other.OnlyMechanitorsMechs &&
-             AllowedMechanoids.Equals(other.AllowedMechanoids);
+             AllowedMechanoids.Count == other.AllowedMechanoids.Count
+             &&  AllowedMechanoids.All(other.AllowedMechanoids.Contains);
     }
 
     public override bool Equals(object obj)
