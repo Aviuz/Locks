@@ -268,30 +268,5 @@ namespace Locks
         designation.Delete();
       }
     }
-
-    public static bool IsVisible(this LockState state, string propertyName)
-    {
-      switch (propertyName)
-      {
-        case nameof(LockState.Locked):
-          return true;
-        case nameof(LockState.Mode):
-          return state.Locked && !state.Private;
-        case nameof(LockState.AnimalDoor):
-          return state.Locked;
-        case nameof(LockState.AnimalDoor.PensDoor):
-          return true;
-        case nameof(LockState.ColonistDoor.AllowedPawns):
-          return state.Locked;
-        case nameof(LockState.AnimalDoor.Allowed):
-          return state.Locked;
-        case nameof(LockState.SlaveAllowed.Any):
-          return state.Locked;
-        case nameof(LockState.ChildLock):
-          return state.Locked;
-        default:
-          return true;
-      }
-    }
   }
 }

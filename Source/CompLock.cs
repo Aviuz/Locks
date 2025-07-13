@@ -22,13 +22,17 @@ namespace Locks
   {
     public override string CompInspectStringExtra()
     {
+      if (parent.Faction != Faction.OfPlayer)
+      {
+        return "";
+      }
       string text = "Locks_StatePrefix".Translate() + " ";
 
-      if (LockUtility.GetData(this.parent).CurrentState.Locked)
+      if (LockUtility.GetData(parent).CurrentState.Locked)
         text += "Locks_StateLocked".Translate();
       else
         text += "Locks_StateUnlocked".Translate();
-      if (LockUtility.GetData(this.parent).NeedChange)
+      if (LockUtility.GetData(parent).NeedChange)
         text += $" ({"Locks_StateChanging".Translate()})";
 
       return text;
