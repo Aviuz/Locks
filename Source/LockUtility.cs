@@ -1,13 +1,9 @@
-﻿using Locks.CompatibilityPatches;
-using Locks.Options;
-using RimWorld;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Multiplayer.API;
+using Locks.Options;
+using RimWorld;
 using Verse;
-using Verse.AI;
 using Verse.AI.Group;
 
 namespace Locks
@@ -18,13 +14,13 @@ namespace Locks
 
     private static readonly Dictionary<ThingWithComps, LockData> Map = new Dictionary<ThingWithComps, LockData>();
 
-    public static List<PawnKindDef> MechKinds { get; } = DefDatabase<PawnKindDef>.AllDefs
-      .Where(def => def.defName.StartsWith("Mech_")).OrderBy(def => def.defName)
-      .ToList();
-
 
     private static DesignationDef designationDef;
     private static JobDef jobDef;
+
+    public static List<PawnKindDef> MechKinds { get; } = DefDatabase<PawnKindDef>.AllDefs
+      .Where(def => def.defName.StartsWith("Mech_")).OrderBy(def => def.defName)
+      .ToList();
 
     public static DesignationDef DesDef =>
       designationDef ?? (designationDef = DefDatabase<DesignationDef>.GetNamed("Locks_Flick"));
@@ -38,9 +34,9 @@ namespace Locks
 
     public static bool PawnCanOpenLogged(ThingWithComps door, Pawn p, StringBuilder builder = null)
     {
-      bool canOpenAnyDoor = p.GetLord()?.LordJob?.CanOpenAnyDoor(p) ?? false;
-      bool noFaction = door.Faction == null;
-      bool specialGuest = p.guest?.Released ?? false;
+      var canOpenAnyDoor = p.GetLord()?.LordJob?.CanOpenAnyDoor(p) ?? false;
+      var noFaction = door.Faction == null;
+      var specialGuest = p.guest?.Released ?? false;
 
       if (canOpenAnyDoor || specialGuest)
       {
@@ -85,7 +81,7 @@ namespace Locks
       if (properties.IsMechanoid)
       {
         builder?.AppendLine("Pawn recognized as Mechanoid");
-        return respectedState.Locked && HandleMechanoid(door, p, respectedState, builder);
+        return !respectedState.Locked || HandleMechanoid(door, p, respectedState, builder);
       }
 
       builder?.AppendLine("Pawn doesn't match any type.");
@@ -96,13 +92,9 @@ namespace Locks
     {
       LockState respectedState;
       if (p.IsPrisoner || door.Faction.HostileTo(p.Faction) || p.InMentalState)
-      {
         respectedState = GetData(door).CurrentState;
-      }
       else
-      {
         respectedState = GetData(door).WantedState;
-      }
 
       return respectedState;
     }
@@ -114,7 +106,7 @@ namespace Locks
         builder?.AppendLine(
           $"Anomalies check. IgnoreLock: {LocksSettings.anomaliesIgnoreLocks}, pawn is revenant: {p.kindDef == PawnKindDefOf.Revenant}, mutant can open any door: {p.IsMutant && p.mutant.Def.canOpenAnyDoor}");
         return LocksSettings.anomaliesIgnoreLocks &&
-               (p.IsMutant && p.mutant.Def.canOpenAnyDoor || p.kindDef == PawnKindDefOf.Revenant);
+               ((p.IsMutant && p.mutant.Def.canOpenAnyDoor) || p.kindDef == PawnKindDefOf.Revenant);
       }
 
       builder?.AppendLine("Anomaly is not active");
@@ -131,7 +123,7 @@ namespace Locks
 
       if (respectedState.MechanoidDoor.OnlyMechanitorsMechs)
       {
-        builder?.AppendLine($"Looking for any mechanitor in allowed colonists.");
+        builder?.AppendLine("Looking for any mechanitor in allowed colonists.");
         return respectedState.ColonistDoor.Any || OwnersControlMech(respectedState, pawn);
       }
 
@@ -222,8 +214,23 @@ namespace Locks
       if (respectedState.Mode == LockMode.Allies)
       {
         builder?.AppendLine("Checking allies mode");
-        return (pawn.guest?.Released ?? false) || pawn.IsFreeman || pawn.HostFaction != door.Faction ||
-               WildManUtility.WildManShouldReachOutsideNow(pawn);
+        if (pawn.IsWildMan())
+        {
+          builder?.AppendLine("Deny wild man");
+          return false;
+        }
+
+        if (pawn.guest?.Released ?? false)
+        {
+          builder?.AppendLine("Checking released guest");
+          return pawn.IsPrisonerOf(door.Faction) || pawn.guest?.HostFaction == door.Faction;
+        }
+
+        if (pawn.IsFreeman)
+        {
+          builder?.AppendLine("Pawn is freeman");
+          return true;
+        }
       }
 
       builder?.AppendLine("No other options for Humanoids");
@@ -250,14 +257,14 @@ namespace Locks
 
     public static void UpdateLockDesignation(Thing t)
     {
-      bool flag = false;
-      ThingWithComps door = t as ThingWithComps;
+      var door = t as ThingWithComps;
+      var flag = false;
       if (door.TryGetComp<CompLock>() != null)
       {
         flag = GetData(door).NeedChange;
       }
 
-      Designation designation = t.Map.designationManager.DesignationOn(t, DesDef);
+      var designation = t.Map.designationManager.DesignationOn(t, DesDef);
       if (flag && designation == null)
       {
         t.Map.designationManager.AddDesignation(new Designation(t, DesDef));
@@ -267,6 +274,11 @@ namespace Locks
       {
         designation.Delete();
       }
+    }
+
+    private static bool IsPrisonerOf(this Pawn pawn, Faction faction)
+    {
+      return pawn.IsPrisoner && pawn.HostFaction == faction;
     }
   }
 }

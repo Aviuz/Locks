@@ -10,9 +10,9 @@ using Verse.AI.Group;
 
 namespace Locks
 {
-  struct PawnDebug : IMarkdown
+  internal struct PawnDebug : IMarkdown
   {
-    private String FullnameNotColored;
+    private readonly string FullnameNotColored;
 
     public PawnDebug(Pawn targetPawn)
     {
@@ -82,11 +82,11 @@ namespace Locks
   public class DebugDialog : Window
   {
     private const float ButtonHeight = 50f;
-    private readonly ThingWithComps parent;
-    private PawnDebug targetPawn;
-    private readonly bool result;
     private readonly StringBuilder builder;
+    private readonly ThingWithComps parent;
     private readonly Pawn pawn;
+    private readonly bool result;
+    private PawnDebug targetPawn;
 
     public DebugDialog(ThingWithComps parent, Pawn pawn, StringBuilder builder, bool result)
     {
@@ -110,7 +110,7 @@ namespace Locks
 
     private void RenderLeftSide(Rect leftSide)
     {
-      Listing_Standard listing = new Listing_Standard();
+      var listing = new Listing_Standard();
       listing.Begin(leftSide);
 
       listing.Label($"Player faction: {Faction.OfPlayer}");
@@ -154,9 +154,9 @@ namespace Locks
 
     private void RenderRightSide(Rect rightSide)
     {
-      Listing_Standard listing = new Listing_Standard();
+      var listing = new Listing_Standard();
       listing.Begin(rightSide);
-      listing.Label($"Debug logic flow");
+      listing.Label("Debug logic flow");
       listing.Label(builder.ToString());
       listing.GapLine();
       listing.Label($"Pawn can use doors: {result}");
@@ -174,7 +174,7 @@ namespace Locks
       var saveRect = new Rect(inRect.width * 0.25f, inRect.height - ButtonHeight, inRect.width * 0.25f, ButtonHeight);
       if (Widgets.ButtonText(saveRect, "Locks_SaveDebug".Translate()))
       {
-        string filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
+        var filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
           $"{parent.def.defName}-vs-{pawn.Name}.md");
         using (var outputFile = new StreamWriter(filePath, true))
         {

@@ -1,8 +1,7 @@
-﻿using RimWorld;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using RimWorld;
 using Verse;
 
 namespace Locks
@@ -22,15 +21,13 @@ namespace Locks
         var maps = Find.Maps;
         foreach (var map in maps)
         {
-          List<Designation> desList = map.designationManager.designationsByDef[LockUtility.DesDef];
+          var desList = map.designationManager.designationsByDef[LockUtility.DesDef];
           foreach (var thing in desList.Select(d => d.target.Thing))
-          {
             if (LockUtility.GetData(thing as Building_Door).WantedState.Private && !LockUtility
                   .GetData(thing as Building_Door).WantedState.ColonistDoor.AllowedPawns.Any(p =>
                     p.workSettings != null &&
                     p.workSettings.WorkIsActive(DefDatabase<WorkTypeDef>.GetNamed("BasicWorker"))))
               yield return thing as Building_Door;
-          }
         }
       }
     }

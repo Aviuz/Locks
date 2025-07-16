@@ -1,19 +1,18 @@
-﻿using RimWorld;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Locks.CompatibilityPatches;
+using Locks.HarmonyPatches;
 using Verse;
 
 namespace Locks
 {
-    [StaticConstructorOnStartup]
-    public static class Initialization
+  [StaticConstructorOnStartup]
+  public static class Initialization
+  {
+    static Initialization()
     {
-        static Initialization()
-        {
-            HarmonyPatches.HPatcher.Init();
-            CompatibilityPatches.ClutterStructure.Init();
-            CompatibilityPatches.DoorsExpanded.Init();
-            CompatibilityPatches.SoS2.Init();
-        }
+      HPatcher.Init();
+      ClutterStructure.Init();
+      DoorsExpanded.Init();
+      SoS2.Init();
     }
+  }
 }

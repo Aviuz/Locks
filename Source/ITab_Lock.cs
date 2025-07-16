@@ -1,21 +1,12 @@
-﻿using RimWorld;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Multiplayer.API;
+﻿using System.Linq;
+using RimWorld;
 using UnityEngine;
 using Verse;
-using Verse.Sound;
 
 namespace Locks
 {
   public class ITab_Lock : ITab
   {
-    private static readonly Vector2 WinSize = new Vector2(310f + WindowGap,
-      ButtonsHeight + MainSettingsHeight + WindowGap + 2 * Spacing + WarningHeight);
-
     private const float ButtonsHeight = 25f;
     private const float WindowGap = 15f;
     private const float MainSettingsHeight = 7 * 32f;
@@ -23,11 +14,14 @@ namespace Locks
     private const float Spacing = 2f;
     private const float ButtonWidth = 60f;
 
+    private static readonly Vector2 WinSize = new Vector2(310f + WindowGap,
+      ButtonsHeight + MainSettingsHeight + WindowGap + 2 * Spacing + WarningHeight);
+
     public ITab_Lock()
     {
-      this.size = ITab_Lock.WinSize;
-      this.labelKey = "Locks_Label";
-      this.tutorTag = "Locks";
+      size = WinSize;
+      labelKey = "Locks_Label";
+      tutorTag = "Locks";
     }
 
     private ThingWithComps SelDoor => SelThing as ThingWithComps;
@@ -37,13 +31,13 @@ namespace Locks
 
     protected override void FillTab()
     {
-      Rect mainRect = new Rect(0f, 0f, WinSize.x, WinSize.y).ContractedBy(WindowGap);
-      Rect upperSettingsRect = new Rect(0f, 0f + WindowGap, mainRect.width, MainSettingsHeight);
-      Rect copyButtonsRect = new Rect(mainRect.width / 2 - Spacing - ButtonWidth * 1.5f,
+      var mainRect = new Rect(0f, 0f, WinSize.x, WinSize.y).ContractedBy(WindowGap);
+      var upperSettingsRect = new Rect(0f, 0f + WindowGap, mainRect.width, MainSettingsHeight);
+      var copyButtonsRect = new Rect(mainRect.width / 2 - Spacing - ButtonWidth * 1.5f,
         mainRect.height - ButtonsHeight, ButtonWidth, ButtonsHeight);
-      Rect pasteButtonsRect = new Rect(mainRect.width / 2 + ButtonWidth * 0.5f,
+      var pasteButtonsRect = new Rect(mainRect.width / 2 - ButtonWidth * 0.5f,
         mainRect.height - ButtonsHeight, ButtonWidth, ButtonsHeight);
-      Rect editButtonRect = new Rect(mainRect.width / 2 + Spacing + 0.5f * ButtonWidth, mainRect.height - ButtonsHeight,
+      var editButtonRect = new Rect(mainRect.width / 2 + Spacing + 0.5f * ButtonWidth, mainRect.height - ButtonsHeight,
         ButtonWidth, ButtonsHeight);
       Text.Font = GameFont.Small;
       var listing = new Listing_Standard(GameFont.Small);
@@ -72,7 +66,7 @@ namespace Locks
           }
           else
           {
-            var pawnTooltips = String.Join("\n", state.ColonistDoor.AllowedPawns.Select(pawn => pawn.LabelShort));
+            var pawnTooltips = string.Join("\n", state.ColonistDoor.AllowedPawns.Select(pawn => pawn.LabelShort));
             listing.Label("Locks_FewColonist".Translate(state.ColonistDoor.AllowedPawns.Count),
               tooltip: "Locks_AllowedColonist".Translate(pawnTooltips));
           }
@@ -89,7 +83,7 @@ namespace Locks
             var nonColonist = (state.SlaveAllowed.AllowedPawns?.Count ?? 0) == 0;
             var tooltip = nonColonist
               ? null
-              : "Locks_AllowedSlaves".Translate(String.Join("\n",
+              : "Locks_AllowedSlaves".Translate(string.Join("\n",
                 state.SlaveAllowed.AllowedPawns.Select(pawn => pawn.LabelShort)));
             listing.Label(nonColonist
               ? "Locks_SlaveNone".Translate()
@@ -112,7 +106,7 @@ namespace Locks
             }
             else
             {
-              var toolTip = String.Join("\n",
+              var toolTip = string.Join("\n",
                 LockUtility.MechKinds.Select(def => state.MechanoidDoor.AllowedMechanoids.Contains(def.defName)));
               listing.Label("Locks_OnlyAllowedMechs".Translate(state.MechanoidDoor.AllowedMechanoids.Count),
                 tooltip: "Locks_AllowedMechsToolTip".Translate(toolTip));
@@ -149,7 +143,7 @@ namespace Locks
       GUI.EndGroup();
     }
 
-    private String AnimalLabel()
+    private string AnimalLabel()
     {
       var animalDoor = Data.WantedState.AnimalDoor;
       if (!animalDoor.Allowed)

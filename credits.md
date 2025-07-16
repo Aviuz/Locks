@@ -1,8 +1,10 @@
 # Thanks to:
+
 **JonnyNova** for helping with fixing errors.
 
 # Used resources:
-Lock icon made by [Freepik](https://www.flaticon.com/authors/freepik) from www.flaticon.com 
+
+Lock icon made by [Freepik](https://www.flaticon.com/authors/freepik) from www.flaticon.com
 
 Reflection powered by **[Harmony](https://github.com/pardeike/Harmony/wiki)**
 

@@ -35,7 +35,7 @@ namespace Locks
 
     public bool Equals(DoorAllowed other)
     {
-      return Any == other.Any && 
+      return Any == other.Any &&
              AllowedPawns.Count == other.AllowedPawns.Count
              && AllowedPawns.All(other.AllowedPawns.Contains);
     }
@@ -79,7 +79,8 @@ namespace Locks
       AllowedMechanoids = allowedMechanoids;
     }
 
-    public MechanoidDoor(MechanoidDoor copy) : this(copy.Any, copy.OnlyMechanitorsMechs, new List<string>(copy.AllowedMechanoids))
+    public MechanoidDoor(MechanoidDoor copy) : this(copy.Any, copy.OnlyMechanitorsMechs,
+      new List<string>(copy.AllowedMechanoids))
     {
     }
 
@@ -87,7 +88,7 @@ namespace Locks
     {
       return Any == other.Any && OnlyMechanitorsMechs == other.OnlyMechanitorsMechs &&
              AllowedMechanoids.Count == other.AllowedMechanoids.Count
-             &&  AllowedMechanoids.All(other.AllowedMechanoids.Contains);
+             && AllowedMechanoids.All(other.AllowedMechanoids.Contains);
     }
 
     public override bool Equals(object obj)

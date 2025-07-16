@@ -1,238 +1,238 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
-  <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E10ABEB7-659B-4307-82A8-7AFDD275743C}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Locks</RootNamespace>
-    <AssemblyName>Locks</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>false</DebugSymbols>
-    <DebugType>none</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>..\1.6\Assemblies\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="0Harmony, Version=2.3.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\Lib.Harmony.2.3.3\lib\net472\0Harmony.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="0MultiplayerAPI, Version=0.5.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\RimWorld.MultiplayerAPI.0.5.0\lib\net472\0MultiplayerAPI.dll</HintPath>
-    </Reference>
-    <Reference Include="Assembly-CSharp">
-      <HintPath>..\..\..\Gry\Steam\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\Assembly-CSharp.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.Bcl.AsyncInterfaces.10.0.0-preview.5.25277.114\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="mscorlib" />
-    <Reference Include="System" />
-    <Reference Include="System.Buffers, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>packages\System.Buffers.4.6.1\lib\net462\System.Buffers.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="System.Core" />
-    <Reference Include="System.IO.Pipelines, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>packages\System.IO.Pipelines.10.0.0-preview.5.25277.114\lib\net462\System.IO.Pipelines.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="System.Memory, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>packages\System.Memory.4.6.3\lib\net462\System.Memory.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="System.Numerics" />
-    <Reference Include="System.Numerics.Vectors, Version=4.1.6.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>packages\System.Numerics.Vectors.4.6.1\lib\net462\System.Numerics.Vectors.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>packages\System.Runtime.CompilerServices.Unsafe.6.1.2\lib\net462\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="System.Runtime.InteropServices.RuntimeInformation" />
-    <Reference Include="System.Text.Encodings.Web, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>packages\System.Text.Encodings.Web.10.0.0-preview.5.25277.114\lib\net462\System.Text.Encodings.Web.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.4.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>packages\System.Threading.Tasks.Extensions.4.6.3\lib\net462\System.Threading.Tasks.Extensions.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
-    <Reference Include="UnityEngine">
-      <HintPath>..\..\..\Gry\Steam\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\UnityEngine.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.CoreModule">
-      <HintPath>..\..\..\Gry\Steam\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.IMGUIModule">
-      <HintPath>..\..\..\Gry\Steam\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\UnityEngine.IMGUIModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.TextRenderingModule">
-      <HintPath>..\..\..\Gry\Steam\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\UnityEngine.TextRenderingModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Alert_LocksCantBeChanged.cs" />
-    <Compile Include="Clipboard.cs" />
-    <Compile Include="CompatibilityPatches\ClutterStructure.cs" />
-    <Compile Include="CompatibilityPatches\SoS2.cs" />
-    <Compile Include="CompatibilityPatches\DoorsExpanded.cs" />
-    <Compile Include="CompatibilityPatches\Multiplayer.cs" />
-    <Compile Include="CompLock.cs" />
-    <Compile Include="CopyUtils.cs" />
-    <Compile Include="CustomRow.cs" />
-    <Compile Include="DebugButtonGizmo.cs" />
-    <Compile Include="DebugDialog.cs" />
-    <Compile Include="Debug\IMarkdown.cs" />
-    <Compile Include="FenceDoorsDef.cs" />
-    <Compile Include="HarmonyPatches\HPatcher.cs" />
-    <Compile Include="HarmonyPatches\Patch_InjectLockCheck.cs" />
-    <Compile Include="HarmonyPatches\RespectLockPatches.cs" />
-    <Compile Include="Initialization.cs" />
-    <Compile Include="ITab_Lock.cs" />
-    <Compile Include="JobDriver_ToggleLock.cs" />
-    <Compile Include="LockData.cs" />
-    <Compile Include="LockGizmo.cs" />
-    <Compile Include="LockOptionDialog.cs" />
-    <Compile Include="LocksDefsOf.cs" />
-    <Compile Include="LockState.cs" />
-    <Compile Include="LockUtility.cs" />
-    <Compile Include="Options\LocksMod.cs" />
-    <Compile Include="Options\LocksSettings.cs" />
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-      <DependentUpon>Settings.settings</DependentUpon>
-    </Compile>
-    <Compile Include="RectUtility.cs" />
-    <Compile Include="WorkGiver_ToggleLock.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="..\1.6\Defs\Designations.xml">
-      <Link>Defs\Designations.xml</Link>
-    </Content>
-    <Content Include="..\1.6\Defs\JobDefs.xml">
-      <Link>Defs\JobDefs.xml</Link>
-    </Content>
-    <Content Include="..\1.6\Defs\WorkGivers.xml">
-      <Link>Defs\WorkGivers.xml</Link>
-    </Content>
-	<Content Include="..\1.6\Defs\CustomDef.xml">
-      <Link>Defs\CustomDef.xml</Link>
-    </Content>
-    <Content Include="..\1.6\Patches\AddCompLock.xml">
-      <Link>Patches\AddCompLock.xml</Link>
-    </Content>
-    <Content Include="..\1.6\Patches\AddCompLockArchitectExpandedFences.xml">
-      <Link>Patches\AddCompLockArchitectExpandedFences.xml</Link>
-    </Content>
-    <Content Include="..\1.6\Patches\AddCompLockDoorsExpanded.xml">
-      <Link>Patches\AddCompLockDoorsExpanded.xml</Link>
-    </Content>
-    <Content Include="..\1.6\Patches\AddCompLockLinkableDoors.xml">
-      <Link>Patches\AddCompLockLinkableDoors.xml</Link>
-    </Content>
-    <Content Include="..\1.6\Patches\AddCompLockSoS2.xml">
-      <Link>Patches\AddCompLockSoS2.xml</Link>
-    </Content>
-    <Content Include="..\1.6\Patches\AddInspectTab.xml">
-      <Link>Patches\AddInspectTab.xml</Link>
-    </Content>
-    <Content Include="..\1.6\Patches\AddInspectTabLockArchitectExpandedFences.xml">
-      <Link>Patches\AddInspectTabLockArchitectExpandedFences.xml</Link>
-    </Content>
-    <Content Include="..\1.6\Patches\AddInspectTabLockDoorsExpanded.xml">
-      <Link>Patches\AddInspectTabLockDoorsExpanded.xml</Link>
-    </Content>
-    <Content Include="..\1.6\Patches\AddInspectTabLockLinkableDoors.xml">
-      <Link>Patches\AddInspectTabLockLinkableDoors.xml</Link>
-    </Content>
-    <Content Include="..\1.6\Patches\AddInspectTabLts.xml">
-      <Link>Patches\AddInspectTabLts.xml</Link>
-    </Content>
-    <Content Include="..\1.6\Patches\AddInspectTabSoS2.xml">
-      <Link>Patches\AddInspectTabSoS2.xml</Link>
-    </Content>
-    <Content Include="..\About\About.xml">
-      <Link>Organizer\About.xml</Link>
-    </Content>
-    <Content Include="..\changelog.txt">
-      <Link>Organizer\changelog.txt</Link>
-    </Content>
-    <Content Include="..\Languages\English\Keyed\Keys.xml">
-      <Link>Language\Keys.xml</Link>
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="..\LoadFolders.xml">
-      <Link>Organizer\LoadFolders.xml</Link>
-    </Content>
-    <Content Include="..\TaskList.txt">
-      <Link>Organizer\TaskList.txt</Link>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\README.md">
-      <Link>Organizer\README.md</Link>
-    </None>
-    <None Include="packages.config" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="packages\NuGet.Build.Tasks.Pack.6.11.0\build\NuGet.Build.Tasks.Pack.targets" Condition="Exists('packages\NuGet.Build.Tasks.Pack.6.11.0\build\NuGet.Build.Tasks.Pack.targets')" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')"/>
     <PropertyGroup>
-      <ErrorText>Ten projekt zawiera odwołania do pakietów NuGet, których nie ma na tym komputerze. Użyj przywracania pakietów NuGet, aby je pobrać. Aby uzyskać więcej informacji, zobacz http://go.microsoft.com/fwlink/?LinkID=322105. Brakujący plik: {0}.</ErrorText>
+        <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+        <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+        <ProjectGuid>{E10ABEB7-659B-4307-82A8-7AFDD275743C}</ProjectGuid>
+        <OutputType>Library</OutputType>
+        <AppDesignerFolder>Properties</AppDesignerFolder>
+        <RootNamespace>Locks</RootNamespace>
+        <AssemblyName>Locks</AssemblyName>
+        <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+        <FileAlignment>512</FileAlignment>
+        <TargetFrameworkProfile/>
+        <NuGetPackageImportStamp>
+        </NuGetPackageImportStamp>
     </PropertyGroup>
-    <Error Condition="!Exists('packages\NuGet.Build.Tasks.Pack.6.11.0\build\NuGet.Build.Tasks.Pack.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\NuGet.Build.Tasks.Pack.6.11.0\build\NuGet.Build.Tasks.Pack.targets'))" />
-    <Error Condition="!Exists('packages\System.ValueTuple.4.6.1\build\net471\System.ValueTuple.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\System.ValueTuple.4.6.1\build\net471\System.ValueTuple.targets'))" />
-  </Target>
-  <Import Project="packages\System.ValueTuple.4.6.1\build\net471\System.ValueTuple.targets" Condition="Exists('packages\System.ValueTuple.4.6.1\build\net471\System.ValueTuple.targets')" />
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+        <DebugSymbols>false</DebugSymbols>
+        <DebugType>none</DebugType>
+        <Optimize>false</Optimize>
+        <OutputPath>..\1.6\Assemblies\</OutputPath>
+        <DefineConstants>DEBUG;TRACE</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+        <Prefer32Bit>false</Prefer32Bit>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+        <DebugType>pdbonly</DebugType>
+        <Optimize>true</Optimize>
+        <OutputPath>bin\Release\</OutputPath>
+        <DefineConstants>TRACE</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+        <Prefer32Bit>false</Prefer32Bit>
+    </PropertyGroup>
+    <ItemGroup>
+        <Reference Include="0Harmony, Version=2.3.3.0, Culture=neutral, processorArchitecture=MSIL">
+            <HintPath>packages\Lib.Harmony.2.3.3\lib\net472\0Harmony.dll</HintPath>
+            <Private>False</Private>
+        </Reference>
+        <Reference Include="0MultiplayerAPI, Version=0.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+            <HintPath>packages\RimWorld.MultiplayerAPI.0.5.0\lib\net472\0MultiplayerAPI.dll</HintPath>
+        </Reference>
+        <Reference Include="Assembly-CSharp">
+            <HintPath>..\..\..\Gry\Steam\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\Assembly-CSharp.dll</HintPath>
+            <Private>False</Private>
+        </Reference>
+        <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+            <HintPath>packages\Microsoft.Bcl.AsyncInterfaces.10.0.0-preview.5.25277.114\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+            <Private>False</Private>
+        </Reference>
+        <Reference Include="mscorlib"/>
+        <Reference Include="System"/>
+        <Reference Include="System.Buffers, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+            <HintPath>packages\System.Buffers.4.6.1\lib\net462\System.Buffers.dll</HintPath>
+            <Private>False</Private>
+        </Reference>
+        <Reference Include="System.Core"/>
+        <Reference Include="System.IO.Pipelines, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+            <HintPath>packages\System.IO.Pipelines.10.0.0-preview.5.25277.114\lib\net462\System.IO.Pipelines.dll</HintPath>
+            <Private>False</Private>
+        </Reference>
+        <Reference Include="System.Memory, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+            <HintPath>packages\System.Memory.4.6.3\lib\net462\System.Memory.dll</HintPath>
+            <Private>False</Private>
+        </Reference>
+        <Reference Include="System.Numerics"/>
+        <Reference Include="System.Numerics.Vectors, Version=4.1.6.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+            <HintPath>packages\System.Numerics.Vectors.4.6.1\lib\net462\System.Numerics.Vectors.dll</HintPath>
+            <Private>False</Private>
+        </Reference>
+        <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+            <HintPath>packages\System.Runtime.CompilerServices.Unsafe.6.1.2\lib\net462\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+            <Private>False</Private>
+        </Reference>
+        <Reference Include="System.Runtime.InteropServices.RuntimeInformation"/>
+        <Reference Include="System.Text.Encodings.Web, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+            <HintPath>packages\System.Text.Encodings.Web.10.0.0-preview.5.25277.114\lib\net462\System.Text.Encodings.Web.dll</HintPath>
+            <Private>False</Private>
+        </Reference>
+        <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.4.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+            <HintPath>packages\System.Threading.Tasks.Extensions.4.6.3\lib\net462\System.Threading.Tasks.Extensions.dll</HintPath>
+            <Private>False</Private>
+        </Reference>
+        <Reference Include="System.Xml.Linq"/>
+        <Reference Include="System.Data.DataSetExtensions"/>
+        <Reference Include="System.Data"/>
+        <Reference Include="System.Xml"/>
+        <Reference Include="UnityEngine">
+            <HintPath>..\..\..\Gry\Steam\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\UnityEngine.dll</HintPath>
+            <Private>False</Private>
+        </Reference>
+        <Reference Include="UnityEngine.CoreModule">
+            <HintPath>..\..\..\Gry\Steam\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+            <Private>False</Private>
+        </Reference>
+        <Reference Include="UnityEngine.IMGUIModule">
+            <HintPath>..\..\..\Gry\Steam\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\UnityEngine.IMGUIModule.dll</HintPath>
+            <Private>False</Private>
+        </Reference>
+        <Reference Include="UnityEngine.TextRenderingModule">
+            <HintPath>..\..\..\Gry\Steam\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\UnityEngine.TextRenderingModule.dll</HintPath>
+            <Private>False</Private>
+        </Reference>
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Alert_LocksCantBeChanged.cs"/>
+        <Compile Include="Clipboard.cs"/>
+        <Compile Include="CompatibilityPatches\ClutterStructure.cs"/>
+        <Compile Include="CompatibilityPatches\SoS2.cs"/>
+        <Compile Include="CompatibilityPatches\DoorsExpanded.cs"/>
+        <Compile Include="CompatibilityPatches\Multiplayer.cs"/>
+        <Compile Include="CompLock.cs"/>
+        <Compile Include="CopyUtils.cs"/>
+        <Compile Include="CustomRow.cs"/>
+        <Compile Include="DebugButtonGizmo.cs"/>
+        <Compile Include="DebugDialog.cs"/>
+        <Compile Include="Debug\IMarkdown.cs"/>
+        <Compile Include="FenceDoorsDef.cs"/>
+        <Compile Include="HarmonyPatches\HPatcher.cs"/>
+        <Compile Include="HarmonyPatches\Patch_InjectLockCheck.cs"/>
+        <Compile Include="HarmonyPatches\RespectLockPatches.cs"/>
+        <Compile Include="Initialization.cs"/>
+        <Compile Include="ITab_Lock.cs"/>
+        <Compile Include="JobDriver_ToggleLock.cs"/>
+        <Compile Include="LockData.cs"/>
+        <Compile Include="LockGizmo.cs"/>
+        <Compile Include="LockOptionDialog.cs"/>
+        <Compile Include="LocksDefsOf.cs"/>
+        <Compile Include="LockState.cs"/>
+        <Compile Include="LockUtility.cs"/>
+        <Compile Include="Options\LocksMod.cs"/>
+        <Compile Include="Options\LocksSettings.cs"/>
+        <Compile Include="Properties\Resources.Designer.cs">
+            <AutoGen>True</AutoGen>
+            <DesignTime>True</DesignTime>
+            <DependentUpon>Resources.resx</DependentUpon>
+        </Compile>
+        <Compile Include="Properties\Settings.Designer.cs">
+            <AutoGen>True</AutoGen>
+            <DesignTimeSharedInput>True</DesignTimeSharedInput>
+            <DependentUpon>Settings.settings</DependentUpon>
+        </Compile>
+        <Compile Include="RectUtility.cs"/>
+        <Compile Include="WorkGiver_ToggleLock.cs"/>
+        <Compile Include="Properties\AssemblyInfo.cs"/>
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="..\1.6\Defs\Designations.xml">
+            <Link>Defs\Designations.xml</Link>
+        </Content>
+        <Content Include="..\1.6\Defs\JobDefs.xml">
+            <Link>Defs\JobDefs.xml</Link>
+        </Content>
+        <Content Include="..\1.6\Defs\WorkGivers.xml">
+            <Link>Defs\WorkGivers.xml</Link>
+        </Content>
+        <Content Include="..\1.6\Defs\CustomDef.xml">
+            <Link>Defs\CustomDef.xml</Link>
+        </Content>
+        <Content Include="..\1.6\Patches\AddCompLock.xml">
+            <Link>Patches\AddCompLock.xml</Link>
+        </Content>
+        <Content Include="..\1.6\Patches\AddCompLockArchitectExpandedFences.xml">
+            <Link>Patches\AddCompLockArchitectExpandedFences.xml</Link>
+        </Content>
+        <Content Include="..\1.6\Patches\AddCompLockDoorsExpanded.xml">
+            <Link>Patches\AddCompLockDoorsExpanded.xml</Link>
+        </Content>
+        <Content Include="..\1.6\Patches\AddCompLockLinkableDoors.xml">
+            <Link>Patches\AddCompLockLinkableDoors.xml</Link>
+        </Content>
+        <Content Include="..\1.6\Patches\AddCompLockSoS2.xml">
+            <Link>Patches\AddCompLockSoS2.xml</Link>
+        </Content>
+        <Content Include="..\1.6\Patches\AddInspectTab.xml">
+            <Link>Patches\AddInspectTab.xml</Link>
+        </Content>
+        <Content Include="..\1.6\Patches\AddInspectTabLockArchitectExpandedFences.xml">
+            <Link>Patches\AddInspectTabLockArchitectExpandedFences.xml</Link>
+        </Content>
+        <Content Include="..\1.6\Patches\AddInspectTabLockDoorsExpanded.xml">
+            <Link>Patches\AddInspectTabLockDoorsExpanded.xml</Link>
+        </Content>
+        <Content Include="..\1.6\Patches\AddInspectTabLockLinkableDoors.xml">
+            <Link>Patches\AddInspectTabLockLinkableDoors.xml</Link>
+        </Content>
+        <Content Include="..\1.6\Patches\AddInspectTabLts.xml">
+            <Link>Patches\AddInspectTabLts.xml</Link>
+        </Content>
+        <Content Include="..\1.6\Patches\AddInspectTabSoS2.xml">
+            <Link>Patches\AddInspectTabSoS2.xml</Link>
+        </Content>
+        <Content Include="..\About\About.xml">
+            <Link>Organizer\About.xml</Link>
+        </Content>
+        <Content Include="..\changelog.txt">
+            <Link>Organizer\changelog.txt</Link>
+        </Content>
+        <Content Include="..\Languages\English\Keyed\Keys.xml">
+            <Link>Language\Keys.xml</Link>
+            <SubType>Designer</SubType>
+        </Content>
+        <Content Include="..\LoadFolders.xml">
+            <Link>Organizer\LoadFolders.xml</Link>
+        </Content>
+        <Content Include="..\TaskList.txt">
+            <Link>Organizer\TaskList.txt</Link>
+        </Content>
+    </ItemGroup>
+    <ItemGroup>
+        <None Include="..\README.md">
+            <Link>Organizer\README.md</Link>
+        </None>
+        <None Include="packages.config"/>
+        <None Include="Properties\Settings.settings">
+            <Generator>SettingsSingleFileGenerator</Generator>
+            <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+        </None>
+    </ItemGroup>
+    <ItemGroup>
+        <EmbeddedResource Include="Properties\Resources.resx">
+            <Generator>ResXFileCodeGenerator</Generator>
+            <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+    </ItemGroup>
+    <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
+    <Import Project="packages\NuGet.Build.Tasks.Pack.6.11.0\build\NuGet.Build.Tasks.Pack.targets" Condition="Exists('packages\NuGet.Build.Tasks.Pack.6.11.0\build\NuGet.Build.Tasks.Pack.targets')"/>
+    <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+        <PropertyGroup>
+            <ErrorText>Ten projekt zawiera odwołania do pakietów NuGet, których nie ma na tym komputerze. Użyj przywracania pakietów NuGet, aby je pobrać. Aby uzyskać więcej informacji, zobacz http://go.microsoft.com/fwlink/?LinkID=322105. Brakujący plik: {0}.</ErrorText>
+        </PropertyGroup>
+        <Error Condition="!Exists('packages\NuGet.Build.Tasks.Pack.6.11.0\build\NuGet.Build.Tasks.Pack.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\NuGet.Build.Tasks.Pack.6.11.0\build\NuGet.Build.Tasks.Pack.targets'))"/>
+        <Error Condition="!Exists('packages\System.ValueTuple.4.6.1\build\net471\System.ValueTuple.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\System.ValueTuple.4.6.1\build\net471\System.ValueTuple.targets'))"/>
+    </Target>
+    <Import Project="packages\System.ValueTuple.4.6.1\build\net471\System.ValueTuple.targets" Condition="Exists('packages\System.ValueTuple.4.6.1\build\net471\System.ValueTuple.targets')"/>
 </Project>

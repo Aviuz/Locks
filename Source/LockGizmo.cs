@@ -1,21 +1,19 @@
-using RimWorld;
 using System;
-using System.Text;
+using Multiplayer.API;
+using RimWorld;
 using UnityEngine;
 using Verse;
 using Verse.Sound;
-using Multiplayer.API;
 
 namespace Locks
 {
   class LockGizmo : Command
   {
-    public ThingWithComps parent;
+    private readonly Func<bool> isActive;
 
     private readonly Texture2D lockTexture;
     private readonly Texture2D unlockTexture;
-
-    private readonly Func<bool> isActive;
+    public ThingWithComps parent;
 
     public LockGizmo(ThingWithComps door)
     {

@@ -6,7 +6,7 @@
             <xpath>/Defs/ThingDef[thingClass = "Building_Door"]</xpath>
             <value>
                 <comps>
-                   <li Class="Locks.CompProperties_Lock"/>
+                    <li Class="Locks.CompProperties_Lock"/>
                 </comps>
             </value>
         </nomatch>

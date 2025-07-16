@@ -1,10 +1,6 @@
-﻿using Multiplayer.API;
+﻿using System.Linq;
+using Multiplayer.API;
 using RimWorld;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Verse;
 
 namespace Locks
@@ -23,7 +19,8 @@ namespace Locks
       LockUtility.UpdateLockDesignation(door);
 
       // Refresh data in multiplayer, as the call to this method will be delayed
-      if (MP.IsInMultiplayer && Find.MainTabsRoot.OpenTab == MainButtonDefOf.Inspect && Find.Selector.SingleSelectedObject == door)
+      if (MP.IsInMultiplayer && Find.MainTabsRoot.OpenTab == MainButtonDefOf.Inspect &&
+          Find.Selector.SingleSelectedObject == door)
       {
         var tab = (MainTabWindow_Inspect)Find.MainTabsRoot.OpenTab.TabWindow;
         tab.CurTabs?.OfType<ITab_Lock>().FirstOrDefault()?.OnOpen();
