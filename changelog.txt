@@ -4,6 +4,8 @@ Changelog:
 - Fix for edit button not clickable when copy is clicked
 - Fix wildman not respecting locks
 - Fix Allies not using allied mode doors
+- Added more protection against null references
+- Fix incorrect labels on paste settings
 3.0.1
 - Fixes for references in clipboard
 - Fixes for changing description on door

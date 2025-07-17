@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Locks.Options;
@@ -279,6 +280,21 @@ namespace Locks
     private static bool IsPrisonerOf(this Pawn pawn, Faction faction)
     {
       return pawn.IsPrisoner && pawn.HostFaction == faction;
+    }
+
+    public static bool Equals<T>(List<T> list1, List<T> list2)
+    {
+      if (ReferenceEquals(list1, list2))
+      {
+        return true;
+      }
+
+      if (list1 == null || list2 == null)
+      {
+        return false;
+      }
+
+      return list1.Count == list2.Count && list1.All(list2.Contains);
     }
   }
 }

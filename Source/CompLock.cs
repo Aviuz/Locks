@@ -51,7 +51,7 @@ namespace Locks
       yield return new DebugButtonGizmo(parent);
       var command_Action = new Command_Action();
       command_Action.icon = ContentFinder<Texture2D>.Get("UI/Commands/CopySettings");
-      command_Action.defaultLabel = "CommandPasteZoneSettingsLabel".Translate();
+      command_Action.defaultLabel = "CommandCopyZoneSettingsLabel".Translate();
       command_Action.action = delegate
       {
         SoundDefOf.Tick_High.PlayOneShotOnCamera();
