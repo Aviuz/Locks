@@ -23,11 +23,15 @@ namespace Locks
         {
           var desList = map.designationManager.designationsByDef[LockUtility.DesDef];
           foreach (var thing in desList.Select(d => d.target.Thing))
+          {
             if (LockUtility.GetData(thing as Building_Door).WantedState.Private && !LockUtility
                   .GetData(thing as Building_Door).WantedState.ColonistDoor.AllowedPawns.Any(p =>
                     p.workSettings != null &&
                     p.workSettings.WorkIsActive(DefDatabase<WorkTypeDef>.GetNamed("BasicWorker"))))
+            {
               yield return thing as Building_Door;
+            }
+          }
         }
       }
     }
@@ -36,7 +40,10 @@ namespace Locks
     {
       var stringBuilder = new StringBuilder();
       foreach (var current in UnchangableDoors)
+      {
         stringBuilder.AppendLine("    " + current.Label);
+      }
+
       return string.Format("Locks_AlertLocksCantBeChangedDesc".Translate(), stringBuilder);
     }
 
