@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Mime;
 using RimWorld;
 using UnityEngine;
 using Verse;
@@ -15,13 +14,20 @@ namespace Locks
     private const float PaddingLeft = 10f;
     private const float Spacing = 4f;
     private readonly ThingWithComps door;
-    private LockState lockData;
-    private readonly QuickSearchWidget quickSearchWidget = new QuickSearchWidget();
-    private Vector2 scrollPosition;
-    private int index;
-    private readonly Dictionary<int, bool> selectedChoices = new Dictionary<int, bool>();
 
     private readonly List<PawnKindDef> pawnKinds = LockUtility.MechKinds;
+    private readonly QuickSearchWidget quickSearchWidget = new QuickSearchWidget();
+    private readonly Dictionary<int, bool> selectedChoices = new Dictionary<int, bool>();
+    private int index;
+    private LockState lockData;
+    private Vector2 scrollPosition;
+
+    public LockOptionsDialog(ThingWithComps door)
+    {
+      this.door = door;
+      lockData = new LockState();
+      lockData.CopyFrom(LockUtility.GetData(door).WantedState);
+    }
 
     private DoorAllowed Data => index == 1 ? lockData.ColonistDoor : lockData.SlaveAllowed;
 
@@ -34,20 +40,13 @@ namespace Locks
       return Find.CurrentMap.mapPawns.FreeColonists.Where(pawn => pawn.IsFreeNonSlaveColonist).ToList();
     }
 
-    public LockOptionsDialog(ThingWithComps door)
-    {
-      this.door = door;
-      lockData = new LockState();
-      lockData.CopyFrom(LockUtility.GetData(door).WantedState);
-    }
-
     public override void DoWindowContents(Rect inRect)
     {
       Text.Anchor = TextAnchor.MiddleCenter;
-      Rect menu = new Rect(0, 0, 100, inRect.height - 60f);
+      var menu = new Rect(0, 0, 100, inRect.height - 60f);
       DrawOptionsSelections(menu);
 
-      Rect body = new Rect(104, 0, inRect.width - 100 - 4, inRect.height - 60f);
+      var body = new Rect(104, 0, inRect.width - 100 - 4, inRect.height - 60f);
       Text.Anchor = TextAnchor.MiddleLeft;
       DrawBody(body);
 
@@ -66,7 +65,7 @@ namespace Locks
           Close();
         }
 
-        Rect closeMenu = new Rect(inRect.width * 0.5f, inRect.height - 50f, inRect.width * 0.25f, 50f);
+        var closeMenu = new Rect(inRect.width * 0.5f, inRect.height - 50f, inRect.width * 0.25f, 50f);
         if (Widgets.ButtonText(closeMenu, "Locks_CancelButton".Translate()))
         {
           Close();
@@ -74,7 +73,7 @@ namespace Locks
       }
       else
       {
-        Rect closeMenu = new Rect(inRect.width * 0.25f, inRect.height - 50f, inRect.width * 0.5f, 50f);
+        var closeMenu = new Rect(inRect.width * 0.25f, inRect.height - 50f, inRect.width * 0.5f, 50f);
         if (Widgets.ButtonText(closeMenu, "Locks_CancelButton".Translate()))
         {
           Close();
@@ -98,7 +97,7 @@ namespace Locks
           if (Widgets.ButtonText(buttonRect.Indent(buttonRect.width / 2f),
                 GetLabel(Data, GetSelectedChoice(index)).Translate()))
           {
-            List<FloatMenuOption> options = new List<FloatMenuOption>
+            var options = new List<FloatMenuOption>
             {
               new FloatMenuOption("Locks_Any".Translate(), delegate { ModifyData(true, false); }),
               new FloatMenuOption("Locks_None".Translate(), delegate { ModifyData(false, false); }),
@@ -122,7 +121,7 @@ namespace Locks
           if (Widgets.ButtonText(buttonRect.Indent(buttonRect.width / 2f),
                 GetMechLabel(GetSelectedChoice(index)).Translate()))
           {
-            List<FloatMenuOption> options = new List<FloatMenuOption>
+            var options = new List<FloatMenuOption>
             {
               new FloatMenuOption("Locks_Any".Translate(), delegate { ModifyMechData(true, false, false); }),
               new FloatMenuOption("Locks_None".Translate(), delegate { ModifyMechData(false, false, false); }),
@@ -208,7 +207,7 @@ namespace Locks
     private void DrawMechs(Rect body)
     {
       var rowHeight = 60f;
-      float startX = body.x + PaddingLeft;
+      var startX = body.x + PaddingLeft;
       var rect = new Rect(startX, body.y + PaddingLeft, body.width * 0.8f, rowHeight);
       Widgets.BeginScrollView(
         new Rect(startX, body.y + PaddingLeft, body.width - PaddingLeft, body.height - PaddingLeft * 3f),
@@ -268,7 +267,7 @@ namespace Locks
       if (Widgets.ButtonText(actualRow.Indent(actualRow.width / 2f),
             GetAnimalLabel().Translate()))
       {
-        List<FloatMenuOption> options = new List<FloatMenuOption>
+        var options = new List<FloatMenuOption>
         {
           new FloatMenuOption("Locks_Any".Translate(), delegate { ModifyAnimalsData(true, false, false); }),
           new FloatMenuOption("Locks_None".Translate(), delegate { ModifyAnimalsData(false, false, false); }),
@@ -330,7 +329,7 @@ namespace Locks
         SoundDefOf.Click.PlayOneShotOnCamera();
       }
 
-      float num = r.x + PaddingLeft;
+      var num = r.x + PaddingLeft;
       Widgets.Label(new Rect(num, r.y, r.width - num, r.height), entity.Key.Translate());
     }
 
@@ -360,7 +359,7 @@ namespace Locks
 
     private Rect DrawSearchWidget(Rect body)
     {
-      float startX = body.x + PaddingLeft;
+      var startX = body.x + PaddingLeft;
       quickSearchWidget.OnGUI(new Rect(startX, body.y, body.width - PaddingLeft, QuickSearchWidget.WidgetHeight));
       return new Rect(body.x, body.y + QuickSearchWidget.WidgetHeight, body.width,
         body.height - QuickSearchWidget.WidgetHeight);
@@ -368,13 +367,13 @@ namespace Locks
 
     private void DrawPawnList(Rect body, List<Pawn> pawns, List<Pawn> selectedPawns)
     {
-      float heightInc = 80f;
-      float startX = body.x + PaddingLeft;
+      var heightInc = 80f;
+      var startX = body.x + PaddingLeft;
       Widgets.BeginScrollView(
         new Rect(startX, body.y + PaddingLeft, body.width - PaddingLeft, body.height - PaddingLeft * 3f),
         ref scrollPosition,
         new Rect(startX, body.y + PaddingLeft, body.width * 0.8f, pawns.Count * heightInc));
-      float curHeight = body.y + Spacing;
+      var curHeight = body.y + Spacing;
       foreach (var pawn in GetPawnToShow(pawns))
       {
         var texture = PortraitsCache.Get(pawn, ColonistBarColonistDrawer.PawnTextureSize, Rot4.South);

@@ -1,5 +1,5 @@
-﻿using Verse;
-using Multiplayer.API;
+﻿using Multiplayer.API;
+using Verse;
 
 namespace Locks.CompatibilityPatches
 {
@@ -26,7 +26,7 @@ namespace Locks.CompatibilityPatches
       }
       else
       {
-        ThingWithComps door = sync.Read<ThingWithComps>();
+        var door = sync.Read<ThingWithComps>();
         inst = new LockGizmo(door);
       }
     }

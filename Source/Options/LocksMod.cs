@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 using Verse;
 
 namespace Locks.Options
 {
   class LocksMod : Mod
   {
-    private static readonly float GAP_HEIGHT = 12f;
     private const string MOD_NAME = "Locks_ModName";
     private const string CHILD_LOCK = "Locks_ChildrenLock";
     private const string CHILD_LOCK_DESC = "Lock_ChildrenLock_Description";
@@ -22,15 +16,16 @@ namespace Locks.Options
     private const string ANOMALIES_IGNORE_LOCKS_DESC = "Locks_AnomaliesIgnoreLocks_Description";
     private const string DEBUG_BUTTON = "Locks_DebugWidget";
     private const string DEBUG_BUTTON_DESC = "Locks_DebugWidget_Description";
+    private static readonly float GAP_HEIGHT = 12f;
 
     public LocksMod(ModContentPack content) : base(content)
     {
-      this.GetSettings<LocksSettings>();
+      GetSettings<LocksSettings>();
     }
 
     public override void DoSettingsWindowContents(Rect inRect)
     {
-      Listing_Standard listingStandard = new Listing_Standard();
+      var listingStandard = new Listing_Standard();
 
       listingStandard.Begin(inRect);
       listingStandard.Gap(GAP_HEIGHT);

@@ -1,35 +1,118 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <LanguageData>
-  <Locks_Label>门锁</Locks_Label>
-  <Locks_Description>当门锁被打开时所有犯人被允许使用并通过这扇门。\n【用鼠标右键点击以获得更多选项】</Locks_Description>
+    <Locks_ModName>Locks 门锁</Locks_ModName>
+    <Locks_ChildrenLock>可通行的儿童的最小年龄: {0}</Locks_ChildrenLock>
+    <Lock_ChildrenLock_Description>能够通行的最小年龄</Lock_ChildrenLock_Description>
+    <Locks_AlwaysPensDoor>始终视为畜栏门</Locks_AlwaysPensDoor>
+    <Locks_AlwaysPensDoor_Description>启用后，所有建造完成的门将自动勾选畜栏门选项。</Locks_AlwaysPensDoor_Description>
+    <Locks_AnomaliesIgnoreLocks>异象无视门锁</Locks_AnomaliesIgnoreLocks>
+    <Locks_AnomaliesIgnoreLocks_Description>禁用时，异象将遵守门锁规则。</Locks_AnomaliesIgnoreLocks_Description>
+    <Locks_DebugWidget>调试按钮</Locks_DebugWidget>
+    <Locks_DebugWidget_Description>在玩家建造的每扇门上启用调试按钮，帮助检查选定殖民者的状态
+    </Locks_DebugWidget_Description>
 
-  <Locks_StatePrefix>门</Locks_StatePrefix>
-  <Locks_StateLocked>已上锁</Locks_StateLocked>
-  <Locks_StateUnlocked>已解锁</Locks_StateUnlocked>
-  <Locks_StateChanging>变更中...</Locks_StateChanging>
+    <Locks_Label>门锁</Locks_Label>
+    <Locks_Description>解锁时所有单位均可通行此门。\n[右键点击获取更多选项]</Locks_Description>
 
-  <Locks_ITabLocked>门锁</Locks_ITabLocked>
-  <Locks_ITabLockedDesc>当门锁选项关闭，所有人都可以通过这扇门。</Locks_ITabLockedDesc>
-  <Locks_ITabVisitorsAllowed>允许访客</Locks_ITabVisitorsAllowed>
-  <Locks_ITabVisitorsAllowedDesc>当此选项关闭，友军和商队将不允许通过这扇门。当门设定了所有者时，此选项不生效。</Locks_ITabVisitorsAllowedDesc>
-  <Locks_ITabPetDoor>宠物门</Locks_ITabPetDoor>
-  <Locks_ITabPetDoorDesc>勾选此选项，小动物比如狗可以通过门。没有设定所有者的门不需要这种设置。</Locks_ITabPetDoorDesc>
-  <Locks_ITabOwners>所有者</Locks_ITabOwners>
-  <Locks_ITabChangeLocksNotification>变更门锁以生效设置。</Locks_ITabChangeLocksNotification>
+    <Locks_PrisonBreak>越狱囚犯遵守门锁规则</Locks_PrisonBreak>
+    <Locks_SlaveRebel>叛乱奴隶遵守门锁规则</Locks_SlaveRebel>
 
-  <Locks_LockToggle>锁上</Locks_LockToggle>
-  <Locks_UnlockToggle>解锁</Locks_UnlockToggle>
-  <Locks_AllowVisitors>允许访客使用</Locks_AllowVisitors>
-  <Locks_ForbidVisitors>禁止访客使用</Locks_ForbidVisitors>
-  <Locks_AddPetDoor>添加宠物门</Locks_AddPetDoor>
-  <Locks_RemovePetDoor>移除宠物门</Locks_RemovePetDoor>
-  <Locks_SetOwners>Set Owners</Locks_SetOwners>
-  <Locks_ClearOwners>清除使用者</Locks_ClearOwners>
+    <Locks_StatePrefix>状态:</Locks_StatePrefix>
+    <Locks_StateLocked>已上锁</Locks_StateLocked>
+    <Locks_StateUnlocked>已解锁</Locks_StateUnlocked>
+    <Locks_StateChanging>变更中……</Locks_StateChanging>
 
-  <Locks_FailOnWrongUser>门锁不属于 {0}</Locks_FailOnWrongUser>
+    <Locks_ITabLocked>上锁状态</Locks_ITabLocked>
+    <Locks_ITabLockedDesc>解锁时门锁设置不生效，所有能开门的单位均可通行。</Locks_ITabLockedDesc>
+    <Locks_ITabVisitorsAllowed>允许访客</Locks_ITabVisitorsAllowed>
+    <Locks_ITabVisitorsAllowedDesc>禁用时，盟友与商人将无法通行此门。设定拥有者后该选项无效。
+    </Locks_ITabVisitorsAllowedDesc>
+    <Locks_ITabPetDoor>宠物门</Locks_ITabPetDoor>
+    <Locks_ITabPetDoorDesc>启用时，小型动物（如狗）可通过此门。未设定拥有者的门无需设置该选项。</Locks_ITabPetDoorDesc>
+    <Locks_ITabPensDoor>畜栏门</Locks_ITabPensDoor>
+    <Locks_ITabPensDoorDesc>
+        启用后，圈养动物无法通过此门。某些门可能无法阻挡动物（如帷幔）。请检查def中的"roamerCanOpen"属性。
+    </Locks_ITabPensDoorDesc>
+    <Locks_ITabSlaveDoors>允许奴隶通行</Locks_ITabSlaveDoors>
+    <Locks_ITabSlaveDoorsDesc>禁用后奴隶无法通行此门。设定拥有者后该选项无效。</Locks_ITabSlaveDoorsDesc>
+    <Locks_ITabAnimalAllowed>允许动物通过</Locks_ITabAnimalAllowed>
+    <Locks_ITabAnimalAllowedDesc>禁用后所有动物均无法通过此门。在畜栏门和宠物门设置之后才会检测该设置。
+    </Locks_ITabAnimalAllowedDesc>
 
-  <Locks_AlertLocksCantBeChanged>门锁无法变更</Locks_AlertLocksCantBeChanged>
-  <Locks_AlertLocksCantBeChangedDesc>某些门锁不能完成变更，因为这些门锁的所有者不执行开关工作：\n\n{0}</Locks_AlertLocksCantBeChangedDesc>
-  <Locks_AlertLocksCantBeChangedDefaultDesc>某些门锁不能完成变更，因为这些门锁的所有者不执行开关工作。</Locks_AlertLocksCantBeChangedDefaultDesc>
 
+    <Locks_ITabOwners>拥有者</Locks_ITabOwners>
+    <Locks_ITabChangeLocksNotification>变更门锁状态以应用设置。</Locks_ITabChangeLocksNotification>
+
+    <Locks_LockToggle>上锁</Locks_LockToggle>
+    <Locks_UnlockToggle>解锁</Locks_UnlockToggle>
+    <Locks_AllowVisitors>允许访客通行</Locks_AllowVisitors>
+    <Locks_ForbidVisitors>禁止访客通行</Locks_ForbidVisitors>
+    <Locks_AddPetDoor>添加宠物门</Locks_AddPetDoor>
+    <Locks_RemovePetDoor>移除宠物门</Locks_RemovePetDoor>
+    <Locks_AddPensDoor>设为 门</Locks_AddPensDoor>
+    <Locks_RemovePensDoor>移除畜栏门</Locks_RemovePensDoor>
+    <Locks_SetOwners>设定拥有者</Locks_SetOwners>
+    <Locks_ClearOwners>清除拥有者</Locks_ClearOwners>
+
+    <Locks_FailOnWrongUser>门锁不属于 {0}</Locks_FailOnWrongUser>
+
+    <Locks_AlertLocksCantBeChanged>无法变更门锁状态</Locks_AlertLocksCantBeChanged>
+    <Locks_AlertLocksCantBeChangedDesc>部分门锁无法变更状态，因为其拥有者无法执行开关工作:\n\n{0}
+    </Locks_AlertLocksCantBeChangedDesc>
+    <Locks_AlertLocksCantBeChangedDefaultDesc>部分门锁无法变更状态，因为其拥有者无法执行开关工作。
+    </Locks_AlertLocksCantBeChangedDefaultDesc>
+
+    <Locks_Cancel>取消</Locks_Cancel>
+    <Locks_Close>关闭</Locks_Close>
+    <Locks_Copy>复制</Locks_Copy>
+    <Locks_Paste>粘贴</Locks_Paste>
+    <Locks_Edit>编辑</Locks_Edit>
+
+    <Locks_Locked>已上锁</Locks_Locked>
+    <Locks_Unlocked>已解锁</Locks_Unlocked>
+    <Locks_Allies>允许盟友通行</Locks_Allies>
+    <Locks_ColonyOnly>仅限殖民地成员通行</Locks_ColonyOnly>
+    <Locks_AnyColonistAllowed>殖民者: 全部允许通行</Locks_AnyColonistAllowed>
+    <Locks_ColonistNone>殖民者: 全部禁止通行</Locks_ColonistNone>
+    <Locks_FewColonist>殖民者: 允许{0}人通行</Locks_FewColonist>
+    <Locks_AllowedColonist>允许通行的殖民者: \n{0}</Locks_AllowedColonist>
+    <Locks_AnySlaveAllowed>奴隶: 全部允许通行</Locks_AnySlaveAllowed>
+    <Locks_SlaveNone>奴隶: 全部禁止通行</Locks_SlaveNone>
+    <Locks_FewSlave>奴隶: 允许{0}人通行</Locks_FewSlave>
+    <Locks_AllowedSlaves>允许通行的奴隶: \n{0}</Locks_AllowedSlaves>
+    <Locks_AnyMechanoidAllowed>机械族: 全部允许通行</Locks_AnyMechanoidAllowed>
+    <Locks_OnlyMechanitorsMechs>机械族: 受机械师控制方可通行</Locks_OnlyMechanitorsMechs>
+    <Locks_OnlyAllowedMechs>机械族: 允许{0}种类型通行</Locks_OnlyAllowedMechs>
+    <Locks_AllowedMechsToolTip>允许通行的类型: \n{0}</Locks_AllowedMechsToolTip>
+    <Locks_NoneAnimalLabel>动物: 全部禁止通过</Locks_NoneAnimalLabel>
+    <Locks_PensDoorLabel>动物: 畜栏限制（圈养动物无法通过）</Locks_PensDoorLabel>
+    <Locks_OnlyPetLabel>动物: 仅限宠物通过</Locks_OnlyPetLabel>
+    <Locks_AnyAnimalLabel>动物: 全部允许通过</Locks_AnyAnimalLabel>
+    <Locks_Any>全部</Locks_Any>
+    <Locks_None>无</Locks_None>
+    <Locks_Selected>指定</Locks_Selected>
+    <Locks_Allowed>允许:</Locks_Allowed>
+    <Locks_MechanitorsOwned>机械师控制</Locks_MechanitorsOwned>
+    <Locks_AnimalMode>动物模式:</Locks_AnimalMode>
+    <Locks_PetDoor>宠物门</Locks_PetDoor>
+    <Locks_PensDoor>畜栏门</Locks_PensDoor>
+    <Locks_VisitorsAllowed>允许访客通行</Locks_VisitorsAllowed>
+
+    <Locks_ChildrenLockEnabled>儿童锁已启用</Locks_ChildrenLockEnabled>
+    <Locks_ChildrenLockDisabled>儿童锁已禁用</Locks_ChildrenLockDisabled>
+
+    <Locks_ITabChildrenLock>儿童锁</Locks_ITabChildrenLock>
+    <Locks_ITabChildrenLockDesc>启用后，仅年龄达标（见选项）的类人单位可通过此门。仅对与门同阵营的单位生效。
+    </Locks_ITabChildrenLockDesc>
+
+    <Locks_GeneralRow>通用设置</Locks_GeneralRow>
+    <Locks_ColonistRow>殖民者设置</Locks_ColonistRow>
+    <Locks_SlavesRow>奴隶设置</Locks_SlavesRow>
+    <Locks_MechsRow>机械族设置</Locks_MechsRow>
+
+    <Locks_UpdateButton>变更</Locks_UpdateButton>
+    <Locks_CancelButton>取消</Locks_CancelButton>
+    <Locks_DebugCheck>门锁调试检查</Locks_DebugCheck>
+    <Locks_DebugCheck_Desc>检查选定单位能否使用此门。该窗口包含调试信息，请分享给门锁模组开发者。</Locks_DebugCheck_Desc>
+    <Locks_SaveDebug>保存调试</Locks_SaveDebug>
 </LanguageData>

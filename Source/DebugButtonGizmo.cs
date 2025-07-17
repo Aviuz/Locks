@@ -9,8 +9,8 @@ namespace Locks
   [StaticConstructorOnStartup]
   public class DebugButtonGizmo : Command_Target
   {
-    private readonly ThingWithComps parent;
     private static readonly Texture QuestionMark = ContentFinder<Texture2D>.Get("UI/Commands/ViewQuest");
+    private readonly ThingWithComps parent;
 
     public DebugButtonGizmo(ThingWithComps parent)
     {
@@ -21,6 +21,8 @@ namespace Locks
       defaultDesc = "Locks_DebugCheck_Desc".Translate();
       icon = QuestionMark;
     }
+
+    public override bool Visible => LocksSettings.debugButton && parent.Faction == Faction.OfPlayer;
 
     private void PerformAction(LocalTargetInfo target)
     {
@@ -35,7 +37,5 @@ namespace Locks
         Log.Error("DebugButtonGizmo: target pawn is null");
       }
     }
-
-    public override bool Visible => LocksSettings.debugButton && parent.Faction == Faction.OfPlayer;
   }
 }

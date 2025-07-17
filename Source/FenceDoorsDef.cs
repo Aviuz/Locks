@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Verse;
 
 namespace Locks
 {
   public class FenceDoorsDef : Def
   {
-    public List<String> fenceGatesDefNames;
+    public List<string> fenceGatesDefNames;
 
-    public bool IsFenceGate(String defName)
+    public bool IsFenceGate(string defName)
     {
       return fenceGatesDefNames?.Contains(defName) ?? false;
     }

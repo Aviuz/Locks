@@ -1,4 +1,11 @@
 Changelog:
+3.0.2
+- Fix for unlocked door and mechs
+- Fix for edit button not clickable when copy is clicked
+- Fix wildman not respecting locks
+- Fix Allies not using allied mode doors
+- Added more protection against null references
+- Fix incorrect labels on paste settings
 3.0.1
 - Fixes for references in clipboard
 - Fixes for changing description on door
@@ -9,7 +16,6 @@ Changelog:
 - New ui for locks setting
 - New option for mechs
 - New gizmo on doors that allow to debug all lock option
-
 2.9.3
 - Save Our Ship 2 fix (https://github.com/ThisIsSP4RTAN)
 2.9.2
