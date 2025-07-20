@@ -233,7 +233,7 @@ namespace Locks
           return true;
         }
 
-        if (pawn.HostFaction == door.Faction)
+        if (!pawn.IsPrisonerOf(door.Faction) && pawn.HostFaction == door.Faction)
         {
           builder?.AppendLine("Pawn is guest of faction");
           return true;
