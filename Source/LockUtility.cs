@@ -232,6 +232,12 @@ namespace Locks
           builder?.AppendLine("Pawn is freeman");
           return true;
         }
+
+        if (pawn.HostFaction == door.Faction)
+        {
+          builder?.AppendLine("Pawn is guest of faction");
+          return true;
+        }
       }
 
       builder?.AppendLine("No other options for Humanoids");

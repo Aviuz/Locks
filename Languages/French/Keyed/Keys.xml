@@ -1,0 +1,202 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  <!-- EN: Locks -->
+  <Locks_ModName>Locks</Locks_ModName>
+  <!-- EN: Child lock minimal age: {0} -->
+  <Locks_ChildrenLock>Limite d'âge pour la sécurité enfant : {0}</Locks_ChildrenLock>
+  <!-- EN: Minimal age needed for humanlike pawn to open doors -->
+  <Lock_ChildrenLock_Description>Un âge minimal est nécessaire pour que le pion humain puisse ouvrir les portes.</Lock_ChildrenLock_Description>
+  <!-- EN: Always pens door -->
+  <Locks_AlwaysPensDoor>Toujours porte d'enclos</Locks_AlwaysPensDoor>
+  <!-- EN: When enabled every door will has "pens door" option turn on after construction. -->
+  <Locks_AlwaysPensDoor_Description>Si cette option est activée, chaque porte aura l'option « porte d'enclos » activée après la construction.</Locks_AlwaysPensDoor_Description>
+  <!-- EN: Anomalies ignore locks -->
+  <Locks_AnomaliesIgnoreLocks>Les anomalies ignorent les serrures</Locks_AnomaliesIgnoreLocks>
+  <!-- EN: When disables anomalies will respect door locks settings. -->
+  <Locks_AnomaliesIgnoreLocks_Description>Lorsque cette option est désactivée, les anomalies respectent les paramètres de verrouillage des portes.</Locks_AnomaliesIgnoreLocks_Description>
+  <!-- EN: Debug widget -->
+  <Locks_DebugWidget>Widget de debug</Locks_DebugWidget>
+  <!-- EN: Enable debug button on each player door to help check door status for selected pawn -->
+  <Locks_DebugWidget_Description>Activer le bouton de débogage sur chaque porte de joueur pour aider à vérifier l'état de la porte pour le pion sélectionné</Locks_DebugWidget_Description>
+  
+  <!-- EN: Lock -->
+  <Locks_Label>Verrouiller</Locks_Label>
+  <!-- EN: When unlocked all pawn will be allowed to use this door.\n[Right click for more options] -->
+  <Locks_Description>Une fois déverrouillée, tous les pions seront autorisés à utiliser cette porte.\n[Cliquer droit pour plus d'options]</Locks_Description>
+
+  <!-- EN: Escaping prisoners respecting locks -->
+  <Locks_PrisonBreak>Les prisonniers en fuite respectent les serrures</Locks_PrisonBreak>
+  <!-- EN: Rebelling slaves respecting locks -->
+  <Locks_SlaveRebel>Esclaves rebelles respectant les serrures</Locks_SlaveRebel>
+
+  <!-- EN: Door -->
+  <Locks_StatePrefix>Porte</Locks_StatePrefix>
+  <!-- EN: locked -->
+  <Locks_StateLocked>verrouillée</Locks_StateLocked>
+  <!-- EN: unlocked -->
+  <Locks_StateUnlocked>déverrouillée</Locks_StateUnlocked>
+  <!-- EN: changing... -->
+  <Locks_StateChanging>en changement...</Locks_StateChanging>
+
+  <!-- EN: Locked -->
+  <Locks_ITabLocked>Verrouillée</Locks_ITabLocked>
+  <!-- EN: When unlocked door settings do not apply, therefore all humanoids capable of opening doors can pass. -->
+  <Locks_ITabLockedDesc>Lorsque les portes sont déverrouillées, les paramètres ne s'appliquent pas, et tous les humanoïdes capables d'ouvrir des portes peuvent donc passer.</Locks_ITabLockedDesc>
+  <!-- EN: Visitors allowed -->
+  <Locks_ITabVisitorsAllowed>Visiteurs autorisés</Locks_ITabVisitorsAllowed>
+  <!-- EN: When disabled, allies and traders will not be allowed to pass through this door. This setting do not apply when owners are set. -->
+  <Locks_ITabVisitorsAllowedDesc>Lorsque ce paramètre est désactivé, les alliés et les commerçants ne seront pas autorisés à passer par cette porte. Ce paramètre ne s'applique pas lorsque les propriétaires sont définis.</Locks_ITabVisitorsAllowedDesc>
+  <!-- EN: Pet door -->
+  <Locks_ITabPetDoor>Porte pour animal de compagnie</Locks_ITabPetDoor>
+  <!-- EN: When enabled small animals, like dogs can pass through door. This setting is not required for doors without owners. -->
+  <Locks_ITabPetDoorDesc>Lorsque cette option est activée, les petits animaux, tels que les chiens, peuvent passer à travers la porte. Ce paramètre n'est pas nécessaire pour les portes sans propriétaire.</Locks_ITabPetDoorDesc>
+  <!-- EN: Pens door -->
+  <Locks_ITabPensDoor>Porte d'enclos</Locks_ITabPensDoor>
+  <!-- EN: When enabled, pens animals can't pass through the door. Some doors may not block animals (e.g. Animal Flap). Check "roamerCanOpen" in defs. -->
+  <Locks_ITabPensDoorDesc>Lorsque cette option est activée, les animaux d'enclos ne peuvent pas passer par la porte. Certaines portes peuvent ne pas bloquer les animaux (par exemple, rideau à animaux). Vérifier « roamerCanOpen » dans defs.</Locks_ITabPensDoorDesc>
+  <!-- EN: Slaves allowed -->
+  <Locks_ITabSlaveDoors>Esclaves autorisés</Locks_ITabSlaveDoors>
+  <!-- EN: When disabled slaves are not allowed to pass through this door. This setting do not apply when owners are set. -->
+  <Locks_ITabSlaveDoorsDesc>Lorsque ce paramètre est désactivé, les esclaves ne sont pas autorisés à passer par cette porte. Ce paramètre ne s'applique pas lorsque les propriétaires sont définis.</Locks_ITabSlaveDoorsDesc>
+  <!-- EN: Animals allowed -->
+  <Locks_ITabAnimalAllowed>Animaux autorisés</Locks_ITabAnimalAllowed>
+  <!-- EN: When disabled all animals will not be allowed to pass through this door. This setting is checked after pens and pet door settings. -->
+  <Locks_ITabAnimalAllowedDesc>Lorsque ce paramètre est désactivé, tous les animaux ne sont pas autorisés à passer par cette porte. Ce paramètre est vérifié après les paramètres des enclos et de la porte pour animaux de compagnie.</Locks_ITabAnimalAllowedDesc>
+
+
+  <!-- EN: Owners -->
+  <Locks_ITabOwners>Propriétaires</Locks_ITabOwners>
+  <!-- EN: Change lock in order to apply settings! -->
+  <Locks_ITabChangeLocksNotification>Changer l'état de la serrure pour appliquer les réglages !</Locks_ITabChangeLocksNotification>
+
+  <!-- EN: Lock -->
+  <Locks_LockToggle>Verrouiller</Locks_LockToggle>
+  <!-- EN: Unlock -->
+  <Locks_UnlockToggle>Déverrouiller</Locks_UnlockToggle>
+  <!-- EN: Allow visitors to use -->
+  <Locks_AllowVisitors>Permettre aux visiteurs l'utilisation</Locks_AllowVisitors>
+  <!-- EN: Forbid visitors from using -->
+  <Locks_ForbidVisitors>Interdire aux visiteurs l'utilisation</Locks_ForbidVisitors>
+  <!-- EN: Add pet door -->
+  <Locks_AddPetDoor>Ajouter porte pour animal de compagnie</Locks_AddPetDoor>
+  <!-- EN: Remove pet door -->
+  <Locks_RemovePetDoor>Retirer porte pour animal de compagnie</Locks_RemovePetDoor>
+  <!-- EN: Set as pens door -->
+  <Locks_AddPensDoor>Définir comme porte d'enclos</Locks_AddPensDoor>
+  <!-- EN: Remove pens door -->
+  <Locks_RemovePensDoor>Retirer porte d'enclos</Locks_RemovePensDoor>
+  <!-- EN: Set owners -->
+  <Locks_SetOwners>Définir propriétaires</Locks_SetOwners>
+  <!-- EN: Clear owners -->
+  <Locks_ClearOwners>Effacer propriétaires</Locks_ClearOwners>
+
+  <!-- EN: Lock does not belong to {0} -->
+  <Locks_FailOnWrongUser>Le verrou n'appartient pas à {0}</Locks_FailOnWrongUser>
+
+  <!-- EN: Locks can't be changed -->
+  <Locks_AlertLocksCantBeChanged>Les serrures ne peuvent pas être changées</Locks_AlertLocksCantBeChanged>
+  <!-- EN: Some locks can't be changed, because owners of those locks do not perform flick jobs:\n\n{0} -->
+  <Locks_AlertLocksCantBeChangedDesc>Certaines serrures ne peuvent pas être changées, car leurs propriétaires n'effectuent pas de travaux de Manutention :\n\n{0}</Locks_AlertLocksCantBeChangedDesc>
+  <!-- EN: Some locks can't be changed, because owners of those locks do not perform flick jobs. -->
+  <Locks_AlertLocksCantBeChangedDefaultDesc>Certaines serrures ne peuvent pas être changées, car leurs propriétaires n'effectuent pas de travaux de Manutention.</Locks_AlertLocksCantBeChangedDefaultDesc>
+
+  <!-- EN: Cancel -->
+  <Locks_Cancel>Annuler</Locks_Cancel>
+  <!-- EN: Close -->
+  <Locks_Close>Fermer</Locks_Close>
+  <!-- EN: Copy -->
+  <Locks_Copy>Copier</Locks_Copy>
+  <!-- EN: Paste -->
+  <Locks_Paste>Coller</Locks_Paste>
+  <!-- EN: Edit -->
+  <Locks_Edit>Editer</Locks_Edit>
+  
+  <!-- EN: Locked -->
+  <Locks_Locked>Verrouillée</Locks_Locked>
+  <!-- EN: Unlocked -->
+  <Locks_Unlocked>Déverrouillée</Locks_Unlocked>
+  <!-- EN: Allies allowed -->
+  <Locks_Allies>Alliés autorisés</Locks_Allies>
+  <!-- EN: Colony only -->
+  <Locks_ColonyOnly>Colonie uniquement</Locks_ColonyOnly>
+  <!-- EN: Colonists: any -->
+  <Locks_AnyColonistAllowed>Colons : tous</Locks_AnyColonistAllowed>
+  <!-- EN: Colonists: none -->
+  <Locks_ColonistNone>Colons : aucun</Locks_ColonistNone>
+  <!-- EN: Colonists: {0} allowed -->
+  <Locks_FewColonist>Colons : {0} autorisés</Locks_FewColonist>
+  <!-- EN: Colonists allowed: \n{0} -->
+  <Locks_AllowedColonist>Colons autorisés : \n{0}</Locks_AllowedColonist>
+  <!-- EN: Slaves: any -->
+  <Locks_AnySlaveAllowed>Esclaves : tous</Locks_AnySlaveAllowed>
+  <!-- EN: Slaves: none -->
+  <Locks_SlaveNone>Esclaves : aucun</Locks_SlaveNone>
+  <!-- EN: Slaves: {0} allowed -->
+  <Locks_FewSlave>Esclaves : {0} autorisés</Locks_FewSlave>
+  <!-- EN: Slaves allowed: \n{0} -->
+  <Locks_AllowedSlaves>Esclaves autorisés : \n{0}</Locks_AllowedSlaves>
+  <!-- EN: Mechs: any -->
+  <Locks_AnyMechanoidAllowed>Mécanoïdes : tous</Locks_AnyMechanoidAllowed>
+  <!-- EN: Mechs: only mechanitors -->
+  <Locks_OnlyMechanitorsMechs>Mécanoïdes: Méchanitor uniquement</Locks_OnlyMechanitorsMechs>
+  <!-- EN: Mechs: {0} types allowed -->
+  <Locks_OnlyAllowedMechs>Mécanoïdes: {0} types autorisés</Locks_OnlyAllowedMechs>
+  <!-- EN: Types allowed: \n{0} -->
+  <Locks_AllowedMechsToolTip>Types autorisés : \n{0}</Locks_AllowedMechsToolTip>
+  <!-- EN: Animals: none -->
+  <Locks_NoneAnimalLabel>Animaux : aucun</Locks_NoneAnimalLabel>
+  <!-- EN: Animals: pens -->
+  <Locks_PensDoorLabel>Animaux : enclos</Locks_PensDoorLabel>
+  <!-- EN: Animals: pets -->
+  <Locks_OnlyPetLabel>Animaux : animaux de compagnie</Locks_OnlyPetLabel>
+  <!-- EN: Animals: any -->
+  <Locks_AnyAnimalLabel>Animaux : tous</Locks_AnyAnimalLabel>
+  <!-- EN: Any -->
+  <Locks_Any>Tous</Locks_Any>
+  <!-- EN: None -->
+  <Locks_None>Aucun</Locks_None>
+  <!-- EN: Selected -->
+  <Locks_Selected>Sélectionné</Locks_Selected>
+  <!-- EN: Allowed:  -->
+  <Locks_Allowed>Autorisé : </Locks_Allowed>
+  <!-- EN: Mechanitors -->
+  <Locks_MechanitorsOwned>Méchanitor</Locks_MechanitorsOwned>
+  <!-- EN: Animals mode: -->
+  <Locks_AnimalMode>Mode animaux :</Locks_AnimalMode>
+  <!-- EN: Pets door -->
+  <Locks_PetDoor>Porte pour animaux de compagnie</Locks_PetDoor>
+  <!-- EN: Pens door -->
+  <Locks_PensDoor>Porte d'enclos</Locks_PensDoor>
+  <!-- EN: Visitors allowed -->
+  <Locks_VisitorsAllowed>Visiteurs autorisés</Locks_VisitorsAllowed>
+  
+  <!-- EN: Child lock enabled -->
+  <Locks_ChildrenLockEnabled>Sécurité enfant activée</Locks_ChildrenLockEnabled>
+  <!-- EN: Child lock disabled -->
+  <Locks_ChildrenLockDisabled>Sécurité enfant désactivée</Locks_ChildrenLockDisabled>
+
+  <!-- EN: Children lock -->
+  <Locks_ITabChildrenLock>Sécurité enfant</Locks_ITabChildrenLock>
+  <!-- EN: When enabled only humanlike pawn over age (check options) are allowed to pass through this door. Works only on pawn from that same faction as door. -->
+  <Locks_ITabChildrenLockDesc>Lorsque cette option est activée, seuls les pions de type humain ayant dépassé l'âge (vérifiez les options) sont autorisés à passer par cette porte. Ne fonctionne que pour les pions de la même faction que la porte.</Locks_ITabChildrenLockDesc>
+  
+  <!-- EN: General -->
+  <Locks_GeneralRow>Général</Locks_GeneralRow>
+  <!-- EN: Colonist -->
+  <Locks_ColonistRow>Colons</Locks_ColonistRow>
+  <!-- EN: Slaves -->
+  <Locks_SlavesRow>Esclaves</Locks_SlavesRow>
+  <!-- EN: Mechs -->
+  <Locks_MechsRow>Mécanoïdes</Locks_MechsRow>
+  
+  <!-- EN: Update -->
+  <Locks_UpdateButton>Actualisation</Locks_UpdateButton>
+  <!-- EN: Cancel -->
+  <Locks_CancelButton>Annuler</Locks_CancelButton>
+  <!-- EN: Locks: Debug Check -->
+  <Locks_DebugCheck>Verrous : Contrôle de débogage</Locks_DebugCheck>
+  <!-- EN: Check if selected pawn can use door. Window also contains debug information which should be shared with locks developer. -->
+  <Locks_DebugCheck_Desc>Vérifie si le pion sélectionné peut utiliser la porte. La fenêtre contient également des informations de débogage qui devraient être partagées avec le développeur du mod Locks.</Locks_DebugCheck_Desc>
+  <!-- EN: Save -->
+  <Locks_SaveDebug>Sauver</Locks_SaveDebug>
+</LanguageData>

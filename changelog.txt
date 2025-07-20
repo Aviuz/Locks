@@ -1,4 +1,8 @@
 Changelog:
+3.0.3
+- Added French translation (Erazil)
+- Child lock is disabled by default (will work on new doors, existing settings should not be affected)
+- Hospitality guest should use doors with allied mode correctly
 3.0.2
 - Fix for unlocked door and mechs
 - Fix for edit button not clickable when copy is clicked
