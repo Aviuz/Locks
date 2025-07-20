@@ -1,4 +1,6 @@
 Changelog:
+3.0.4
+- Fix for prisoners of player faction match guest status
 3.0.3
 - Added French translation (Erazil)
 - Child lock is disabled by default (will work on new doors, existing settings should not be affected)
