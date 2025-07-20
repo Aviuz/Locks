@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: lock/unlock door -->
+  <Locks_Flick.label>verrouillage/déverrouillage de la porte</Locks_Flick.label>
+  <!-- EN: locking/unlocking -->
+  <Locks_Flick.gerund>verrouillage/déverrouillage</Locks_Flick.gerund>
+  <!-- EN: lock/unlock -->
+  <Locks_Flick.verb>verrouiller/déverrouiller</Locks_Flick.verb>
+  
+</LanguageData>

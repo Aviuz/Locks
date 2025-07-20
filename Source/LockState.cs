@@ -180,7 +180,7 @@ namespace Locks
 
     public static LockState DefaultConfiguration()
     {
-      return new LockState(LockMode.Allies, true, true, new AnimalDoor(true, false, false),
+      return new LockState(LockMode.Allies, true, false, new AnimalDoor(true, false, false),
         new DoorAllowed(true, new List<Pawn>()), new DoorAllowed(true, new List<Pawn>()),
         new MechanoidDoor(true, false, new List<string>()));
     }
