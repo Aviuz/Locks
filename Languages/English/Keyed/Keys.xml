@@ -107,4 +107,6 @@
   <Locks_DebugCheck>Locks: Debug Check</Locks_DebugCheck>
   <Locks_DebugCheck_Desc>Check if selected pawn can use door. Window also contains debug information which should be shared with locks developer.</Locks_DebugCheck_Desc>
   <Locks_SaveDebug>Save</Locks_SaveDebug>
+  <Locks_ForceReset>Locks: Debug Reset</Locks_ForceReset>
+  <Locks_ForceReset_Desc>DEBUG: Force reinitialize locks data to default state</Locks_ForceReset_Desc>
 </LanguageData>

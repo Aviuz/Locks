@@ -17,4 +17,13 @@ namespace Locks.HarmonyPatches
       yield return new CodeInstruction(OpCodes.Ret);
     }
   }
+
+  [HarmonyPatch(typeof(Building_VacBarrier), "AlwaysOpen", MethodType.Getter)]
+  public class Patch_VacBarrierAlwaysOpen
+  {
+    private static void Postfix(ref bool __result)
+    {
+      __result = false;
+    }
+  }
 }

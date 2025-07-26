@@ -13,8 +13,6 @@ namespace Locks
   {
     private static readonly float MaxPetSize = 0.86f;
 
-    private static readonly Dictionary<ThingWithComps, LockData> Map = new Dictionary<ThingWithComps, LockData>();
-
 
     private static DesignationDef designationDef;
     private static JobDef jobDef;
@@ -252,14 +250,27 @@ namespace Locks
 
     public static LockData GetData(ThingWithComps key)
     {
-      if (!Map.ContainsKey(key))
-        Map[key] = new LockData();
-      return Map[key];
+      var comp = key.TryGetComp<CompLock>();
+      if (comp == null)
+      {
+        Log.Warning($"Missing lock comp for {key.Label}");
+        return new LockData();
+      }
+
+      return comp.LockData;
     }
 
-    public static void Remove(ThingWithComps key)
+    public static void ResetData(ThingWithComps key)
     {
-      Map.Remove(key);
+      var comp = key.TryGetComp<CompLock>();
+      if (comp != null)
+      {
+        comp.LockData = new LockData
+        {
+          CurrentState = LockState.DefaultConfiguration(),
+          WantedState = LockState.DefaultConfiguration()
+        };
+      }
     }
 
     public static void UpdateLockDesignation(Thing t)

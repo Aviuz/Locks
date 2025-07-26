@@ -143,6 +143,7 @@
             <DependentUpon>Settings.settings</DependentUpon>
         </Compile>
         <Compile Include="RectUtility.cs"/>
+        <Compile Include="ResetButtonGizmo.cs" />
         <Compile Include="WorkGiver_ToggleLock.cs"/>
         <Compile Include="Properties\AssemblyInfo.cs"/>
     </ItemGroup>
