@@ -18,7 +18,7 @@ namespace Locks.HarmonyPatches
     }
   }
 
-  [HarmonyPatch(typeof(Building_VacBarrier), "AlwaysOpen", MethodType.Getter)]
+  [HarmonyPatch(typeof(Building_VacBarrier), "FreePassage", MethodType.Getter)]
   public class Patch_VacBarrierAlwaysOpen
   {
     private static void Postfix(ref bool __result)
