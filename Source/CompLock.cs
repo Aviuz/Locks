@@ -17,6 +17,13 @@ namespace Locks
 
   public class CompLock : ThingComp
   {
+    private LockData lockData = new LockData();
+
+    public LockData LockData
+    {
+      get => lockData ?? (lockData = new LockData());
+      set => lockData = value;
+    }
     public override string CompInspectStringExtra()
     {
       if (parent.Faction != Faction.OfPlayer)
@@ -25,30 +32,26 @@ namespace Locks
       }
       string text = "Locks_StatePrefix".Translate() + " ";
 
-      if (LockUtility.GetData(parent).CurrentState.Locked)
+      if (LockData.CurrentState.Locked)
         text += "Locks_StateLocked".Translate();
       else
         text += "Locks_StateUnlocked".Translate();
-      if (LockUtility.GetData(parent).NeedChange)
+      if (LockData.NeedChange)
         text += $" ({"Locks_StateChanging".Translate()})";
 
       return text;
     }
 
-    public override void PostDeSpawn(Map map, DestroyMode mode = DestroyMode.Vanish)
-    {
-      LockUtility.Remove(parent);
-    }
-
     public override void PostExposeData()
     {
-      LockUtility.GetData(parent).ExposeData();
+      LockData.ExposeData();
     }
 
     public override IEnumerable<Gizmo> CompGetGizmosExtra()
     {
       yield return new LockGizmo(parent);
       yield return new DebugButtonGizmo(parent);
+      yield return new ResetButtonGizmo(parent);
       var command_Action = new Command_Action();
       command_Action.icon = ContentFinder<Texture2D>.Get("UI/Commands/CopySettings");
       command_Action.defaultLabel = "CommandCopyZoneSettingsLabel".Translate();
@@ -81,9 +84,11 @@ namespace Locks
       if ((LocksDefsOf.Locks_AllFenceDoors.fenceGatesDefNames.Contains(parent.def.defName) ||
            LocksSettings.alwaysPensDoor) && !respawningAfterLoad)
       {
-        LockUtility.GetData(parent).CurrentState.AnimalDoor.PensDoor = true;
-        LockUtility.GetData(parent).WantedState.AnimalDoor.PensDoor = true;
+        LockData.CurrentState.AnimalDoor.PensDoor = true;
+        LockData.WantedState.AnimalDoor.PensDoor = true;
       }
+
+
     }
   }
 }

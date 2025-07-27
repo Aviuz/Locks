@@ -13,8 +13,6 @@ namespace Locks
   {
     private static readonly float MaxPetSize = 0.86f;
 
-    private static readonly Dictionary<ThingWithComps, LockData> Map = new Dictionary<ThingWithComps, LockData>();
-
 
     private static DesignationDef designationDef;
     private static JobDef jobDef;
@@ -181,35 +179,9 @@ namespace Locks
         return false;
       }
 
-      if (pawn.Faction == door.Faction)
+      if (pawn.Faction == door.Faction && HandleThatSameFaction(door, pawn, respectedState, builder, out var result))
       {
-        builder?.AppendLine("Pawn and door share faction");
-        if (respectedState.ChildLock && pawn.ageTracker != null &&
-            pawn.ageTracker.AgeBiologicalYears < LocksSettings.childLockAge)
-        {
-          builder?.AppendLine("Child lock rule triggered");
-          return false;
-        }
-
-        builder?.AppendLine("Checking rules for free pawns");
-        if (pawn.IsFreeNonSlaveColonist)
-        {
-          builder?.AppendLine("Checking if colonist can use door");
-          return respectedState.ColonistDoor.IsAllowed(pawn);
-        }
-
-        builder?.AppendLine("Checking rules for slaves");
-        if (pawn.IsSlave)
-        {
-          builder?.AppendLine("Checking is slave can use door");
-          return respectedState.SlaveAllowed.IsAllowed(pawn);
-        }
-
-        if ((door.Map?.Parent.doorsAlwaysOpenForPlayerPawns ?? false) && !pawn.IsPrisonerOfColony)
-        {
-          builder?.AppendLine("Free colonist with doorsAlwaysOpenForPlayerPawns");
-          return true;
-        }
+        return result;
       }
 
       if (respectedState.Mode == LockMode.Allies)
@@ -244,6 +216,45 @@ namespace Locks
       return false;
     }
 
+    private static bool HandleThatSameFaction(ThingWithComps door, Pawn pawn, LockState respectedState,
+      StringBuilder builder, out bool result)
+    {
+      builder?.AppendLine("Pawn and door share faction");
+      if (respectedState.ChildLock && pawn.ageTracker != null &&
+          pawn.ageTracker.AgeBiologicalYears < LocksSettings.childLockAge)
+      {
+        builder?.AppendLine("Child lock rule triggered");
+        result = false;
+        return true;
+      }
+
+      builder?.AppendLine("Checking rules for free pawns");
+      if (pawn.IsFreeNonSlaveColonist)
+      {
+        builder?.AppendLine("Checking if colonist can use door");
+        result = respectedState.ColonistDoor.IsAllowed(pawn);
+        return true;
+      }
+
+      builder?.AppendLine("Checking rules for slaves");
+      if (pawn.IsSlave)
+      {
+        builder?.AppendLine("Checking is slave can use door");
+        result = respectedState.SlaveAllowed.IsAllowed(pawn);
+        return true;
+      }
+
+      if ((door.Map?.Parent.doorsAlwaysOpenForPlayerPawns ?? false) && !pawn.IsPrisonerOfColony)
+      {
+        builder?.AppendLine("Free colonist with doorsAlwaysOpenForPlayerPawns");
+        result = true;
+        return true;
+      }
+
+      result = false;
+      return false;
+    }
+
     private static bool OwnersControlMech(LockState respectedState, Pawn p)
     {
       return p.IsColonyMech && Enumerable.Any(respectedState.ColonistDoor.AllowedPawns,
@@ -252,14 +263,30 @@ namespace Locks
 
     public static LockData GetData(ThingWithComps key)
     {
-      if (!Map.ContainsKey(key))
-        Map[key] = new LockData();
-      return Map[key];
+      var comp = key.TryGetComp<CompLock>();
+      if (comp != null)
+      {
+        return comp.LockData;
+      }
+
+      Log.Warning($"Missing lock comp for {key.Label}");
+      return new LockData();
     }
 
-    public static void Remove(ThingWithComps key)
+    public static void ResetData(ThingWithComps key)
     {
-      Map.Remove(key);
+      var comp = key.TryGetComp<CompLock>();
+      if (comp == null)
+      {
+        return;
+      }
+
+      comp.LockData = new LockData
+      {
+        CurrentState = LockState.DefaultConfiguration(),
+        WantedState = LockState.DefaultConfiguration()
+      };
+      key.Map.reachability.ClearCache();
     }
 
     public static void UpdateLockDesignation(Thing t)
@@ -275,7 +302,7 @@ namespace Locks
       if (flag && designation == null)
       {
         t.Map.designationManager.AddDesignation(new Designation(t, DesDef));
-        door.Map.reachability.ClearCache();
+        t.Map.reachability.ClearCache();
       }
       else if (!flag && designation != null)
       {

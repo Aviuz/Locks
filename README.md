@@ -3,7 +3,7 @@
 </p>
 <p align="center">
   <a href="https://github.com/Aviuz/Locks/releases">
-    <img src="https://img.shields.io/badge/version-3.0.4-blue.svg?style=flat" alt="v3.0.4" />
+    <img src="https://img.shields.io/badge/version-3.1.0-blue.svg?style=flat" alt="v3.1.0" />
   </a>
 </p>
 
