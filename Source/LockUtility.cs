@@ -239,7 +239,7 @@ namespace Locks
       builder?.AppendLine("Checking rules for slaves");
       if (pawn.IsSlave)
       {
-        builder?.AppendLine("Checking is slave can use door");
+        builder?.AppendLine("Checking if slave can use door");
         result = respectedState.SlaveAllowed.IsAllowed(pawn);
         return true;
       }
@@ -247,6 +247,13 @@ namespace Locks
       if ((door.Map?.Parent.doorsAlwaysOpenForPlayerPawns ?? false) && !pawn.IsPrisonerOfColony)
       {
         builder?.AppendLine("Free colonist with doorsAlwaysOpenForPlayerPawns");
+        result = true;
+        return true;
+      }
+
+      if (pawn.IsMutant)
+      {
+        builder?.AppendLine("Mutant can open door");
         result = true;
         return true;
       }
