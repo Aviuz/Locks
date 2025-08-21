@@ -1,4 +1,5 @@
-﻿using Multiplayer.API;
+﻿using Locks.Commands;
+using Multiplayer.API;
 using Verse;
 
 namespace Locks.CompatibilityPatches

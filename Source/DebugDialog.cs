@@ -159,7 +159,9 @@ namespace Locks
       listing.Label("Debug logic flow");
       listing.Label(builder.ToString());
       listing.GapLine();
-      listing.Label($"Pawn can use doors: {result}");
+      listing.Label(parent.IsHackable()
+        ? $"Pawn can use doors: {result && parent.IsHacked()}. Door hacked: {parent.IsHacked()}"
+        : $"Pawn can use doors: {result}");
       listing.End();
     }
 
@@ -189,12 +191,20 @@ namespace Locks
           mdBuilder.AppendLine("|----|----|");
           mdBuilder.AppendLine($"|Door def|{parent.def.defName}|");
           mdBuilder.AppendLine($"|Door faction|{parent.Faction}|");
+          if (parent.IsHackable())
+          {
+            mdBuilder.AppendLine($"|Door hacked|{parent.IsHacked()}|");
+          }
+
           mdBuilder.AppendLine("## Door settings");
           mdBuilder.Append(LockUtility.GetRespectedState(parent, pawn).ToMarkdown());
           mdBuilder.AppendLine("## Mod settings");
           mdBuilder.Append(LocksSettings.ToMarkdown());
           mdBuilder.AppendLine($"|Anomaly Active|{ModsConfig.AnomalyActive}|");
-          mdBuilder.AppendLine($"## Debug logic flow for result {result}");
+          mdBuilder.Append(parent.IsHackable()
+            ? $"## Debug logic flow for result {result && parent.IsHacked()}. Doors are hacked: {parent.IsHacked()}"
+            : $"## Debug logic flow for result {result}"
+          );
           foreach (var line in builder.ToString().Split(Environment.NewLine.ToCharArray()))
           {
             mdBuilder.AppendLine($"- {line}");

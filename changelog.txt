@@ -1,4 +1,7 @@
 Changelog:
+3.1.2
+- Apply lock component on Ancient Blast Door
+- Mod will try to recreate Locks Component if somehow component wasn't created
 3.1.1
 - Fix for faction mutants
 3.1.0

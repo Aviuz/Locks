@@ -5,7 +5,7 @@ using UnityEngine;
 using Verse;
 using Verse.Sound;
 
-namespace Locks
+namespace Locks.Commands
 {
   class LockGizmo : Command
   {
@@ -25,7 +25,7 @@ namespace Locks
       isActive = () => LockUtility.GetData(parent).WantedState.Locked;
     }
 
-    public override bool Visible => parent.Faction == Faction.OfPlayer;
+    public override bool Visible => LockUtility.ShouldGizmoBeVisible(parent);
 
     public override void ProcessInput(Event ev)
     {

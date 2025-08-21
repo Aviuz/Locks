@@ -107,31 +107,34 @@
     <ItemGroup>
         <Compile Include="Alert_LocksCantBeChanged.cs"/>
         <Compile Include="Clipboard.cs"/>
-        <Compile Include="CompatibilityPatches\ClutterStructure.cs"/>
-        <Compile Include="CompatibilityPatches\SoS2.cs"/>
-        <Compile Include="CompatibilityPatches\DoorsExpanded.cs"/>
-        <Compile Include="CompatibilityPatches\Multiplayer.cs"/>
-        <Compile Include="CompLock.cs"/>
-        <Compile Include="CopyUtils.cs"/>
-        <Compile Include="CustomRow.cs"/>
-        <Compile Include="DebugButtonGizmo.cs"/>
-        <Compile Include="DebugDialog.cs"/>
-        <Compile Include="Debug\IMarkdown.cs"/>
-        <Compile Include="FenceDoorsDef.cs"/>
-        <Compile Include="HarmonyPatches\HPatcher.cs"/>
-        <Compile Include="HarmonyPatches\Patch_InjectLockCheck.cs"/>
-        <Compile Include="HarmonyPatches\RespectLockPatches.cs"/>
-        <Compile Include="Initialization.cs"/>
-        <Compile Include="ITab_Lock.cs"/>
-        <Compile Include="JobDriver_ToggleLock.cs"/>
-        <Compile Include="LockData.cs"/>
-        <Compile Include="LockGizmo.cs"/>
-        <Compile Include="LockOptionDialog.cs"/>
-        <Compile Include="LocksDefsOf.cs"/>
-        <Compile Include="LockState.cs"/>
-        <Compile Include="LockUtility.cs"/>
-        <Compile Include="Options\LocksMod.cs"/>
-        <Compile Include="Options\LocksSettings.cs"/>
+        <Compile Include="Commands\CopySettingsGizmo.cs" />
+        <Compile Include="Commands\DebugButtonGizmo.cs" />
+        <Compile Include="Commands\LockGizmo.cs" />
+        <Compile Include="Commands\PasteSettingsGizmo.cs" />
+        <Compile Include="Commands\ResetButtonGizmo.cs" />
+        <Compile Include="CompatibilityPatches\ClutterStructure.cs" />
+        <Compile Include="CompatibilityPatches\SoS2.cs" />
+        <Compile Include="CompatibilityPatches\DoorsExpanded.cs" />
+        <Compile Include="CompatibilityPatches\Multiplayer.cs" />
+        <Compile Include="CompLock.cs" />
+        <Compile Include="CopyUtils.cs" />
+        <Compile Include="CustomRow.cs" />
+        <Compile Include="DebugDialog.cs" />
+        <Compile Include="Debug\IMarkdown.cs" />
+        <Compile Include="FenceDoorsDef.cs" />
+        <Compile Include="HarmonyPatches\HPatcher.cs" />
+        <Compile Include="HarmonyPatches\Patch_InjectLockCheck.cs" />
+        <Compile Include="HarmonyPatches\RespectLockPatches.cs" />
+        <Compile Include="Initialization.cs" />
+        <Compile Include="ITab_Lock.cs" />
+        <Compile Include="JobDriver_ToggleLock.cs" />
+        <Compile Include="LockData.cs" />
+        <Compile Include="LockOptionDialog.cs" />
+        <Compile Include="LocksDefsOf.cs" />
+        <Compile Include="LockState.cs" />
+        <Compile Include="LockUtility.cs" />
+        <Compile Include="Options\LocksMod.cs" />
+        <Compile Include="Options\LocksSettings.cs" />
         <Compile Include="Properties\Resources.Designer.cs">
             <AutoGen>True</AutoGen>
             <DesignTime>True</DesignTime>
@@ -142,10 +145,9 @@
             <DesignTimeSharedInput>True</DesignTimeSharedInput>
             <DependentUpon>Settings.settings</DependentUpon>
         </Compile>
-        <Compile Include="RectUtility.cs"/>
-        <Compile Include="ResetButtonGizmo.cs" />
-        <Compile Include="WorkGiver_ToggleLock.cs"/>
-        <Compile Include="Properties\AssemblyInfo.cs"/>
+        <Compile Include="RectUtility.cs" />
+        <Compile Include="WorkGiver_ToggleLock.cs" />
+        <Compile Include="Properties\AssemblyInfo.cs" />
     </ItemGroup>
     <ItemGroup>
         <Content Include="..\1.6\Defs\Designations.xml">
@@ -165,6 +167,9 @@
         </Content>
         <Content Include="..\1.6\Patches\AddCompLockArchitectExpandedFences.xml">
             <Link>Patches\AddCompLockArchitectExpandedFences.xml</Link>
+        </Content>
+        <Content Include="..\1.6\Odyssey\Patches\AddCompLockBlastDoor.xml">
+            <Link>Patches\Odyssey\AddCompLockBlastDoor.xml</Link>
         </Content>
         <Content Include="..\1.6\Patches\AddCompLockDoorsExpanded.xml">
             <Link>Patches\AddCompLockDoorsExpanded.xml</Link>
@@ -214,7 +219,7 @@
         <None Include="..\README.md">
             <Link>Organizer\README.md</Link>
         </None>
-        <None Include="packages.config"/>
+        <None Include="packages.config" />
         <None Include="Properties\Settings.settings">
             <Generator>SettingsSingleFileGenerator</Generator>
             <LastGenOutput>Settings.Designer.cs</LastGenOutput>
