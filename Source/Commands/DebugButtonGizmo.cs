@@ -4,7 +4,7 @@ using RimWorld;
 using UnityEngine;
 using Verse;
 
-namespace Locks
+namespace Locks.Commands
 {
   [StaticConstructorOnStartup]
   public class DebugButtonGizmo : Command_Target
@@ -22,7 +22,7 @@ namespace Locks
       icon = QuestionMark;
     }
 
-    public override bool Visible => LocksSettings.debugButton && parent.Faction == Faction.OfPlayer;
+    public override bool Visible => LocksSettings.debugButton;
 
     private void PerformAction(LocalTargetInfo target)
     {

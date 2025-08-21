@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using HarmonyLib;
 using Locks.Options;
 using RimWorld;
 using Verse;
@@ -271,13 +272,7 @@ namespace Locks
     public static LockData GetData(ThingWithComps key)
     {
       var comp = key.TryGetComp<CompLock>();
-      if (comp != null)
-      {
-        return comp.LockData;
-      }
-
-      Log.Warning($"Missing lock comp for {key.Label}");
-      return new LockData();
+      return comp != null ? comp.LockData : ReinitComp(key).LockData;
     }
 
     public static void ResetData(ThingWithComps key)
@@ -285,6 +280,7 @@ namespace Locks
       var comp = key.TryGetComp<CompLock>();
       if (comp == null)
       {
+        ReinitComp(key);
         return;
       }
 
@@ -294,6 +290,30 @@ namespace Locks
         WantedState = LockState.DefaultConfiguration()
       };
       key.Map.reachability.ClearCache();
+    }
+
+    private static CompLock ReinitComp(ThingWithComps thing)
+    {
+      Log.Warning($"Missing lock comp for {thing.Label}. Trying to reinitialize lock component");
+      var traverse = Traverse.Create(thing).Field("comps");
+      var thingComps = traverse.GetValue<List<ThingComp>>();
+      if (thingComps == null)
+      {
+        thingComps = new List<ThingComp>();
+        traverse.SetValue(thingComps);
+      }
+      var compLock = new CompLock
+      {
+        parent = thing,
+        props = new CompProperties_Lock(),
+        LockData = new LockData
+        {
+          CurrentState = LockState.DefaultConfiguration(),
+          WantedState = LockState.DefaultConfiguration()
+        }
+      };
+      thingComps.Add(compLock);
+      return compLock;
     }
 
     public static void UpdateLockDesignation(Thing t)
@@ -335,6 +355,16 @@ namespace Locks
       }
 
       return list1.Count == list2.Count && list1.All(list2.Contains);
+    }
+
+    public static bool ShouldGizmoBeVisible(Thing thing)
+    {
+      if (thing.Faction != Faction.OfPlayer)
+      {
+        return false;
+      }
+
+      return !thing.IsHackable() || thing.IsHacked();
     }
   }
 }
