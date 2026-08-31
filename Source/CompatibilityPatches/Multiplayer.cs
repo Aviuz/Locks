@@ -9,10 +9,7 @@ namespace Locks.CompatibilityPatches
   {
     static MultiplayerCompatibility()
     {
-      if (!MP.enabled)
-      {
-        return;
-      }
+      if (!MP.enabled) return;
 
       MP.RegisterAll();
       MP.RegisterSyncWorker<LockGizmo>(SyncWorkerForLockGizmo);

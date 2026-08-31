@@ -1,31 +1,32 @@
 <loadFolders>
-  <v1.0>
-    <li>/</li>
-    <li>1.0</li>
-  </v1.0>
-  <v1.1>
-    <li>/</li>
-    <li>1.2</li>
-  </v1.1>
-  <v1.2>
-    <li>/</li>
-    <li>1.2</li>
-  </v1.2>
-  <v1.3>
-    <li>/</li>
-    <li>1.3</li>
-  </v1.3>
-  <v1.4>
-    <li>/</li>
-    <li>1.4</li>
-  </v1.4>
-  <v1.5>
-    <li>/</li>
-    <li>1.5</li>
-  </v1.5>
-  <v1.6>
-    <li>/</li>
-    <li>1.6</li>
-    <li IfModActive="Ludeon.Rimworld.Odyssey">1.6/Odyssey</li>
-  </v1.6>
+    <v1.0>
+        <li>/</li>
+        <li>1.0</li>
+    </v1.0>
+    <v1.1>
+        <li>/</li>
+        <li>1.2</li>
+    </v1.1>
+    <v1.2>
+        <li>/</li>
+        <li>1.2</li>
+    </v1.2>
+    <v1.3>
+        <li>/</li>
+        <li>1.3</li>
+    </v1.3>
+    <v1.4>
+        <li>/</li>
+        <li>1.4</li>
+    </v1.4>
+    <v1.5>
+        <li>/</li>
+        <li>1.5</li>
+    </v1.5>
+    <v1.6>
+        <li>/</li>
+        <li>1.6</li>
+        <li IfModActive="Ludeon.Rimworld.Odyssey">1.6/Odyssey</li>
+        <li IfModActive="vanillaquestsexpanded.dronefactory">1.6/DroneFactory</li>
+    </v1.6>
 </loadFolders>

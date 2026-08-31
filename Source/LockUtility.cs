@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using HarmonyLib;
@@ -17,15 +16,41 @@ namespace Locks
 
     private static DesignationDef designationDef;
     private static JobDef jobDef;
-
-    public static List<PawnKindDef> MechKinds { get; } = DefDatabase<PawnKindDef>.AllDefs
-      .Where(def => def.defName.StartsWith("Mech_")).OrderBy(def => def.defName)
-      .ToList();
+    private static MechsCompatibilityDef mechsCompatibilityDef;
+    private static IEnumerable<PawnKindDef> mechsFromMods;
+    private static MechCompatibleFleshTypeDef fleshForMechsFromOtherMods;
 
     public static DesignationDef DesDef =>
       designationDef ?? (designationDef = DefDatabase<DesignationDef>.GetNamed("Locks_Flick"));
 
     public static JobDef JobDef => jobDef ?? (jobDef = DefDatabase<JobDef>.GetNamed("Locks_Flick"));
+
+    private static MechsCompatibilityDef MechsCompatibilityDef =>
+      mechsCompatibilityDef ??
+      (mechsCompatibilityDef = DefDatabase<MechsCompatibilityDef>.GetNamed("Locks_MechsCompatibility"));
+
+    private static MechCompatibleFleshTypeDef CompatibileMechsFleshFromMods =>
+      fleshForMechsFromOtherMods ??
+      (fleshForMechsFromOtherMods =
+        DefDatabase<MechCompatibleFleshTypeDef>
+          .GetNamed(
+            "Locks_MechsFleshTypeCompatibility"));
+
+    public static List<PawnKindDef> MechKinds()
+    {
+      var baseGameMechs = DefDatabase<PawnKindDef>.AllDefs
+        .Where(def => def.defName.StartsWith("Mech_"));
+
+      var mappedMechsFromMods = MapModsCompatibilityToPawnKinds() ?? Enumerable.Empty<PawnKindDef>();
+
+      return baseGameMechs.Concat(mappedMechsFromMods).OrderBy(def => def.defName).ToList();
+    }
+
+    private static IEnumerable<PawnKindDef> MapModsCompatibilityToPawnKinds()
+    {
+      return mechsFromMods ?? (mechsFromMods =
+        MechsCompatibilityDef.mechsFromMods.Where(def => def != null));
+    }
 
     public static bool PawnCanOpen(ThingWithComps door, Pawn p)
     {
@@ -54,7 +79,8 @@ namespace Locks
 
       if (noFaction)
       {
-        builder?.AppendLine($"Doors without faction. Returning pawn RaceProps: {p.RaceProps.canOpenFactionlessDoors}");
+        builder?.AppendLine(
+          $"Doors without faction. Returning pawn RaceProps: {p.RaceProps.canOpenFactionlessDoors}");
         return p.RaceProps.canOpenFactionlessDoors;
       }
 
@@ -78,7 +104,7 @@ namespace Locks
         return HandleAnimals(door, p, respectedState, builder);
       }
 
-      if (properties.IsMechanoid)
+      if (IsMechanoid(properties))
       {
         builder?.AppendLine("Pawn recognized as Mechanoid");
         return !respectedState.Locked || HandleMechanoid(door, p, respectedState, builder);
@@ -86,6 +112,12 @@ namespace Locks
 
       builder?.AppendLine("Pawn doesn't match any type.");
       return HandleAnomalies(p, builder);
+    }
+
+    private static bool IsMechanoid(RaceProperties properties)
+    {
+      return properties.IsMechanoid ||
+             CompatibileMechsFleshFromMods.fleshFromMods.Contains(properties.FleshType.defName);
     }
 
     public static LockState GetRespectedState(ThingWithComps door, Pawn p)
@@ -113,7 +145,8 @@ namespace Locks
       return false;
     }
 
-    private static bool HandleMechanoid(ThingWithComps door, Pawn pawn, LockState respectedState, StringBuilder builder)
+    private static bool HandleMechanoid(ThingWithComps door, Pawn pawn, LockState respectedState,
+      StringBuilder builder)
     {
       if (pawn.Faction.HostileTo(door.Faction))
       {
@@ -132,7 +165,8 @@ namespace Locks
              respectedState.MechanoidDoor.AllowedMechanoids.Contains(pawn.kindDef.defName);
     }
 
-    private static bool HandleAnimals(ThingWithComps door, Pawn pawn, LockState respectedState, StringBuilder builder)
+    private static bool HandleAnimals(ThingWithComps door, Pawn pawn, LockState respectedState,
+      StringBuilder builder)
     {
       if (pawn.Faction.HostileTo(door.Faction) || !respectedState.AnimalDoor.Allowed)
       {
@@ -172,7 +206,8 @@ namespace Locks
       return true;
     }
 
-    private static bool HandleHumanoids(ThingWithComps door, Pawn pawn, LockState respectedState, StringBuilder builder)
+    private static bool HandleHumanoids(ThingWithComps door, Pawn pawn, LockState respectedState,
+      StringBuilder builder)
     {
       if (pawn.Faction.HostileTo(door.Faction))
       {

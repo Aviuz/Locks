@@ -1,4 +1,7 @@
 Changelog:
+3.1.3
+- Fix search for Mechs
+- Add compatibility with vanilla quests expanded drone factory
 3.1.2
 - Apply lock component on Ancient Blast Door
 - Mod will try to recreate Locks Component if somehow component wasn't created

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/Locks.MechsCompatibilityDef/mechsFromMods</xpath>
+        <value>
+            <li>VQE_PackDrone</li>
+            <li>VQE_MinerDrone</li>
+            <li>VQE_TurretDrone</li>
+            <li>VQE_HaulerDrone</li>
+            <li>VQE_Protolancer</li>
+            <li>VQE_BattleDrone</li>
+            <li>VQE_HornetDrone</li>
+            <li>VQE_RaiderDrone</li>
+            <li>VQE_CleanerDrone</li>
+            <li>VQE_FarmingDrone</li>
+            <li>VQE_StingrayDrone</li>
+            <li>VQE_CraftingDroneKindDef</li>
+            <li>VQE_ShufflerDrone</li>
+            <li>VQE_DriverDrone</li>
+            <li>VQE_CrawlerDrone</li>
+            <li>VQE_FirefighterDrone</li>
+            <li>VQE_AutobroadcasterDrone</li>
+        </value>
+    </Operation>
+</Patch>

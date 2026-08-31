@@ -107,7 +107,7 @@ namespace Locks
             else
             {
               var toolTip = string.Join("\n",
-                LockUtility.MechKinds.Select(def => state.MechanoidDoor.AllowedMechanoids.Contains(def.defName)));
+                LockUtility.MechKinds().Select(def => state.MechanoidDoor.AllowedMechanoids.Contains(def.defName)));
               listing.Label("Locks_OnlyAllowedMechs".Translate(state.MechanoidDoor.AllowedMechanoids.Count),
                 tooltip: "Locks_AllowedMechsToolTip".Translate(toolTip));
             }

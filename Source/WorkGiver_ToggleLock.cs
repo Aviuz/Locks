@@ -6,17 +6,14 @@ using Verse.AI;
 
 namespace Locks
 {
-    public class WorkGiver_ToggleLock : WorkGiver_Scanner
+  public class WorkGiver_ToggleLock : WorkGiver_Scanner
+  {
+    [DebuggerHidden]
+    public override IEnumerable<Thing> PotentialWorkThingsGlobal(Pawn pawn)
     {
-        [DebuggerHidden]
-        public override IEnumerable<Thing> PotentialWorkThingsGlobal(Pawn pawn)
-        {
-            var desList = pawn.Map.designationManager.designationsByDef[LockUtility.DesDef];
-            for (var i = 0; i < desList.Count; i++)
-            {
-                yield return desList[i].target.Thing;
-            }
-        }
+      var desList = pawn.Map.designationManager.designationsByDef[LockUtility.DesDef];
+      for (var i = 0; i < desList.Count; i++) yield return desList[i].target.Thing;
+    }
 
     public override bool HasJobOnThing(Pawn pawn, Thing t, bool forced = false)
     {

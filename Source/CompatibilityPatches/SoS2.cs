@@ -8,7 +8,7 @@ using Verse;
 
 namespace Locks.CompatibilityPatches
 {
-  class SoS2
+  internal class SoS2
   {
     public static void Init()
     {

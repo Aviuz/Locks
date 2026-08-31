@@ -3,7 +3,7 @@ using Verse;
 
 namespace Locks.Options
 {
-  class LocksMod : Mod
+  internal class LocksMod : Mod
   {
     private const string MOD_NAME = "Locks_ModName";
     private const string CHILD_LOCK = "Locks_ChildrenLock";

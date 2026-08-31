@@ -3,7 +3,7 @@
 </p>
 <p align="center">
   <a href="https://github.com/Aviuz/Locks/releases">
-    <img src="https://img.shields.io/badge/version-3.1.2-blue.svg?style=flat" alt="v3.1.2" />
+    <img src="https://img.shields.io/badge/version-3.1.3-blue.svg?style=flat" alt="v3.1.3" />
   </a>
 </p>
 
@@ -19,9 +19,8 @@
 This addon adds new locking door system.
 
 - Doors can be unlocked to allow enemies and prisoners to pass by (only races that have inteligence "humanlike" or
-  above).
-  **Note**: In order to unlock/lock door, colonist must "flick" the door. Unflicked door will work as unchanged for
-  enemies and prisoners.
+  above). **Note**: In order to unlock/lock door, colonist must "flick" the door. Unflicked door will work as unchanged
+  for enemies and prisoners.
 - Doors can exclude visitors (wanna lock some traders?).
 - Pet doors for small animals can now be added to doors.
 - Doors can be assigned to colonists (you can simply restrict rooms to specific colonists without allowed area manager).
@@ -30,9 +29,8 @@ This addon adds new locking door system.
 
 ## How to use
 
-Select door and left click "Lock" command if you want to unlock/lock door.
-Right click for more options.
-Alternatively you can use "Lock" inspector tab.
+Select door and left click "Lock" command if you want to unlock/lock door. Right click for more options. Alternatively
+you can use "Lock" inspector tab.
 
 ## Performance
 
@@ -40,12 +38,11 @@ This mod has almost zero impact on performance. It's quick and light.
 
 ## Why do I need this?
 
-I've created this mod to allow prisoners walk through doors while keeping temperature indoors with Prison Labor mod.
-You can use this mod to create heat/cold killboxes, lock traders inside, keeping base safe from animals but avoiding
-destroying doors by pirates.
-Also you can lock bedrooms for specific colonists. When that colonist will be in second camp-like base, nobody will
-sleep in his bed.
-You can lock areas from dirty vistors, or lock them when horde of manhunter animals is waiting outside.
+I've created this mod to allow prisoners walk through doors while keeping temperature indoors with Prison Labor mod. You
+can use this mod to create heat/cold killboxes, lock traders inside, keeping base safe from animals but avoiding
+destroying doors by pirates. Also you can lock bedrooms for specific colonists. When that colonist will be in second
+camp-like base, nobody will sleep in his bed. You can lock areas from dirty vistors, or lock them when horde of
+manhunter animals is waiting outside.
 
 ## Compatibility
 

@@ -85,6 +85,7 @@ namespace Locks.HarmonyPatches
         step++;
         return true;
       }
+
       return false;
     }
 
