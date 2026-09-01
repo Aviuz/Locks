@@ -6,4 +6,12 @@
             <li>FenceGate</li>
         </fenceGatesDefNames>
     </Locks.FenceDoorsDef>
+    <Locks.MechsCompatibilityDef>
+        <defName>Locks_MechsCompatibility</defName>
+        <mechsFromMods/>
+    </Locks.MechsCompatibilityDef>
+    <Locks.MechCompatibleFleshTypeDef>
+        <defName>Locks_MechsFleshTypeCompatibility</defName>
+        <fleshFromMods/>
+    </Locks.MechCompatibleFleshTypeDef>
 </Defs>

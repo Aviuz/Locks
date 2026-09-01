@@ -13,9 +13,17 @@ namespace Locks
     private const float TextRow = 40f;
     private const float PaddingLeft = 10f;
     private const float Spacing = 4f;
+    private const string SELECTED_LABEL = "Locks_Selected";
+    private const string ANY_LABEL = "Locks_Any";
+    private const string NONE_LABEL = "Locks_None";
+    private const string MECHANITOR_OWNS_LABEL = "Locks_MechanitorsOwned";
+    private const string ALLOWED_LABEL = "Locks_Allowed";
+    private const string CANCEL_BUTTON_LABEL = "Locks_CancelButton";
+    private const string PENS_DOOR_LABEL = "Locks_PensDoor";
+    private const string PET_DOOR_LABEL = "Locks_PetDoor";
     private readonly ThingWithComps door;
 
-    private readonly List<PawnKindDef> pawnKinds = LockUtility.MechKinds;
+    private readonly List<PawnKindDef> pawnKinds = LockUtility.MechKinds();
     private readonly QuickSearchWidget quickSearchWidget = new QuickSearchWidget();
     private readonly Dictionary<int, bool> selectedChoices = new Dictionary<int, bool>();
     private int index;
@@ -66,7 +74,7 @@ namespace Locks
         }
 
         var closeMenu = new Rect(inRect.width * 0.5f, inRect.height - 50f, inRect.width * 0.25f, 50f);
-        if (Widgets.ButtonText(closeMenu, "Locks_CancelButton".Translate()))
+        if (Widgets.ButtonText(closeMenu, CANCEL_BUTTON_LABEL.Translate()))
         {
           Close();
         }
@@ -74,7 +82,7 @@ namespace Locks
       else
       {
         var closeMenu = new Rect(inRect.width * 0.25f, inRect.height - 50f, inRect.width * 0.5f, 50f);
-        if (Widgets.ButtonText(closeMenu, "Locks_CancelButton".Translate()))
+        if (Widgets.ButtonText(closeMenu, CANCEL_BUTTON_LABEL.Translate()))
         {
           Close();
         }
@@ -92,16 +100,16 @@ namespace Locks
         case 1:
         case 2:
           Widgets.Label(new Rect(body.x + PaddingLeft, body.y, buttonRect.width / 2f, TextRow),
-            "Locks_Allowed".Translate());
+            ALLOWED_LABEL.Translate());
 
           if (Widgets.ButtonText(buttonRect.Indent(buttonRect.width / 2f),
                 GetLabel(Data, GetSelectedChoice(index)).Translate()))
           {
             var options = new List<FloatMenuOption>
             {
-              new FloatMenuOption("Locks_Any".Translate(), delegate { ModifyData(true, false); }),
-              new FloatMenuOption("Locks_None".Translate(), delegate { ModifyData(false, false); }),
-              new FloatMenuOption("Locks_Selected".Translate(), delegate { ModifyData(false, true); })
+              new FloatMenuOption(ANY_LABEL.Translate(), delegate { ModifyData(true, false); }),
+              new FloatMenuOption(NONE_LABEL.Translate(), delegate { ModifyData(false, false); }),
+              new FloatMenuOption(SELECTED_LABEL.Translate(), delegate { ModifyData(false, true); })
             };
             Find.WindowStack.Add(new FloatMenu(options));
           }
@@ -116,18 +124,18 @@ namespace Locks
           break;
         case 3:
           Widgets.Label(new Rect(body.x + PaddingLeft, body.y, buttonRect.width / 2f, TextRow),
-            "Locks_Allowed".Translate());
+            ALLOWED_LABEL.Translate());
 
           if (Widgets.ButtonText(buttonRect.Indent(buttonRect.width / 2f),
                 GetMechLabel(GetSelectedChoice(index)).Translate()))
           {
             var options = new List<FloatMenuOption>
             {
-              new FloatMenuOption("Locks_Any".Translate(), delegate { ModifyMechData(true, false, false); }),
-              new FloatMenuOption("Locks_None".Translate(), delegate { ModifyMechData(false, false, false); }),
-              new FloatMenuOption("Locks_MechanitorsOwned".Translate(),
+              new FloatMenuOption(ANY_LABEL.Translate(), delegate { ModifyMechData(true, false, false); }),
+              new FloatMenuOption(NONE_LABEL.Translate(), delegate { ModifyMechData(false, false, false); }),
+              new FloatMenuOption(MECHANITOR_OWNS_LABEL.Translate(),
                 delegate { ModifyMechData(false, true, false); }),
-              new FloatMenuOption("Locks_Selected".Translate(), delegate { ModifyMechData(false, false, true); })
+              new FloatMenuOption(SELECTED_LABEL.Translate(), delegate { ModifyMechData(false, false, true); })
             };
             Find.WindowStack.Add(new FloatMenu(options));
           }
@@ -183,25 +191,25 @@ namespace Locks
     {
       if (selectsChoice || data.AllowedPawns?.Count > 0)
       {
-        return "Locks_Selected";
+        return SELECTED_LABEL;
       }
 
-      return data.Any ? "Locks_Any" : "Locks_None";
+      return data.Any ? ANY_LABEL : NONE_LABEL;
     }
 
     private string GetMechLabel(bool selectsChoice)
     {
       if (selectsChoice || lockData.MechanoidDoor.AllowedMechanoids?.Count > 0)
       {
-        return "Locks_Selected";
+        return SELECTED_LABEL;
       }
 
       if (lockData.MechanoidDoor.OnlyMechanitorsMechs)
       {
-        return "Locks_MechanitorsOwned";
+        return MECHANITOR_OWNS_LABEL;
       }
 
-      return lockData.MechanoidDoor.Any ? "Locks_Any" : "Locks_None";
+      return lockData.MechanoidDoor.Any ? ANY_LABEL : NONE_LABEL;
     }
 
     private void DrawMechs(Rect body)
@@ -214,7 +222,7 @@ namespace Locks
         ref scrollPosition,
         new Rect(startX, body.y + PaddingLeft, body.width * 0.8f, pawnKinds.Count * rowHeight));
 
-      foreach (var mech in pawnKinds)
+      foreach (var mech in GetMechsToShown(pawnKinds))
       {
         var graphic = mech.lifeStages[0].bodyGraphicData.Graphic.MatEast.mainTexture as Texture2D;
         var customRow = new CustomRow(rect);
@@ -269,11 +277,11 @@ namespace Locks
       {
         var options = new List<FloatMenuOption>
         {
-          new FloatMenuOption("Locks_Any".Translate(), delegate { ModifyAnimalsData(true, false, false); }),
-          new FloatMenuOption("Locks_None".Translate(), delegate { ModifyAnimalsData(false, false, false); }),
-          new FloatMenuOption("Locks_PetDoor".Translate(),
+          new FloatMenuOption(ANY_LABEL.Translate(), delegate { ModifyAnimalsData(true, false, false); }),
+          new FloatMenuOption(NONE_LABEL.Translate(), delegate { ModifyAnimalsData(false, false, false); }),
+          new FloatMenuOption(PET_DOOR_LABEL.Translate(),
             delegate { ModifyAnimalsData(true, true, false); }),
-          new FloatMenuOption("Locks_PensDoor".Translate(), delegate { ModifyAnimalsData(true, false, true); })
+          new FloatMenuOption(PENS_DOOR_LABEL.Translate(), delegate { ModifyAnimalsData(true, false, true); })
         };
         Find.WindowStack.Add(new FloatMenu(options));
       }
@@ -283,15 +291,15 @@ namespace Locks
     {
       if (lockData.AnimalDoor.PensDoor)
       {
-        return "Locks_PensDoor";
+        return PENS_DOOR_LABEL;
       }
 
       if (lockData.AnimalDoor.OnlyPets)
       {
-        return "Locks_PetDoor";
+        return PET_DOOR_LABEL;
       }
 
-      return lockData.AnimalDoor.Allowed ? "Locks_Any" : "Locks_None";
+      return lockData.AnimalDoor.Allowed ? ANY_LABEL : NONE_LABEL;
     }
 
     private void ModifyAnimalsData(bool allowed, bool onlyPets, bool onlyPen)
@@ -406,6 +414,15 @@ namespace Locks
         ? pawns
         : pawns.FindAll(pawn =>
           pawn.NameFullColored.RawText.IndexOf(quickSearchWidget.filter.Text,
+            StringComparison.OrdinalIgnoreCase) > -1);
+    }
+    
+    private List<PawnKindDef> GetMechsToShown(List<PawnKindDef> kinds)
+    {
+      return quickSearchWidget.filter.Text.NullOrEmpty()
+        ? kinds
+        : kinds.FindAll(kind =>
+          kind.defName.IndexOf(quickSearchWidget.filter.Text,
             StringComparison.OrdinalIgnoreCase) > -1);
     }
   }

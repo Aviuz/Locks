@@ -18,6 +18,7 @@
         <li>kentington.saveourship2</li>
         <li>linkolas.linkabledoors</li>
         <li>jecrell.doorsexpanded</li>
+        <li>vanillaquestsexpanded.dronefactory</li>
     </loadAfter>
     <modDependencies>
         <li>
@@ -27,7 +28,7 @@
             <downloadUrl>https://github.com/pardeike/HarmonyRimWorld/releases/latest</downloadUrl>
         </li>
     </modDependencies>
-    <description>Version 3.1.2\nThis addon adds Lock command on every door.\n - Left-click to lock toggle.\n - Right
+    <description>Version 3.1.3\nThis addon adds Lock command on every door.\n - Left-click to lock toggle.\n - Right
         click for more options\n - Alternatively you can use "Lock" inspector tab\n\nNote: Door lock must be flicked by
         colonist.
     </description>

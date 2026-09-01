@@ -7,7 +7,8 @@ namespace Locks
   [StaticConstructorOnStartup]
   public static class Initialization
   {
-    public const string VERSION = "3.1.2";
+    public const string VERSION = "3.1.3";
+
     static Initialization()
     {
       HPatcher.Init();
