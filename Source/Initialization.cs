@@ -7,7 +7,7 @@ namespace Locks
   [StaticConstructorOnStartup]
   public static class Initialization
   {
-    public const string VERSION = "3.1.3";
+    public const string VERSION = "3.2.0";
 
     static Initialization()
     {

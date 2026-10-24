@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+    <Locks.FenceDoorsDef>
+        <defName>Locks_AllFenceDoors</defName>
+        <fenceGatesDefNames>
+            <li>FenceGate</li>
+        </fenceGatesDefNames>
+    </Locks.FenceDoorsDef>
+    <Locks.MechsCompatibilityDef>
+        <defName>Locks_MechsCompatibility</defName>
+        <mechsFromMods/>
+    </Locks.MechsCompatibilityDef>
+    <Locks.MechCompatibleFleshTypeDef>
+        <defName>Locks_MechsFleshTypeCompatibility</defName>
+        <fleshFromMods/>
+    </Locks.MechCompatibleFleshTypeDef>
+</Defs>

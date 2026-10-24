@@ -19,7 +19,7 @@
         <DebugSymbols>false</DebugSymbols>
         <DebugType>none</DebugType>
         <Optimize>false</Optimize>
-        <OutputPath>..\1.6\Assemblies\</OutputPath>
+        <OutputPath>..\1.7\Assemblies\</OutputPath>
         <DefineConstants>DEBUG;TRACE</DefineConstants>
         <ErrorReport>prompt</ErrorReport>
         <WarningLevel>4</WarningLevel>
@@ -41,10 +41,6 @@
         </Reference>
         <Reference Include="0MultiplayerAPI, Version=0.5.0.0, Culture=neutral, processorArchitecture=MSIL">
             <HintPath>packages\RimWorld.MultiplayerAPI.0.5.0\lib\net472\0MultiplayerAPI.dll</HintPath>
-        </Reference>
-        <Reference Include="Assembly-CSharp">
-            <HintPath>..\..\..\Gry\Steam\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\Assembly-CSharp.dll</HintPath>
-            <Private>False</Private>
         </Reference>
         <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
             <HintPath>packages\Microsoft.Bcl.AsyncInterfaces.10.0.0-preview.5.25277.114\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
@@ -87,22 +83,22 @@
         <Reference Include="System.Data.DataSetExtensions"/>
         <Reference Include="System.Data"/>
         <Reference Include="System.Xml"/>
-        <Reference Include="UnityEngine">
-            <HintPath>..\..\..\Gry\Steam\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\UnityEngine.dll</HintPath>
-            <Private>False</Private>
-        </Reference>
-        <Reference Include="UnityEngine.CoreModule">
-            <HintPath>..\..\..\Gry\Steam\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
-            <Private>False</Private>
-        </Reference>
-        <Reference Include="UnityEngine.IMGUIModule">
-            <HintPath>..\..\..\Gry\Steam\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\UnityEngine.IMGUIModule.dll</HintPath>
-            <Private>False</Private>
-        </Reference>
-        <Reference Include="UnityEngine.TextRenderingModule">
-            <HintPath>..\..\..\Gry\Steam\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\UnityEngine.TextRenderingModule.dll</HintPath>
-            <Private>False</Private>
-        </Reference>
+		<Reference Include="Assembly-CSharp">
+		  <HintPath>..\..\..\..\Games\Steam\steamapps\common\RimWorld\Assembly-CSharp.dll</HintPath>
+		  <Private>False</Private>
+		</Reference>
+		<Reference Include="Waylith.UnityCompat">
+		  <HintPath>..\..\..\..\Games\Steam\steamapps\common\RimWorld\Waylith.UnityCompat.dll</HintPath>
+		  <Private>False</Private>
+		</Reference>
+		<Reference Include="Waylith">
+		  <HintPath>..\..\..\..\Games\Steam\steamapps\common\RimWorld\Waylith.dll</HintPath>
+		  <Private>False</Private>
+		</Reference>
+		<Reference Include="UnityStubs">
+		  <HintPath>..\..\..\..\Games\Steam\steamapps\common\RimWorld\UnityStubs.dll</HintPath>
+		  <Private>False</Private>
+		</Reference>
     </ItemGroup>
     <ItemGroup>
         <Compile Include="Alert_LocksCantBeChanged.cs"/>
@@ -151,58 +147,58 @@
         <Compile Include="Properties\AssemblyInfo.cs"/>
     </ItemGroup>
     <ItemGroup>
-        <Content Include="..\1.6\Defs\Designations.xml">
+        <Content Include="..\1.7\Defs\Designations.xml">
             <Link>Defs\Designations.xml</Link>
         </Content>
-        <Content Include="..\1.6\Defs\JobDefs.xml">
+        <Content Include="..\1.7\Defs\JobDefs.xml">
             <Link>Defs\JobDefs.xml</Link>
         </Content>
-        <Content Include="..\1.6\Defs\WorkGivers.xml">
+        <Content Include="..\1.7\Defs\WorkGivers.xml">
             <Link>Defs\WorkGivers.xml</Link>
         </Content>
-        <Content Include="..\1.6\Defs\CustomDef.xml">
+        <Content Include="..\1.7\Defs\CustomDef.xml">
             <Link>Defs\CustomDef.xml</Link>
         </Content>
-        <Content Include="..\1.6\DroneFactory\Patches\AddSupportedMechsFleshTypes.xml">
+        <Content Include="..\1.7\DroneFactory\Patches\AddSupportedMechsFleshTypes.xml">
             <Link>Patches\DroneFactory\AddSupportedMechsFleshTypes.xml</Link>
         </Content>
-        <Content Include="..\1.6\Patches\AddCompLock.xml">
+        <Content Include="..\1.7\Patches\AddCompLock.xml">
             <Link>Patches\AddCompLock.xml</Link>
         </Content>
-        <Content Include="..\1.6\Patches\AddCompLockArchitectExpandedFences.xml">
+        <Content Include="..\1.7\Patches\AddCompLockArchitectExpandedFences.xml">
             <Link>Patches\AddCompLockArchitectExpandedFences.xml</Link>
         </Content>
-        <Content Include="..\1.6\Odyssey\Patches\AddCompLockBlastDoor.xml">
+        <Content Include="..\1.7\Odyssey\Patches\AddCompLockBlastDoor.xml">
             <Link>Patches\Odyssey\AddCompLockBlastDoor.xml</Link>
         </Content>
-        <Content Include="..\1.6\DroneFactory\Patches\AddDronesToDoorListPatch.xml">
+        <Content Include="..\1.7\DroneFactory\Patches\AddDronesToDoorListPatch.xml">
             <Link>Patches\DroneFactory\AddDronesToDoorListPatch.xml</Link>
         </Content>
-        <Content Include="..\1.6\Patches\AddCompLockDoorsExpanded.xml">
+        <Content Include="..\1.7\Patches\AddCompLockDoorsExpanded.xml">
             <Link>Patches\AddCompLockDoorsExpanded.xml</Link>
         </Content>
-        <Content Include="..\1.6\Patches\AddCompLockLinkableDoors.xml">
+        <Content Include="..\1.7\Patches\AddCompLockLinkableDoors.xml">
             <Link>Patches\AddCompLockLinkableDoors.xml</Link>
         </Content>
-        <Content Include="..\1.6\Patches\AddCompLockSoS2.xml">
+        <Content Include="..\1.7\Patches\AddCompLockSoS2.xml">
             <Link>Patches\AddCompLockSoS2.xml</Link>
         </Content>
-        <Content Include="..\1.6\Patches\AddInspectTab.xml">
+        <Content Include="..\1.7\Patches\AddInspectTab.xml">
             <Link>Patches\AddInspectTab.xml</Link>
         </Content>
-        <Content Include="..\1.6\Patches\AddInspectTabLockArchitectExpandedFences.xml">
+        <Content Include="..\1.7\Patches\AddInspectTabLockArchitectExpandedFences.xml">
             <Link>Patches\AddInspectTabLockArchitectExpandedFences.xml</Link>
         </Content>
-        <Content Include="..\1.6\Patches\AddInspectTabLockDoorsExpanded.xml">
+        <Content Include="..\1.7\Patches\AddInspectTabLockDoorsExpanded.xml">
             <Link>Patches\AddInspectTabLockDoorsExpanded.xml</Link>
         </Content>
-        <Content Include="..\1.6\Patches\AddInspectTabLockLinkableDoors.xml">
+        <Content Include="..\1.7\Patches\AddInspectTabLockLinkableDoors.xml">
             <Link>Patches\AddInspectTabLockLinkableDoors.xml</Link>
         </Content>
-        <Content Include="..\1.6\Patches\AddInspectTabLts.xml">
+        <Content Include="..\1.7\Patches\AddInspectTabLts.xml">
             <Link>Patches\AddInspectTabLts.xml</Link>
         </Content>
-        <Content Include="..\1.6\Patches\AddInspectTabSoS2.xml">
+        <Content Include="..\1.7\Patches\AddInspectTabSoS2.xml">
             <Link>Patches\AddInspectTabSoS2.xml</Link>
         </Content>
         <Content Include="..\About\About.xml">
