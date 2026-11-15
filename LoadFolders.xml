@@ -29,4 +29,10 @@
         <li IfModActive="Ludeon.Rimworld.Odyssey">1.6/Odyssey</li>
         <li IfModActive="vanillaquestsexpanded.dronefactory">1.6/DroneFactory</li>
     </v1.6>
+    <v1.7>
+        <li>/</li>
+        <li>1.7</li>
+        <li IfModActive="Ludeon.Rimworld.Odyssey">1.7/Odyssey</li>
+        <li IfModActive="vanillaquestsexpanded.dronefactory">1.7/DroneFactory</li>
+    </v1.7>
 </loadFolders>
